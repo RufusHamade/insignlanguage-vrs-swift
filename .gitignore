@@ -1,0 +1,5 @@
+Podfile.lock
+Pods/
+.DS_Store
+RufusApp.xcworkspace/
+RufusApp.xcodeproj/
