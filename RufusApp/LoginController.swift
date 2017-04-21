@@ -61,6 +61,7 @@ class LoginController: UIViewController {
     func onAuthFailure(_ reason: String) {
         loginErrors.isHidden = false
         loginErrors.text = "Login failed: " + reason
+        loginErrors.textAlignment = .center
     }
     
     @IBAction func loginClicked(_ sender: Any) {

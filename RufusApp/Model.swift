@@ -128,17 +128,21 @@ class SessionModel {
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default)
-        .responseJSON { response in
-            if response.response!.statusCode == 400 {
-                self.authenticateFailure("Invalid Credentials")
-            }
-            else if response.response!.statusCode != 200 {
-                self.authenticateFailure("Internal Server error")
-            }
-            else {
-                let jsonResult = response.result.value as! [String: Any]
-                self.authenticateResult(token: jsonResult["token"] as! String)
-            }
+            .responseJSON { response in
+                if response.response == nil {
+                    self.authenticateFailure("Server Unavailable")
+                    return
+                }
+                if response.response!.statusCode == 400 {
+                    self.authenticateFailure("Invalid Credentials")
+                }
+                else if response.response!.statusCode != 200 {
+                    self.authenticateFailure("Internal Server error")
+                }
+                else {
+                    let jsonResult = response.result.value as! [String: Any]
+                    self.authenticateResult(token: jsonResult["token"] as! String)
+                }
         }
     }
     
@@ -155,17 +159,21 @@ class SessionModel {
         ]
         Alamofire.request(SESSION_SERVER + "/ping/",
                           headers: headers)
-        .responseJSON { response in
-            if response.response!.statusCode == 200 {
-                self.loginState = .authenticated
-            }
-            else {
-                self.sessionToken = nil
-                let preferences = UserDefaults.standard
-                preferences.set(self.sessionToken, forKey: "sessionToken")
-                self.loginState = .unauthenticated
-            }
-            self.onAuthChange?()
+            .responseJSON { response in
+                if response.response == nil {
+                    self.authenticateFailure("Server Unavailable")
+                    return
+                }
+                if response.response?.statusCode == 200 {
+                    self.loginState = .authenticated
+                }
+                else {
+                    self.sessionToken = nil
+                    let preferences = UserDefaults.standard
+                    preferences.set(self.sessionToken, forKey: "sessionToken")
+                    self.loginState = .unauthenticated
+                }
+                self.onAuthChange?()
         }
     }
     
@@ -178,6 +186,10 @@ class SessionModel {
     }
     
     //MARK: Execute dial
+    func dialFailure(_ error: String) {
+
+    }
+
     func dialResult(callId: Int, sessionId: String, token: String) {
         self.callId = callId
         self.sessionId = sessionId
@@ -195,18 +207,22 @@ class SessionModel {
             return
         }
         
-        let parameters = ["caller": self.name!]
+        let headers: HTTPHeaders = [
+            "Authorization": "Token " + self.sessionToken!,
+            "Accept": "application/json"
+        ]
 
-        Alamofire.request(SESSION_SERVER + "/call/",
-                          method: .post,
-                          parameters: parameters,
-                          encoding: JSONEncoding.default)
+        Alamofire.request(SESSION_SERVER + "/call/", headers: headers)
             .responseJSON { response in
+                if response.result.value == nil {
+                    self.dialFailure("Server Error")
+                    return
+                }
                 let jsonResult = response.result.value as! [String: Any]
                 self.dialResult(callId: jsonResult["call_id"] as! Int,
                                 sessionId: jsonResult["session_id"] as! String,
                                 token: jsonResult["token"] as! String)
-            }
+        }
     }
     
     //MARK: Execute hangup
@@ -221,12 +237,13 @@ class SessionModel {
         if self.videoState != .connected {
             return
         }
-        let parameters = ["call_id": self.callId!]
-        
-        Alamofire.request(SESSION_SERVER + "/hangup/",
-                          method: .post,
-                          parameters: parameters,
-                          encoding: JSONEncoding.default)
+
+        let headers: HTTPHeaders = [
+            "Authorization": "Token " + self.sessionToken!,
+            "Accept": "application/json"
+        ]
+
+        Alamofire.request(SESSION_SERVER + "/hangup/" + String(describing: self.callId) + "/", headers: headers)
             .responseJSON { response in
                 self.hangupResult()
         }
