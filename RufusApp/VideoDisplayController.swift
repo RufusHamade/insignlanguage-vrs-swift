@@ -30,19 +30,20 @@ class VideoDisplayController: UIViewController, UITextFieldDelegate {
     // MARK: Initialisation
     override func viewDidLoad() {
         super.viewDidLoad()
-        sessionModel.setOnDialSuccess {
-            self.onDialSuccess()
-        }
-        sessionModel.setOnHangupSuccess {
-            self.onHangup()
-        }
+        sessionModel.setOnDialSuccess(self.onDialSuccess)
+        sessionModel.setOnHangupSuccess(self.doHangup)
+        sessionModel.setOnDialFailure(self.onDialFailure)
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         sessionModel.dial()
     }
-    
+
+    func onDialFailure(_ reason: String) {
+        showAlert(errorStr: "Couldn't find a translator: " + reason)
+    }
+
     //MARK: Session/State transition functions
     func onDialSuccess() {
         session = OTSession(apiKey: API_KEY, sessionId: sessionModel.sessionId!, delegate: self)!
@@ -55,10 +56,12 @@ class VideoDisplayController: UIViewController, UITextFieldDelegate {
         session!.connect(withToken: sessionModel.token!, error: &error)
     }
 
-    func onHangup() {
-        session!.disconnect()
+    func doHangup() {
         cleanupSubscriber()
         cleanupPublisher()
+        session?.disconnect()
+        session = nil
+        self.performSegue(withIdentifier: "returnToLogin", sender: self)
     }
     
     /**
@@ -75,7 +78,11 @@ class VideoDisplayController: UIViewController, UITextFieldDelegate {
         session!.publish(publisher, error: &error)
         
         if let pubView = publisher.view {
-            pubView.frame = CGRect(x: 50    , y: 450, width: 150, height: 150)
+            let insetTop = hangupButton.frame.origin.y - 132
+            let baseView = UIView(frame: CGRect(x:4.0, y: insetTop, width: 102, height: 122))
+            baseView.backgroundColor = .white
+            view.addSubview(baseView)
+            pubView.frame = CGRect(x: 5.0, y: insetTop + 1, width: 100, height: 120)
             view.addSubview(pubView)
         }
     }
@@ -100,12 +107,18 @@ class VideoDisplayController: UIViewController, UITextFieldDelegate {
     }
     
     fileprivate func cleanupSubscriber() {
-        subscriber?.view?.removeFromSuperview()
+        if let subscriber = self.subscriber {
+            subscriber.view?.removeFromSuperview()
+            var error: OTError?
+            session!.unsubscribe(subscriber, error: &error)
+            processError(error)
+        }
         subscriber = nil
     }
     
     //MARK: UI Actions
     @IBAction func hangupClicked(_ sender: Any) {
+        sessionModel.hangUp()
     }
     
     //MARK: Error handling
@@ -116,6 +129,7 @@ class VideoDisplayController: UIViewController, UITextFieldDelegate {
     }
     
     fileprivate func showAlert(errorStr err: String) {
+        print("Alert: " + err)
         DispatchQueue.main.async {
             let controller = UIAlertController(title: "Error", message: err, preferredStyle: .alert)
             controller.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
@@ -146,7 +160,7 @@ extension VideoDisplayController: OTSessionDelegate {
     func session(_ session: OTSession, streamDestroyed stream: OTStream) {
         print("Session streamDestroyed: \(stream.streamId)")
         if let subStream = subscriber?.stream, subStream.streamId == stream.streamId {
-            cleanupSubscriber()
+            doHangup()
         }
     }
     
@@ -155,6 +169,7 @@ extension VideoDisplayController: OTSessionDelegate {
     }
     
 }
+
 
 // MARK: - OTPublisher delegate callbacks
 extension VideoDisplayController: OTPublisherDelegate {
@@ -173,18 +188,18 @@ extension VideoDisplayController: OTPublisherDelegate {
     func publisher(_ publisher: OTPublisherKit, didFailWithError error: OTError) {
         print("Publisher failed: \(error.localizedDescription)")
     }
-    
 }
 
 // MARK: - OTSubscriber delegate callbacks
 extension VideoDisplayController: OTSubscriberDelegate {
     func subscriberDidConnect(toStream subscriberKit: OTSubscriberKit) {
         if let subsView = subscriber?.view {
-            subsView.frame = CGRect(x: 40,
-                                    y: 150,
-                                    width: 300,
-                                    height: 300)
-            view.addSubview(subsView)
+            let insetTop = CGFloat(80.0)
+            let insetBottom = view.frame.size.height - hangupButton.frame.origin.y + CGFloat(8)
+            subsView.frame = CGRect(x: 2.0, y: insetTop,
+                                    width: view.frame.size.width - 4,
+                                    height: view.frame.size.height - insetTop - insetBottom)
+            view.insertSubview(subsView, at: 0)
         }
     }
     

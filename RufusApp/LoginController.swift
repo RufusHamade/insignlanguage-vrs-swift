@@ -63,7 +63,7 @@ class LoginController: UIViewController {
         loginErrors.text = "Login failed: " + reason
         loginErrors.textAlignment = .center
     }
-    
+
     @IBAction func loginClicked(_ sender: Any) {
         loginErrors.isHidden = true
         loginButton.isEnabled = false
@@ -75,6 +75,8 @@ class LoginController: UIViewController {
             sessionModel.logout()
         }
     }
+
+    @IBAction func unwindToLogin(segue: UIStoryboardSegue) {}
 }
 
 extension LoginController: UITextFieldDelegate {

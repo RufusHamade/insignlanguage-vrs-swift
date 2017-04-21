@@ -37,6 +37,7 @@ class SessionModel {
     var onAuthChange: (() -> Void)?
     var onAuthFailure: ((_ reason: String) -> Void)?
     var onDialSuccess: (() -> Void)?
+    var onDialFailure: ((_ reason: String) -> Void)?
     var onHangupSuccess: (() -> Void)?
     
     // MARK: Initialization
@@ -50,23 +51,27 @@ class SessionModel {
         
         checkToken()
     }
-    
+
     func setOnAuthChange(_ onAuthChange: @escaping () -> Void ) {
         self.onAuthChange = onAuthChange
     }
-    
+
     func setOnAuthFailure(_ function: @escaping (_ reason: String) -> Void ) {
         self.onAuthFailure = function
     }
-    
-    func setOnDialSuccess(_ onDialSuccess: @escaping () -> Void ) {
-        self.onDialSuccess = onDialSuccess
+
+    func setOnDialSuccess(_ function: @escaping () -> Void ) {
+        self.onDialSuccess = function
     }
-    
+
+    func setOnDialFailure(_ function: @escaping (_ reason: String) -> Void ) {
+        self.onDialFailure = function
+    }
+
     func setOnHangupSuccess(_ onHangupSuccess: @escaping () -> Void ) {
         self.onHangupSuccess = onHangupSuccess
     }
-    
+
     //MARK: Authentication functions
     func setName(_ name: String?) {
         if self.name != name {
@@ -187,7 +192,7 @@ class SessionModel {
     
     //MARK: Execute dial
     func dialFailure(_ error: String) {
-
+        self.onDialFailure?(error)
     }
 
     func dialResult(callId: Int, sessionId: String, token: String) {
@@ -243,7 +248,7 @@ class SessionModel {
             "Accept": "application/json"
         ]
 
-        Alamofire.request(SESSION_SERVER + "/hangup/" + String(describing: self.callId) + "/", headers: headers)
+        Alamofire.request(SESSION_SERVER + "/hangup/\(self.callId!)/", headers: headers)
             .responseJSON { response in
                 self.hangupResult()
         }
