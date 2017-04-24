@@ -15,6 +15,7 @@ class LoginController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var loginErrors: UILabel!
     @IBOutlet weak var dialButton: UIButton!
+    @IBOutlet weak var qqqServer: UITextField!
     
     var sessionModel = SessionModel.sharedInstance
 
@@ -24,7 +25,9 @@ class LoginController: UIViewController {
         nameField.text = sessionModel.name
         nameField.delegate = self
         passwordField.delegate = self
+        qqqServer.delegate = self
 
+        qqqServer.text = sessionModel.server
         sessionModel.setOnAuthChange(self.onAuthChange)
         sessionModel.setOnAuthFailure(self.onAuthFailure)
         onAuthChange()
@@ -92,6 +95,9 @@ extension LoginController: UITextFieldDelegate {
         }
         else if textField == passwordField {
             sessionModel.setPassword(textField.text)
+        }
+        else if textField == qqqServer {
+            sessionModel.server = textField.text
         }
     }
 }

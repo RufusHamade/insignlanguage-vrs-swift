@@ -16,6 +16,7 @@ class SessionModel {
     static let sharedInstance = SessionModel();
     
     // MARK: Properties
+    var server: String? = SESSION_SERVER
     var name: String?
     var password: String?
     var sessionToken: String?
@@ -129,7 +130,7 @@ class SessionModel {
             "password": self.password!
         ]
         
-        Alamofire.request(SESSION_SERVER + "/api-token-auth/",
+        Alamofire.request(self.server! + "/api-token-auth/",
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default)
@@ -162,7 +163,7 @@ class SessionModel {
             "Authorization": "Token " + self.sessionToken!,
             "Accept": "application/json"
         ]
-        Alamofire.request(SESSION_SERVER + "/ping/",
+        Alamofire.request(self.server! + "/ping/",
                           headers: headers)
             .responseJSON { response in
                 if response.response == nil {
@@ -217,7 +218,7 @@ class SessionModel {
             "Accept": "application/json"
         ]
 
-        Alamofire.request(SESSION_SERVER + "/call/", headers: headers)
+        Alamofire.request(self.server! + "/call/", headers: headers)
             .responseJSON { response in
                 if response.result.value == nil {
                     self.dialFailure("Server Error")
@@ -248,7 +249,7 @@ class SessionModel {
             "Accept": "application/json"
         ]
 
-        Alamofire.request(SESSION_SERVER + "/hangup/\(self.callId!)/", headers: headers)
+        Alamofire.request(self.server! + "/hangup/\(self.callId!)/", headers: headers)
             .responseJSON { response in
                 self.hangupResult()
         }
