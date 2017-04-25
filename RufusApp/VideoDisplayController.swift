@@ -61,7 +61,7 @@ class VideoDisplayController: UIViewController, UITextFieldDelegate {
         cleanupPublisher()
         session?.disconnect()
         session = nil
-        self.performSegue(withIdentifier: "returnToLogin", sender: self)
+        self.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
     }
     
     /**
@@ -78,11 +78,13 @@ class VideoDisplayController: UIViewController, UITextFieldDelegate {
         session!.publish(publisher, error: &error)
         
         if let pubView = publisher.view {
-            let insetTop = hangupButton.frame.origin.y - 132
-            let baseView = UIView(frame: CGRect(x:4.0, y: insetTop, width: 102, height: 122))
+            let width = view.frame.size.width/4
+            let height = view.frame.size.height/4
+            let insetTop = hangupButton.frame.origin.y - (height + 12)
+            let baseView = UIView(frame: CGRect(x:4.0, y: insetTop, width: width + 2, height: height + 2))
             baseView.backgroundColor = .white
             view.addSubview(baseView)
-            pubView.frame = CGRect(x: 5.0, y: insetTop + 1, width: 100, height: 120)
+            pubView.frame = CGRect(x: 5.0, y: insetTop + 1, width: width, height: height)
             view.addSubview(pubView)
         }
     }
@@ -127,12 +129,16 @@ class VideoDisplayController: UIViewController, UITextFieldDelegate {
             showAlert(errorStr: err.localizedDescription)
         }
     }
-    
+
+    fileprivate func handleAlert(action:UIAlertAction) {
+        doHangup()
+    }
+
     fileprivate func showAlert(errorStr err: String) {
         print("Alert: " + err)
         DispatchQueue.main.async {
             let controller = UIAlertController(title: "Error", message: err, preferredStyle: .alert)
-            controller.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            controller.addAction(UIAlertAction(title: "Ok", style: .default, handler: self.handleAlert))
             self.present(controller, animated: true, completion: nil)
         }
     }

@@ -24,18 +24,19 @@ class SessionModel {
     enum LoginState: Int {
         case authenticated, unauthenticated
     }
-    var loginState: LoginState
+    var loginState: LoginState = .unauthenticated
     
     enum VideoState: Int {
         case disconnected, connected
     }
-    var videoState: VideoState
+    var videoState: VideoState = .disconnected
 
     var callId: Int?
     var sessionId: String?
     var token: String?
     
-    var onAuthChange: (() -> Void)?
+    var onCredentialsChange: (() -> Void)?
+    var onAuthSuccess: (() -> Void)?
     var onAuthFailure: ((_ reason: String) -> Void)?
     var onDialSuccess: (() -> Void)?
     var onDialFailure: ((_ reason: String) -> Void)?
@@ -46,15 +47,14 @@ class SessionModel {
         let preferences = UserDefaults.standard
         self.name = preferences.object(forKey: "name") as? String
         self.sessionToken = preferences.object(forKey: "sessionToken") as? String
-        
-        loginState = LoginState.unauthenticated
-        videoState = VideoState.disconnected
-        
-        checkToken()
     }
 
-    func setOnAuthChange(_ onAuthChange: @escaping () -> Void ) {
-        self.onAuthChange = onAuthChange
+    func setOnCredentialsChange(_ function: @escaping () -> Void ) {
+        self.onCredentialsChange = function
+    }
+
+    func setOnAuthSuccess(_ function: @escaping () -> Void ) {
+        self.onAuthSuccess = function
     }
 
     func setOnAuthFailure(_ function: @escaping (_ reason: String) -> Void ) {
@@ -81,7 +81,7 @@ class SessionModel {
             let preferences = UserDefaults.standard
             preferences.set(self.name, forKey: "name")
             preferences.set(self.sessionToken, forKey: "sessionToken")
-            self.onAuthChange?()
+            self.onCredentialsChange?()
         }
     }
 
@@ -91,7 +91,7 @@ class SessionModel {
             self.sessionToken = nil
             let preferences = UserDefaults.standard
             preferences.set(self.sessionToken, forKey: "sessionToken")
-            self.onAuthChange?()
+            self.onCredentialsChange?()
         }
     }
 
@@ -110,7 +110,7 @@ class SessionModel {
         let preferences = UserDefaults.standard
         preferences.set(self.sessionToken, forKey: "sessionToken")
         loginState = .authenticated
-        self.onAuthChange?()
+        self.onAuthSuccess?()
     }
     
     func authenticateFailure(_ reason: String){
@@ -121,8 +121,7 @@ class SessionModel {
     func authenticate () {
         if !self.isAuthenticable() {
             // no point doing anything.
-            loginState = LoginState.unauthenticated
-            self.onAuthChange?()
+            return
         }
         
         let parameters = [
@@ -154,11 +153,9 @@ class SessionModel {
     
     func checkToken () {
         if self.sessionToken == nil {
-            self.loginState = .unauthenticated
-            self.onAuthChange?()
             return
         }
-        
+
         let headers: HTTPHeaders = [
             "Authorization": "Token " + self.sessionToken!,
             "Accept": "application/json"
@@ -172,6 +169,7 @@ class SessionModel {
                 }
                 if response.response?.statusCode == 200 {
                     self.loginState = .authenticated
+                    self.onAuthSuccess?()
                 }
                 else {
                     self.sessionToken = nil
@@ -179,7 +177,6 @@ class SessionModel {
                     preferences.set(self.sessionToken, forKey: "sessionToken")
                     self.loginState = .unauthenticated
                 }
-                self.onAuthChange?()
         }
     }
     
@@ -188,7 +185,6 @@ class SessionModel {
         self.sessionToken = nil
         let preferences = UserDefaults.standard
         preferences.set(self.sessionToken, forKey: "sessionToken")
-        self.onAuthChange?()
     }
     
     //MARK: Execute dial
@@ -201,10 +197,6 @@ class SessionModel {
         self.sessionId = sessionId
         self.token = token
         self.videoState = .connected
-        
-        print("session ID: " + sessionId)
-        print("token: " + token)
-        
         self.onDialSuccess?()
     }
     

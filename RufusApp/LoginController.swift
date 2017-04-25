@@ -14,7 +14,6 @@ class LoginController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var loginErrors: UILabel!
-    @IBOutlet weak var dialButton: UIButton!
     @IBOutlet weak var qqqServer: UITextField!
     
     var sessionModel = SessionModel.sharedInstance
@@ -28,57 +27,42 @@ class LoginController: UIViewController {
         qqqServer.delegate = self
 
         qqqServer.text = sessionModel.server
-        sessionModel.setOnAuthChange(self.onAuthChange)
+        sessionModel.setOnAuthSuccess(self.onAuthSuccess)
         sessionModel.setOnAuthFailure(self.onAuthFailure)
-        onAuthChange()
+        sessionModel.setOnCredentialsChange(self.onCredentialsChange)
+        onCredentialsChange()
+        sessionModel.checkToken()
     }
 
-    func onAuthChange() {
-        // Set up the UI accodring to the session state
-        if sessionModel.loginState == SessionModel.LoginState.authenticated {
-            nameField.isEnabled = false
-            passwordField.isEnabled = false
-            loginButton.isEnabled = true
-            loginButton.alpha = 1.0
-            loginButton.setTitle("Logout", for: .normal)
-            dialButton.isEnabled = true
-            dialButton.alpha = 1.0
-        }
-        else {
-            nameField.isEnabled = true
-            passwordField.isEnabled = true
-            if sessionModel.isAuthenticable() {
-                loginButton.isEnabled = true
-                loginButton.alpha = 1.0
-            }
-            else {
-                loginButton.isEnabled = false
-                loginButton.alpha = 0.5
-            }
-            loginButton.setTitle("Login", for: .normal)
-            dialButton.isEnabled = false
-            dialButton.alpha = 0.5
-        }
+    func onAuthSuccess() {
+        loginButton.isEnabled = true
+        loginButton.alpha = 1.0
+        self.performSegue(withIdentifier: "loginSuccess", sender: self)
     }
-    
+
     func onAuthFailure(_ reason: String) {
         loginErrors.isHidden = false
         loginErrors.text = "Login failed: " + reason
         loginErrors.textAlignment = .center
-        loginButton.isEnabled = true
-        loginButton.alpha = 1.0
+        onCredentialsChange()
+    }
+
+    func onCredentialsChange() {
+        if (sessionModel.isAuthenticable()) {
+            loginButton.isEnabled = true
+            loginButton.alpha = 1
+        }
+        else {
+            loginButton.isEnabled = false
+            loginButton.alpha = 0.5
+        }
     }
 
     @IBAction func loginClicked(_ sender: Any) {
         loginErrors.isHidden = true
         loginButton.isEnabled = false
         loginButton.alpha = 0.5
-        if loginButton.titleLabel?.text == "Login" {
-            sessionModel.authenticate()
-        }
-        else {
-            sessionModel.logout()
-        }
+        sessionModel.authenticate()
     }
 
     @IBAction func unwindToLogin(segue: UIStoryboardSegue) {}
