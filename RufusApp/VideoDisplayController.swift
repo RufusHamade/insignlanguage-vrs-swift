@@ -57,10 +57,6 @@ class VideoDisplayController: UIViewController, UITextFieldDelegate {
     }
 
     func doHangup() {
-        cleanupSubscriber()
-        cleanupPublisher()
-        session?.disconnect()
-        session = nil
         self.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
     }
     
@@ -120,6 +116,16 @@ class VideoDisplayController: UIViewController, UITextFieldDelegate {
     
     //MARK: UI Actions
     @IBAction func hangupClicked(_ sender: Any) {
+        if session == nil {
+            // This is probably the second time we've hit hangup.  So just segue
+            self.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
+            return
+        }
+
+        cleanupSubscriber()
+        cleanupPublisher()
+        session?.disconnect()
+        session = nil
         sessionModel.hangUp()
     }
     
