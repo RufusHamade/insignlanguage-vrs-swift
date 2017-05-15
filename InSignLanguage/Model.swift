@@ -1,6 +1,6 @@
 //
 //  Model.swift
-//  RufusApp
+//  InSignLanguage
 //
 //  Created by Yvonne Eva Hannah Louise DeBrett on 18/04/2017.
 //

@@ -1,6 +1,6 @@
 //
 //  LoginController.swift
-//  RufusApp
+//  InSignLanguage
 //
 //  Created by Yvonne Eva Hannah Louise DeBrett on 20/04/2017.
 //

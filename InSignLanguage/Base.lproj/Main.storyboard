@@ -15,7 +15,7 @@
         <!--Ready To Call-->
         <scene sceneID="YOO-uA-LZa">
             <objects>
-                <viewController title="Ready To Call" id="V4X-10-FnW" customClass="ReadyToCallController" customModule="RufusApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Ready To Call" id="V4X-10-FnW" customClass="ReadyToCallController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1P5-A5-OBr"/>
                         <viewControllerLayoutGuide type="bottom" id="d40-Hy-F7P"/>
@@ -102,7 +102,7 @@
         <!--Video Display-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Video Display" id="BYZ-38-t0r" customClass="VideoDisplayController" customModule="RufusApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Video Display" id="BYZ-38-t0r" customClass="VideoDisplayController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -153,7 +153,7 @@
         <!--Login Page-->
         <scene sceneID="HNX-hs-tvL">
             <objects>
-                <viewController title="Login Page" id="S38-Cp-FME" customClass="LoginController" customModule="RufusApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Login Page" id="S38-Cp-FME" customClass="LoginController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jvs-bw-Ilv"/>
                         <viewControllerLayoutGuide type="bottom" id="PaV-EE-VC5"/>

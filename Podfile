@@ -2,12 +2,8 @@
 platform :ios, '10.0'
 use_frameworks!
 
-target 'RufusApp' do
-  # Pods for RufusApp
+target 'InSignLanguage' do
+  # Pods for InSignLanguage
   pod 'Alamofire'
   pod 'OpenTok'
-  target 'RufusAppTests' do
-    inherit! :search_paths
-  end
-
 end

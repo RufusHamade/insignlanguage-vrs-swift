@@ -1,15 +1,15 @@
 //
-//  RufusAppTests.swift
-//  RufusAppTests
+//  InSignLanguageTests.swift
+//  InSignLanguageTests
 //
 //  Created by Yvonne Eva Hannah Louise DeBrett on 17/04/2017.
 //
 //
 
 import XCTest
-@testable import RufusApp
+@testable import InSignLanguage
 
-class RufusAppTests: XCTestCase {
+class InSignLanguageTests: XCTestCase {
     
     let semaphore = DispatchSemaphore(value: 0)
     
