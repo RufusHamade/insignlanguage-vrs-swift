@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>APP_API_KEY</key>
-	<string>45820992</string>
+	<string>45843382</string>
 	<key>APP_SESSION_SERVER</key>
-	<string>http://192.168.0.22:8000</string>
+	<string>https://dev.lingoing.com/InSignLanguage</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -26,6 +26,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>To enable interaction with sign language interpreter.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To enable interaction with sign language interpreter.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
