@@ -13,11 +13,16 @@ import UIKit
 class ReadyToCallController: UIViewController {
 
     @IBOutlet weak var nameField: UILabel!
+    @IBOutlet weak var notesField: UITextView!
 
     var sessionModel = SessionModel.sharedInstance
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.notesField.layer.borderWidth = 1.0;
+        self.notesField.layer.cornerRadius = 5.0;
+        self.notesField.text = sessionModel.getNotes()
+        self.notesField.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -32,4 +37,10 @@ class ReadyToCallController: UIViewController {
 
     @IBAction func unwindToReadyToCall(segue: UIStoryboardSegue) {}
 
+}
+
+extension ReadyToCallController: UITextViewDelegate {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        sessionModel.setNotes(textView.text)
+    }
 }

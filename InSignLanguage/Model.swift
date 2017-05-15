@@ -20,6 +20,7 @@ class SessionModel {
     var name: String?
     var password: String?
     var sessionToken: String?
+    var notes: String?
     
     enum LoginState: Int {
         case authenticated, unauthenticated
@@ -47,6 +48,7 @@ class SessionModel {
         let preferences = UserDefaults.standard
         self.name = preferences.object(forKey: "name") as? String
         self.sessionToken = preferences.object(forKey: "sessionToken") as? String
+        self.notes = preferences.object(forKey: "notes") as? String
     }
 
     func setOnCredentialsChange(_ function: @escaping () -> Void ) {
@@ -210,7 +212,12 @@ class SessionModel {
             "Accept": "application/json"
         ]
 
-        Alamofire.request(self.server! + "/call/", headers: headers)
+        let parameters:Parameters = ["notes": self.getNotes()]
+
+        Alamofire.request(self.server! + "/call/",
+                          method: .post,
+                          parameters: parameters,
+                          headers: headers)
             .responseJSON { response in
                 if response.result.value == nil {
                     self.dialFailure("Server Error")
@@ -245,5 +252,15 @@ class SessionModel {
             .responseJSON { response in
                 self.hangupResult()
         }
+    }
+
+    func setNotes(_ notes:String?) {
+        self.notes = notes
+        let preferences = UserDefaults.standard
+        preferences.set(self.notes, forKey: "notes")
+    }
+
+    func getNotes() -> String {
+        return self.notes != nil ? self.notes! : ""
     }
 }
