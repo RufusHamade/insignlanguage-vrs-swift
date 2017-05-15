@@ -2,4 +2,4 @@ Podfile.lock
 Pods/
 .DS_Store
 InSignLanguage.xcworkspace/
-InSignLanguage.xcodeproj/
+xcuserdata/
