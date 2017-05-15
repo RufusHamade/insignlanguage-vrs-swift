@@ -11,6 +11,7 @@
 		EE3325151EC9F395002D9543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3325141EC9F395002D9543 /* AppDelegate.swift */; };
 		EE33251A1EC9F395002D9543 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3325181EC9F395002D9543 /* Main.storyboard */; };
 		EE33251F1EC9F395002D9543 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE33251D1EC9F395002D9543 /* LaunchScreen.storyboard */; };
+		EE4D6DB41ECA124D00EB2E63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE4D6DB31ECA124D00EB2E63 /* Assets.xcassets */; };
 		EEC2480D1EC9F58B003EEDA1 /* hangup.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC248041EC9F58B003EEDA1 /* hangup.png */; };
 		EEC2480E1EC9F58B003EEDA1 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC248051EC9F58B003EEDA1 /* LoginController.swift */; };
 		EEC2480F1EC9F58B003EEDA1 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC248061EC9F58B003EEDA1 /* logo.png */; };
@@ -18,7 +19,6 @@
 		EEC248111EC9F58B003EEDA1 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC248081EC9F58B003EEDA1 /* phone.png */; };
 		EEC248121EC9F58B003EEDA1 /* ReadyToCallController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC248091EC9F58B003EEDA1 /* ReadyToCallController.swift */; };
 		EEC248131EC9F58B003EEDA1 /* VideoDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC2480A1EC9F58B003EEDA1 /* VideoDisplayController.swift */; };
-		EEC248141EC9F58B003EEDA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEC2480B1EC9F58B003EEDA1 /* Assets.xcassets */; };
 		EEC248151EC9F58B003EEDA1 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = EEC2480C1EC9F58B003EEDA1 /* Base.lproj */; };
 		EEC248171EC9F59E003EEDA1 /* InSignLanguageTests in Resources */ = {isa = PBXBuildFile; fileRef = EEC248161EC9F59E003EEDA1 /* InSignLanguageTests */; };
 /* End PBXBuildFile section */
@@ -30,9 +30,9 @@
 		EE3325111EC9F395002D9543 /* InSignLanguage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InSignLanguage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE3325141EC9F395002D9543 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE3325191EC9F395002D9543 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EE33251B1EC9F395002D9543 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EE33251E1EC9F395002D9543 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EE3325201EC9F395002D9543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE4D6DB31ECA124D00EB2E63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEC248041EC9F58B003EEDA1 /* hangup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hangup.png; sourceTree = "<group>"; };
 		EEC248051EC9F58B003EEDA1 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		EEC248061EC9F58B003EEDA1 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -40,7 +40,6 @@
 		EEC248081EC9F58B003EEDA1 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 		EEC248091EC9F58B003EEDA1 /* ReadyToCallController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadyToCallController.swift; sourceTree = "<group>"; };
 		EEC2480A1EC9F58B003EEDA1 /* VideoDisplayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDisplayController.swift; sourceTree = "<group>"; };
-		EEC2480B1EC9F58B003EEDA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEC2480C1EC9F58B003EEDA1 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
 		EEC248161EC9F59E003EEDA1 /* InSignLanguageTests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = InSignLanguageTests; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,18 +95,17 @@
 		EE3325131EC9F395002D9543 /* InSignLanguage */ = {
 			isa = PBXGroup;
 			children = (
+				EE4D6DB31ECA124D00EB2E63 /* Assets.xcassets */,
 				EEC248041EC9F58B003EEDA1 /* hangup.png */,
 				EEC248051EC9F58B003EEDA1 /* LoginController.swift */,
-				EEC248061EC9F58B003EEDA1 /* logo.png */,
-				EEC248071EC9F58B003EEDA1 /* Model.swift */,
-				EEC248081EC9F58B003EEDA1 /* phone.png */,
 				EEC248091EC9F58B003EEDA1 /* ReadyToCallController.swift */,
 				EEC2480A1EC9F58B003EEDA1 /* VideoDisplayController.swift */,
-				EEC2480B1EC9F58B003EEDA1 /* Assets.xcassets */,
+				EEC248071EC9F58B003EEDA1 /* Model.swift */,
+				EEC248061EC9F58B003EEDA1 /* logo.png */,
+				EEC248081EC9F58B003EEDA1 /* phone.png */,
 				EEC2480C1EC9F58B003EEDA1 /* Base.lproj */,
 				EE3325141EC9F395002D9543 /* AppDelegate.swift */,
 				EE3325181EC9F395002D9543 /* Main.storyboard */,
-				EE33251B1EC9F395002D9543 /* Assets.xcassets */,
 				EE33251D1EC9F395002D9543 /* LaunchScreen.storyboard */,
 				EE3325201EC9F395002D9543 /* Info.plist */,
 			);
@@ -183,7 +181,7 @@
 				EEC248111EC9F58B003EEDA1 /* phone.png in Resources */,
 				EEC248171EC9F59E003EEDA1 /* InSignLanguageTests in Resources */,
 				EE33251F1EC9F395002D9543 /* LaunchScreen.storyboard in Resources */,
-				EEC248141EC9F58B003EEDA1 /* Assets.xcassets in Resources */,
+				EE4D6DB41ECA124D00EB2E63 /* Assets.xcassets in Resources */,
 				EE33251A1EC9F395002D9543 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
