@@ -21,7 +21,10 @@ class SessionModel {
     var password: String?
     var sessionToken: String?
     var notes: String?
-    
+
+    var providersAvailable: Int = -1
+    var pollTimer: Timer?
+
     enum LoginState: Int {
         case authenticated, unauthenticated
     }
@@ -42,6 +45,7 @@ class SessionModel {
     var onDialSuccess: (() -> Void)?
     var onDialFailure: ((_ reason: String) -> Void)?
     var onHangupSuccess: (() -> Void)?
+    var onProviderAvailability: ((_ providerAvailability: Int) -> Void)?
     
     // MARK: Initialization
     private init() {
@@ -71,10 +75,16 @@ class SessionModel {
         self.onDialFailure = function
     }
 
-    func setOnHangupSuccess(_ onHangupSuccess: @escaping () -> Void ) {
-        self.onHangupSuccess = onHangupSuccess
+    func setOnHangupSuccess(_ function: @escaping () -> Void ) {
+        self.onHangupSuccess = function
     }
 
+    func setOnProviderAvailability(_ function: @escaping (_ providersAvailable: Int) -> Void) {
+        self.onProviderAvailability = function
+        if self.providersAvailable >= 0 {
+            self.onProviderAvailability!(self.providersAvailable)
+        }
+    }
     //MARK: Authentication functions
     func setName(_ name: String?) {
         if self.name != name {
@@ -106,13 +116,22 @@ class SessionModel {
         }
         return true
     }
-    
+
+    func authSuccess() -> Void {
+        loginState = .authenticated
+        self.pollTimer = Timer.scheduledTimer(timeInterval: 5,
+                                              target: self,
+                                              selector: #selector(self.checkProviderAvailability),
+                                              userInfo: nil,
+                                              repeats: true)
+        self.onAuthSuccess?()
+    }
+
     func authenticateResult(token: String) {
         sessionToken = token
         let preferences = UserDefaults.standard
         preferences.set(self.sessionToken, forKey: "sessionToken")
-        loginState = .authenticated
-        self.onAuthSuccess?()
+        self.authSuccess()
     }
     
     func authenticateFailure(_ reason: String){
@@ -170,8 +189,7 @@ class SessionModel {
                     return
                 }
                 if response.response?.statusCode == 200 {
-                    self.loginState = .authenticated
-                    self.onAuthSuccess?()
+                    self.authSuccess()
                 }
                 else {
                     self.sessionToken = nil
@@ -186,6 +204,10 @@ class SessionModel {
         self.loginState = .unauthenticated
         self.sessionToken = nil
         let preferences = UserDefaults.standard
+        if self.pollTimer != nil {
+            self.pollTimer!.invalidate()
+            self.pollTimer = nil
+        }
         preferences.set(self.sessionToken, forKey: "sessionToken")
     }
     
@@ -254,6 +276,28 @@ class SessionModel {
         }
     }
 
+    @objc func checkProviderAvailability() {
+        let headers: HTTPHeaders = [
+            "Authorization": "Token " + self.sessionToken!,
+            "Accept": "application/json"
+        ]
+
+        Alamofire.request(self.server! + "/poll/", headers: headers)
+            .responseJSON { response in
+                if response.result.value == nil {
+                    return
+                }
+                let jsonResult = response.result.value as! [String: Any]
+                let availableNow:Int = jsonResult["providers_available"] as! Int
+                if self.providersAvailable != availableNow {
+                    self.providersAvailable = availableNow
+                    if self.onProviderAvailability != nil {
+                        self.onProviderAvailability!(availableNow)
+                    }
+                }
+        }
+
+    }
     func setNotes(_ notes:String?) {
         self.notes = notes
         let preferences = UserDefaults.standard

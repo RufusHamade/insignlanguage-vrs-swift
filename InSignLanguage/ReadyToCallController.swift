@@ -14,6 +14,7 @@ class ReadyToCallController: UIViewController {
 
     @IBOutlet weak var nameField: UILabel!
     @IBOutlet weak var notesField: UITextView!
+    @IBOutlet weak var providerAvailabilityField: UILabel!
 
     var sessionModel = SessionModel.sharedInstance
 
@@ -23,11 +24,24 @@ class ReadyToCallController: UIViewController {
         self.notesField.layer.cornerRadius = 5.0;
         self.notesField.text = sessionModel.getNotes()
         self.notesField.delegate = self
+        sessionModel.setOnProviderAvailability(self.onProvidersAvailable)
+    }
+
+    func onProvidersAvailable(_ availableProviders: Int) {
+        if availableProviders == 0 {
+            self.providerAvailabilityField.text = "Unfortunately, there are no translators available."
+        }
+        else {
+            self.providerAvailabilityField.text = String(format: "There are %d translators available.", availableProviders)
+        }
+        self.providerAvailabilityField.textAlignment = .center
     }
 
     override func viewWillAppear(_ animated: Bool) {
         self.nameField.text = sessionModel.name
         self.nameField.textAlignment = .center
+        self.providerAvailabilityField.text = "Checking for translators..."
+        self.providerAvailabilityField.textAlignment = .center
     }
 
     @IBAction func logoutClicked(_ sender: Any) {
