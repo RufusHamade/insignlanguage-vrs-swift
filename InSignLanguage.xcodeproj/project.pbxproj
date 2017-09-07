@@ -20,7 +20,6 @@
 		EEC248121EC9F58B003EEDA1 /* ReadyToCallController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC248091EC9F58B003EEDA1 /* ReadyToCallController.swift */; };
 		EEC248131EC9F58B003EEDA1 /* VideoDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC2480A1EC9F58B003EEDA1 /* VideoDisplayController.swift */; };
 		EEC248151EC9F58B003EEDA1 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = EEC2480C1EC9F58B003EEDA1 /* Base.lproj */; };
-		EEC248171EC9F59E003EEDA1 /* InSignLanguageTests in Resources */ = {isa = PBXBuildFile; fileRef = EEC248161EC9F59E003EEDA1 /* InSignLanguageTests */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +40,6 @@
 		EEC248091EC9F58B003EEDA1 /* ReadyToCallController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadyToCallController.swift; sourceTree = "<group>"; };
 		EEC2480A1EC9F58B003EEDA1 /* VideoDisplayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDisplayController.swift; sourceTree = "<group>"; };
 		EEC2480C1EC9F58B003EEDA1 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
-		EEC248161EC9F59E003EEDA1 /* InSignLanguageTests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = InSignLanguageTests; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +74,6 @@
 		EE3325081EC9F394002D9543 = {
 			isa = PBXGroup;
 			children = (
-				EEC248161EC9F59E003EEDA1 /* InSignLanguageTests */,
 				EE3325131EC9F395002D9543 /* InSignLanguage */,
 				EE3325121EC9F395002D9543 /* Products */,
 				D454AC0CF57EA7695995B152 /* Pods */,
@@ -179,7 +176,6 @@
 				EEC2480F1EC9F58B003EEDA1 /* logo.png in Resources */,
 				EEC248151EC9F58B003EEDA1 /* Base.lproj in Resources */,
 				EEC248111EC9F58B003EEDA1 /* phone.png in Resources */,
-				EEC248171EC9F59E003EEDA1 /* InSignLanguageTests in Resources */,
 				EE33251F1EC9F395002D9543 /* LaunchScreen.storyboard in Resources */,
 				EE4D6DB41ECA124D00EB2E63 /* Assets.xcassets in Resources */,
 				EE33251A1EC9F395002D9543 /* Main.storyboard in Resources */,
