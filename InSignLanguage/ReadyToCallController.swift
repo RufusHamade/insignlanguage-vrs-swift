@@ -25,7 +25,16 @@ class ReadyToCallController: UIViewController {
         self.notesField.text = sessionModel.getNotes()
         self.notesField.delegate = self
         sessionModel.setOnProviderAvailability(self.onProvidersAvailable)
+
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
+
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+
 
     func onProvidersAvailable(_ availableProviders: Int) {
         if availableProviders == 0 {

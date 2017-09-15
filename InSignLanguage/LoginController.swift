@@ -32,6 +32,14 @@ class LoginController: UIViewController {
         sessionModel.setOnCredentialsChange(self.onCredentialsChange)
         onCredentialsChange()
         sessionModel.checkToken()
+
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 
     func onAuthSuccess() {

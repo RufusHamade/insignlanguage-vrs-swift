@@ -10,7 +10,6 @@
 		40CF89581F34ABFEBE524F92 /* Pods_InSignLanguage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8230F9041DA7EE9932C7AA17 /* Pods_InSignLanguage.framework */; };
 		EE3325151EC9F395002D9543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3325141EC9F395002D9543 /* AppDelegate.swift */; };
 		EE33251A1EC9F395002D9543 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3325181EC9F395002D9543 /* Main.storyboard */; };
-		EE33251F1EC9F395002D9543 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE33251D1EC9F395002D9543 /* LaunchScreen.storyboard */; };
 		EE4D6DB41ECA124D00EB2E63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE4D6DB31ECA124D00EB2E63 /* Assets.xcassets */; };
 		EEC2480D1EC9F58B003EEDA1 /* hangup.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC248041EC9F58B003EEDA1 /* hangup.png */; };
 		EEC2480E1EC9F58B003EEDA1 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC248051EC9F58B003EEDA1 /* LoginController.swift */; };
@@ -29,7 +28,6 @@
 		EE3325111EC9F395002D9543 /* InSignLanguage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InSignLanguage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE3325141EC9F395002D9543 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE3325191EC9F395002D9543 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EE33251E1EC9F395002D9543 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EE3325201EC9F395002D9543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE4D6DB31ECA124D00EB2E63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEC248041EC9F58B003EEDA1 /* hangup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hangup.png; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 				EEC2480C1EC9F58B003EEDA1 /* Base.lproj */,
 				EE3325141EC9F395002D9543 /* AppDelegate.swift */,
 				EE3325181EC9F395002D9543 /* Main.storyboard */,
-				EE33251D1EC9F395002D9543 /* LaunchScreen.storyboard */,
 				EE3325201EC9F395002D9543 /* Info.plist */,
 			);
 			path = InSignLanguage;
@@ -176,7 +173,6 @@
 				EEC2480F1EC9F58B003EEDA1 /* logo.png in Resources */,
 				EEC248151EC9F58B003EEDA1 /* Base.lproj in Resources */,
 				EEC248111EC9F58B003EEDA1 /* phone.png in Resources */,
-				EE33251F1EC9F395002D9543 /* LaunchScreen.storyboard in Resources */,
 				EE4D6DB41ECA124D00EB2E63 /* Assets.xcassets in Resources */,
 				EE33251A1EC9F395002D9543 /* Main.storyboard in Resources */,
 			);
@@ -254,14 +250,6 @@
 				EE3325191EC9F395002D9543 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		EE33251D1EC9F395002D9543 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EE33251E1EC9F395002D9543 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
