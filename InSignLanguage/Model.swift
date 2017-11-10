@@ -8,9 +8,17 @@
 
 import Foundation
 import Alamofire
+import OpenTok
 
 let API_KEY = Bundle.main.infoDictionary!["APP_API_KEY"] as! String
 let SESSION_SERVER = Bundle.main.infoDictionary!["APP_SESSION_SERVER"] as! String
+
+
+protocol DialHandler {
+    func onDialSuccess() -> Void
+    func onDialFailure(_ reason: String) -> Void
+    func onHangupSuccess() -> Void
+}
 
 class SessionModel {
     static let sharedInstance = SessionModel();
@@ -42,11 +50,9 @@ class SessionModel {
     var onCredentialsChange: (() -> Void)?
     var onAuthSuccess: (() -> Void)?
     var onAuthFailure: ((_ reason: String) -> Void)?
-    var onDialSuccess: (() -> Void)?
-    var onDialFailure: ((_ reason: String) -> Void)?
-    var onHangupSuccess: (() -> Void)?
     var onProviderAvailability: ((_ providerAvailability: Int) -> Void)?
-    
+    var dialHandler: DialHandler?
+
     // MARK: Initialization
     private init() {
         let preferences = UserDefaults.standard
@@ -67,16 +73,8 @@ class SessionModel {
         self.onAuthFailure = function
     }
 
-    func setOnDialSuccess(_ function: @escaping () -> Void ) {
-        self.onDialSuccess = function
-    }
-
-    func setOnDialFailure(_ function: @escaping (_ reason: String) -> Void ) {
-        self.onDialFailure = function
-    }
-
-    func setOnHangupSuccess(_ function: @escaping () -> Void ) {
-        self.onHangupSuccess = function
+    func setDialHandler(_ dh: DialHandler ) {
+        self.dialHandler = dh
     }
 
     func setOnProviderAvailability(_ function: @escaping (_ providersAvailable: Int) -> Void) {
@@ -213,7 +211,7 @@ class SessionModel {
     
     //MARK: Execute dial
     func dialFailure(_ error: String) {
-        self.onDialFailure?(error)
+        self.dialHandler?.onDialFailure(error)
     }
 
     func dialResult(callId: Int, sessionId: String, token: String) {
@@ -221,7 +219,7 @@ class SessionModel {
         self.sessionId = sessionId
         self.token = token
         self.videoState = .connected
-        self.onDialSuccess?()
+        self.dialHandler?.onDialSuccess()
     }
     
     func dial() {
@@ -257,7 +255,7 @@ class SessionModel {
         self.callId = nil
         self.videoState = .disconnected
         
-        self.onHangupSuccess?()
+        self.dialHandler?.onHangupSuccess()
     }
     
     func hangUp() {
@@ -306,5 +304,177 @@ class SessionModel {
 
     func getNotes() -> String {
         return self.notes != nil ? self.notes! : ""
+    }
+}
+
+
+protocol VideoDisplayer {
+    func displayVideo(_ publisherView: UIView) -> Void
+    func displayInsert(_ subscriberView: UIView) -> Void
+}
+
+protocol ErrorHandler {
+    func showAlert(_ err: String) -> Void
+    func onHangupSuccess() -> Void
+}
+
+class ConnectionModel: NSObject {
+    static let sharedInstance = ConnectionModel();
+
+    var sessionModel = SessionModel.sharedInstance
+
+    var session: OTSession?
+
+    lazy var publisher: OTPublisher = {
+        let settings = OTPublisherSettings()
+        settings.name = UIDevice.current.name
+        return OTPublisher(delegate: self, settings: settings)!
+    }()
+
+    var subscriber: OTSubscriber?
+    var subscribeToSelf = false // Set true to see your own video stream....
+
+    var videoDisplayer: VideoDisplayer?
+    var errorHandler: ErrorHandler?
+
+    func setVideoDisplayer(_ vd: VideoDisplayer) {
+        self.videoDisplayer = vd
+    }
+    func setErrorHandler(_ eh: ErrorHandler) {
+        self.errorHandler = eh
+    }
+
+    func connect() {
+        self.session = OTSession(apiKey: API_KEY, sessionId: sessionModel.sessionId!, delegate: self)!
+
+        var error: OTError?
+        defer {
+            self.processOTError(error)
+        }
+
+        self.session!.connect(withToken: sessionModel.token!, error: &error)
+    }
+
+    func disconnect() {
+        session?.disconnect()
+        session = nil
+    }
+
+    /**
+     * Sets up an instance of OTPublisher to use with this session. OTPubilsher
+     * binds to the device camera and microphone, and will provide A/V streams
+     * to the OpenTok session.
+     */
+    fileprivate func doPublish() {
+        var error: OTError?
+        defer {
+            self.processOTError(error)
+        }
+
+        session!.publish(publisher, error: &error)
+
+        if let pubView = publisher.view {
+            self.videoDisplayer?.displayInsert(pubView)
+        }
+    }
+
+    /**
+     * Instantiates a subscriber for the given stream and asynchronously begins the
+     * process to begin receiving A/V content for this stream. Unlike doPublish,
+     * this method does not add the subscriber to the view hierarchy. Instead, we
+     * add the subscriber only after it has connected and begins receiving data.
+     */
+    fileprivate func doSubscribe(_ stream: OTStream) {
+        var error: OTError?
+        defer {
+            processOTError(error)
+        }
+        subscriber = OTSubscriber(stream: stream, delegate: self)
+
+        session!.subscribe(subscriber!, error: &error)
+    }
+
+    func cleanupSubscriber() {
+        if let subscriber = self.subscriber {
+            subscriber.view?.removeFromSuperview()
+            var error: OTError?
+            self.session!.unsubscribe(subscriber, error: &error)
+            self.processOTError(error)
+        }
+        self.subscriber = nil
+    }
+
+    //MARK: Error handling
+    fileprivate func processOTError(_ error: OTError?) {
+        if let err = error {
+            self.errorHandler?.showAlert(err.localizedDescription)
+        }
+    }
+}
+
+// MARK: - OTSession delegate callbacks
+extension ConnectionModel: OTSessionDelegate {
+    func sessionDidConnect(_ session: OTSession) {
+        print("Session connected")
+        doPublish()
+    }
+
+    func sessionDidDisconnect(_ session: OTSession) {
+        print("Session disconnected")
+    }
+
+    func session(_ session: OTSession, streamCreated stream: OTStream) {
+        print("Session streamCreated: \(stream.streamId)")
+        if subscriber == nil && !subscribeToSelf {
+            doSubscribe(stream)
+        }
+    }
+
+    func session(_ session: OTSession, streamDestroyed stream: OTStream) {
+        print("Session streamDestroyed: \(stream.streamId)")
+        if let subStream = subscriber?.stream, subStream.streamId == stream.streamId {
+            self.errorHandler?.onHangupSuccess()
+        }
+    }
+
+    func session(_ session: OTSession, didFailWithError error: OTError) {
+        print("session Failed to connect: \(error.localizedDescription)")
+    }
+
+}
+
+
+// MARK: - OTPublisher delegate callbacks
+extension ConnectionModel: OTPublisherDelegate {
+    func publisher(_ publisher: OTPublisherKit, streamCreated stream: OTStream) {
+        if subscriber == nil && subscribeToSelf {
+            doSubscribe(stream)
+        }
+    }
+
+    func publisher(_ publisher: OTPublisherKit, streamDestroyed stream: OTStream) {
+        if let subStream = subscriber?.stream, subStream.streamId == stream.streamId {
+            cleanupSubscriber()
+        }
+    }
+
+    func publisher(_ publisher: OTPublisherKit, didFailWithError error: OTError) {
+        print("Publisher failed: \(error.localizedDescription)")
+    }
+}
+
+// MARK: - OTSubscriber delegate callbacks
+extension ConnectionModel: OTSubscriberDelegate {
+    func subscriberDidConnect(toStream subscriberKit: OTSubscriberKit) {
+        if let subsView = subscriber?.view {
+            self.videoDisplayer?.displayVideo(subsView)
+        }
+    }
+
+    func subscriber(_ subscriber: OTSubscriberKit, didFailWithError error: OTError) {
+        print("Subscriber failed: \(error.localizedDescription)")
+    }
+
+    func subscriberVideoDataReceived(_ subscriber: OTSubscriber) {
     }
 }
