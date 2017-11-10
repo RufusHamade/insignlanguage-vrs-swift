@@ -10,7 +10,7 @@ import Foundation
 
 import UIKit
 
-class ReadyToCallController: UIViewController {
+class ReadyToCallController: UIViewController, ProviderHandler {
 
     @IBOutlet weak var nameField: UILabel!
     @IBOutlet weak var notesField: UITextView!
@@ -24,7 +24,7 @@ class ReadyToCallController: UIViewController {
         self.notesField.layer.cornerRadius = 5.0;
         self.notesField.text = sessionModel.getNotes()
         self.notesField.delegate = self
-        sessionModel.setOnProviderAvailability(self.onProvidersAvailable)
+        self.sessionModel.setProviderHandler(self)
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -36,7 +36,7 @@ class ReadyToCallController: UIViewController {
     }
 
 
-    func onProvidersAvailable(_ availableProviders: Int) {
+    func onProviderAvailability(_ availableProviders: Int) {
         if availableProviders == 0 {
             self.providerAvailabilityField.text = "Unfortunately, there are no translators available."
         }
@@ -51,6 +51,7 @@ class ReadyToCallController: UIViewController {
         self.nameField.textAlignment = .center
         self.providerAvailabilityField.text = "Checking for translators..."
         self.providerAvailabilityField.textAlignment = .center
+        self.sessionModel.resetProviderAvailabilityCheck()
     }
 
     @IBAction func logoutClicked(_ sender: Any) {

@@ -13,6 +13,15 @@ import OpenTok
 let API_KEY = Bundle.main.infoDictionary!["APP_API_KEY"] as! String
 let SESSION_SERVER = Bundle.main.infoDictionary!["APP_SESSION_SERVER"] as! String
 
+protocol SessionHandler {
+    func onCredentialsChange() -> Void
+    func onAuthSuccess() -> Void
+    func onAuthFailure(_ reason: String) -> Void
+}
+
+protocol ProviderHandler {
+    func onProviderAvailability(_ availableProviders: Int) -> Void
+}
 
 protocol DialHandler {
     func onDialSuccess() -> Void
@@ -46,11 +55,9 @@ class SessionModel {
     var callId: Int?
     var sessionId: String?
     var token: String?
-    
-    var onCredentialsChange: (() -> Void)?
-    var onAuthSuccess: (() -> Void)?
-    var onAuthFailure: ((_ reason: String) -> Void)?
-    var onProviderAvailability: ((_ providerAvailability: Int) -> Void)?
+
+    var sessionHandler: SessionHandler?
+    var providerHandler: ProviderHandler?
     var dialHandler: DialHandler?
 
     // MARK: Initialization
@@ -61,28 +68,22 @@ class SessionModel {
         self.notes = preferences.object(forKey: "notes") as? String
     }
 
-    func setOnCredentialsChange(_ function: @escaping () -> Void ) {
-        self.onCredentialsChange = function
+    func setSessionHandler(_ sh: SessionHandler) {
+        self.sessionHandler = sh
     }
 
-    func setOnAuthSuccess(_ function: @escaping () -> Void ) {
-        self.onAuthSuccess = function
-    }
-
-    func setOnAuthFailure(_ function: @escaping (_ reason: String) -> Void ) {
-        self.onAuthFailure = function
+    func setProviderHandler(_ ph: ProviderHandler) {
+        self.providerHandler = ph
     }
 
     func setDialHandler(_ dh: DialHandler ) {
         self.dialHandler = dh
     }
 
-    func setOnProviderAvailability(_ function: @escaping (_ providersAvailable: Int) -> Void) {
-        self.onProviderAvailability = function
-        if self.providersAvailable >= 0 {
-            self.onProviderAvailability!(self.providersAvailable)
-        }
+    func resetProviderAvailabilityCheck() {
+        providersAvailable = -1
     }
+
     //MARK: Authentication functions
     func setName(_ name: String?) {
         if self.name != name {
@@ -91,7 +92,7 @@ class SessionModel {
             let preferences = UserDefaults.standard
             preferences.set(self.name, forKey: "name")
             preferences.set(self.sessionToken, forKey: "sessionToken")
-            self.onCredentialsChange?()
+            self.sessionHandler?.onCredentialsChange()
         }
     }
 
@@ -101,7 +102,7 @@ class SessionModel {
             self.sessionToken = nil
             let preferences = UserDefaults.standard
             preferences.set(self.sessionToken, forKey: "sessionToken")
-            self.onCredentialsChange?()
+            self.sessionHandler?.onCredentialsChange()
         }
     }
 
@@ -122,7 +123,7 @@ class SessionModel {
                                               selector: #selector(self.checkProviderAvailability),
                                               userInfo: nil,
                                               repeats: true)
-        self.onAuthSuccess?()
+        self.sessionHandler?.onAuthSuccess()
     }
 
     func authenticateResult(token: String) {
@@ -134,7 +135,7 @@ class SessionModel {
     
     func authenticateFailure(_ reason: String){
         loginState = .unauthenticated
-        self.onAuthFailure?(reason)
+        self.sessionHandler?.onAuthFailure(reason)
     }
     
     func authenticate () {
@@ -282,6 +283,7 @@ class SessionModel {
 
         Alamofire.request(self.server! + "/poll/", headers: headers)
             .responseJSON { response in
+
                 if response.result.value == nil {
                     return
                 }
@@ -289,8 +291,8 @@ class SessionModel {
                 let availableNow:Int = jsonResult["providers_available"] as! Int
                 if self.providersAvailable != availableNow {
                     self.providersAvailable = availableNow
-                    if self.onProviderAvailability != nil {
-                        self.onProviderAvailability!(availableNow)
+                    if self.sessionHandler != nil {
+                        self.providerHandler!.onProviderAvailability(availableNow)
                     }
                 }
         }

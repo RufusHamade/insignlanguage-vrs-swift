@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginController: UIViewController {
+class LoginController: UIViewController, SessionHandler {
 
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -27,9 +27,7 @@ class LoginController: UIViewController {
         qqqServer.delegate = self
 
         qqqServer.text = sessionModel.server
-        sessionModel.setOnAuthSuccess(self.onAuthSuccess)
-        sessionModel.setOnAuthFailure(self.onAuthFailure)
-        sessionModel.setOnCredentialsChange(self.onCredentialsChange)
+        sessionModel.setSessionHandler(self)
         onCredentialsChange()
         sessionModel.checkToken()
 
