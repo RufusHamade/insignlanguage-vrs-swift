@@ -79,7 +79,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6y-0k-9yC">
+                            <button opaque="NO" alpha="0.25" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6y-0k-9yC">
                                 <rect key="frame" x="110" y="448" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="250" id="NHB-Lz-6ay" userLabel="height = 125"/>
@@ -125,6 +125,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="callButton" destination="s6y-0k-9yC" id="HnN-fF-qeE"/>
                         <outlet property="nameField" destination="JdP-Bv-Z0s" id="1JO-Hc-a4l"/>
                         <outlet property="notesField" destination="AxL-CV-Z3F" id="ZVA-BN-81y"/>
                         <outlet property="providerAvailabilityField" destination="qXf-Je-7JI" id="Znc-cm-hGZ"/>

@@ -15,6 +15,7 @@ class ReadyToCallController: UIViewController, ProviderHandler {
     @IBOutlet weak var nameField: UILabel!
     @IBOutlet weak var notesField: UITextView!
     @IBOutlet weak var providerAvailabilityField: UILabel!
+    @IBOutlet weak var callButton: UIButton!
 
     var sessionModel = SessionModel.sharedInstance
 
@@ -37,11 +38,20 @@ class ReadyToCallController: UIViewController, ProviderHandler {
 
 
     func onProviderAvailability(_ availableProviders: Int) {
-        if availableProviders == 0 {
-            self.providerAvailabilityField.text = "Unfortunately, there are no translators available."
+        if availableProviders < 1 {
+            if availableProviders == 0 {
+                self.providerAvailabilityField.text = "Unfortunately, there are no translators available."
+            }
+            else {
+                self.providerAvailabilityField.text = "Server unavailable."
+            }
+            callButton.isEnabled = false
+            callButton.alpha = 0.25
         }
         else {
             self.providerAvailabilityField.text = String(format: "There are %d translators available.", availableProviders)
+            callButton.isEnabled = true
+            callButton.alpha = 1
         }
         self.providerAvailabilityField.textAlignment = .center
     }

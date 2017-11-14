@@ -84,6 +84,7 @@ class SessionModel {
 
     func resetProviderAvailabilityCheck() {
         providersAvailable = -1
+        self.checkProviderAvailability()
     }
 
     //MARK: Authentication functions
@@ -120,7 +121,7 @@ class SessionModel {
 
     func authSuccess() -> Void {
         loginState = .authenticated
-        self.pollTimer = Timer.scheduledTimer(timeInterval: 5,
+        self.pollTimer = Timer.scheduledTimer(timeInterval: 10,
                                               target: self,
                                               selector: #selector(self.checkProviderAvailability),
                                               userInfo: nil,
@@ -257,7 +258,6 @@ class SessionModel {
     func hangupResult() {
         self.callId = nil
         self.videoState = .disconnected
-        
         self.dialHandler?.onHangupSuccess()
     }
     
@@ -286,17 +286,21 @@ class SessionModel {
         Alamofire.request(self.server! + "/poll/", headers: headers)
             .responseJSON { response in
 
-                if response.result.value == nil {
-                    return
-                }
-                let jsonResult = response.result.value as! [String: Any]
-                let availableNow:Int = jsonResult["providers_available"] as! Int
-                if self.providersAvailable != availableNow {
-                    self.providersAvailable = availableNow
-                    if self.sessionHandler != nil {
-                        self.providerHandler!.onProviderAvailability(availableNow)
+                switch response.result {
+                case .success:
+                    let jsonResult = response.result.value as! [String: Any]
+                    let availableNow:Int = jsonResult["providers_available"] as! Int
+                    if self.providersAvailable != availableNow {
+                        self.providersAvailable = availableNow
+                        if self.sessionHandler != nil {
+                            self.providerHandler!.onProviderAvailability(availableNow)
+                        }
                     }
+                case .failure:
+                    self.providersAvailable = -1
+                    self.providerHandler!.onProviderAvailability(-1)
                 }
+
         }
 
     }
