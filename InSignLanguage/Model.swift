@@ -13,6 +13,8 @@ import OpenTok
 let API_KEY = Bundle.main.infoDictionary!["APP_API_KEY"] as! String
 let SESSION_SERVER = Bundle.main.infoDictionary!["APP_SESSION_SERVER"] as! String
 
+//MARK: SessionModel
+
 protocol SessionHandler {
     func onCredentialsChange() -> Void
     func onAuthSuccess() -> Void
@@ -325,7 +327,8 @@ class ConnectionModel: NSObject {
 
     var sessionModel = SessionModel.sharedInstance
 
-    var session: OTSession?
+    var otSession: OTSession?
+    var connectionId: String?
 
     lazy var publisher: OTPublisher = {
         let settings = OTPublisherSettings()
@@ -347,19 +350,19 @@ class ConnectionModel: NSObject {
     }
 
     func connect() {
-        self.session = OTSession(apiKey: API_KEY, sessionId: sessionModel.sessionId!, delegate: self)!
+        self.otSession = OTSession(apiKey: API_KEY, sessionId: sessionModel.sessionId!, delegate: self)!
 
         var error: OTError?
         defer {
             self.processOTError(error)
         }
 
-        self.session!.connect(withToken: sessionModel.token!, error: &error)
+        self.otSession!.connect(withToken: sessionModel.token!, error: &error)
     }
 
     func disconnect() {
-        session?.disconnect()
-        session = nil
+        self.otSession?.disconnect(nil)
+        self.otSession = nil
     }
 
     /**
@@ -373,7 +376,7 @@ class ConnectionModel: NSObject {
             self.processOTError(error)
         }
 
-        session!.publish(publisher, error: &error)
+        self.otSession!.publish(publisher, error: &error)
 
         if let pubView = publisher.view {
             self.videoDisplayer?.displayInsert(pubView)
@@ -393,14 +396,14 @@ class ConnectionModel: NSObject {
         }
         subscriber = OTSubscriber(stream: stream, delegate: self)
 
-        session!.subscribe(subscriber!, error: &error)
+        self.otSession!.subscribe(subscriber!, error: &error)
     }
 
     func cleanupSubscriber() {
         if let subscriber = self.subscriber {
             subscriber.view?.removeFromSuperview()
             var error: OTError?
-            self.session!.unsubscribe(subscriber, error: &error)
+            self.otSession!.unsubscribe(subscriber, error: &error)
             self.processOTError(error)
         }
         self.subscriber = nil
@@ -418,11 +421,13 @@ class ConnectionModel: NSObject {
 extension ConnectionModel: OTSessionDelegate {
     func sessionDidConnect(_ session: OTSession) {
         print("Session connected")
-        doPublish()
+        self.connectionId = self.otSession?.connection?.connectionId
+        self.doPublish()
     }
 
     func sessionDidDisconnect(_ session: OTSession) {
         print("Session disconnected")
+        self.connectionId = nil
     }
 
     func session(_ session: OTSession, streamCreated stream: OTStream) {

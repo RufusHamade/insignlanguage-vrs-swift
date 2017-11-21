@@ -9,7 +9,7 @@
 import UIKit
 import OpenTok
 
-class VideoDisplayController: UIViewController, VideoDisplayer, ErrorHandler, DialHandler {
+class VideoDisplayController: UIViewController, ErrorHandler, DialHandler {
 
     @IBOutlet weak var hangupButton: UIButton!
     var mainView: UIView?
@@ -45,31 +45,9 @@ class VideoDisplayController: UIViewController, VideoDisplayer, ErrorHandler, Di
         self.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
     }
     
-    func displayVideo(_ subscriberView: UIView) {
-        let insetTop = CGFloat(80.0)
-        let insetBottom = view.frame.size.height - hangupButton.frame.origin.y + CGFloat(8)
-        subscriberView.frame = CGRect(x: 2.0, y: insetTop,
-                                width: view.frame.size.width - 4,
-                                height: view.frame.size.height - insetTop - insetBottom)
-        view.insertSubview(subscriberView, at: 0)
-        self.mainView = subscriberView
-    }
-
-    func displayInsert(_ publisherView: UIView) {
-        let width = view.frame.size.width/4
-        let height = view.frame.size.height/4
-        let insetTop = hangupButton.frame.origin.y - (height + 12)
-        let baseView = UIView(frame: CGRect(x:4.0, y: insetTop, width: width + 2, height: height + 2))
-        baseView.backgroundColor = .white
-        view.addSubview(baseView)
-        publisherView.frame = CGRect(x: 5.0, y: insetTop + 1, width: width, height: height)
-        view.addSubview(publisherView)
-        self.insertView = publisherView
-    }
-
     //MARK: UI Actions
     @IBAction func hangupClicked(_ sender: Any) {
-        if self.connectionModel.session == nil {
+        if self.connectionModel.otSession == nil {
             // This is probably the second time we've hit hangup.  So just segue
             self.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
             return
@@ -100,5 +78,29 @@ class VideoDisplayController: UIViewController, VideoDisplayer, ErrorHandler, Di
             controller.addAction(UIAlertAction(title: "Ok", style: .default, handler: self.handleAlert))
             self.present(controller, animated: true, completion: nil)
         }
+    }
+}
+
+extension VideoDisplayController: VideoDisplayer {
+    func displayVideo(_ subscriberView: UIView) {
+        let insetTop = CGFloat(80.0)
+        let insetBottom = view.frame.size.height - hangupButton.frame.origin.y + CGFloat(8)
+        subscriberView.frame = CGRect(x: 2.0, y: insetTop,
+                                      width: view.frame.size.width - 4,
+                                      height: view.frame.size.height - insetTop - insetBottom)
+        view.insertSubview(subscriberView, at: 0)
+        self.mainView = subscriberView
+    }
+
+    func displayInsert(_ publisherView: UIView) {
+        let width = view.frame.size.width/4
+        let height = view.frame.size.height/4
+        let insetTop = hangupButton.frame.origin.y - (height + 12)
+        let baseView = UIView(frame: CGRect(x:4.0, y: insetTop, width: width + 2, height: height + 2))
+        baseView.backgroundColor = .white
+        view.addSubview(baseView)
+        publisherView.frame = CGRect(x: 5.0, y: insetTop + 1, width: width, height: height)
+        view.addSubview(publisherView)
+        self.insertView = publisherView
     }
 }
