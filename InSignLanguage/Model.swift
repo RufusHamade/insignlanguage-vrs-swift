@@ -35,11 +35,12 @@ class SessionModel {
     static let sharedInstance = SessionModel();
     
     // MARK: Properties
-    var server: String? = SESSION_SERVER
+    var serverUrl: String? = SESSION_SERVER
     var name: String?
     var password: String?
     var sessionToken: String?
     var notes: String?
+    var number: String?
 
     var providersAvailable: Int = -1
     var pollTimer: Timer?
@@ -152,7 +153,7 @@ class SessionModel {
             "password": self.password!
         ]
         
-        Alamofire.request(self.server! + "/api-token-auth/",
+        Alamofire.request(self.serverUrl! + "/call/api-token-auth/",
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default)
@@ -183,7 +184,7 @@ class SessionModel {
             "Authorization": "Token " + self.sessionToken!,
             "Accept": "application/json"
         ]
-        Alamofire.request(self.server! + "/ping/",
+        Alamofire.request(self.serverUrl! + "/call/ping/",
                           headers: headers)
             .responseJSON { response in
                 if response.response == nil {
@@ -236,9 +237,10 @@ class SessionModel {
             "Accept": "application/json"
         ]
 
-        let parameters:Parameters = ["notes": self.getNotes()]
+        let parameters:Parameters = ["notes": self.getNotes(),
+                                     "number": self.getNumber()]
 
-        Alamofire.request(self.server! + "/call/",
+        Alamofire.request(self.serverUrl! + "/call/call/",
                           method: .post,
                           parameters: parameters,
                           headers: headers)
@@ -271,7 +273,7 @@ class SessionModel {
             "Accept": "application/json"
         ]
 
-        Alamofire.request(self.server! + "/hangup/\(self.callId!)/", headers: headers)
+        Alamofire.request(self.serverUrl! + "/call/hangup/\(self.callId!)/", headers: headers)
             .responseJSON { response in
                 self.hangupResult()
         }
@@ -283,7 +285,7 @@ class SessionModel {
             "Accept": "application/json"
         ]
 
-        Alamofire.request(self.server! + "/poll/", headers: headers)
+        Alamofire.request(self.serverUrl! + "/call/poll/", headers: headers)
             .responseJSON { response in
 
                 switch response.result {
@@ -312,6 +314,14 @@ class SessionModel {
 
     func getNotes() -> String {
         return self.notes != nil ? self.notes! : ""
+    }
+
+    func setNumber(_ number:String?) {
+        self.number = number
+    }
+
+    func getNumber() -> String {
+        return self.number != nil ? self.number! : ""
     }
 }
 

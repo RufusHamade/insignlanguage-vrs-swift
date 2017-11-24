@@ -14,7 +14,7 @@ class LoginController: UIViewController, SessionHandler {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var loginErrors: UILabel!
-    @IBOutlet weak var qqqServer: UITextField!
+    @IBOutlet weak var serverUrlField: UITextField!
     
     var sessionModel = SessionModel.sharedInstance
 
@@ -24,9 +24,9 @@ class LoginController: UIViewController, SessionHandler {
         nameField.text = sessionModel.name
         nameField.delegate = self
         passwordField.delegate = self
-        qqqServer.delegate = self
+        serverUrlField.delegate = self
 
-        qqqServer.text = sessionModel.server
+        serverUrlField.text = sessionModel.serverUrl
         sessionModel.setSessionHandler(self)
         onCredentialsChange()
         sessionModel.checkToken()
@@ -82,14 +82,14 @@ extension LoginController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == nameField {
+        if textField == self.nameField {
             sessionModel.setName(textField.text)
         }
-        else if textField == passwordField {
+        else if textField == self.passwordField {
             sessionModel.setPassword(textField.text)
         }
-        else if textField == qqqServer {
-            sessionModel.server = textField.text
+        else if textField == self.serverUrlField {
+            sessionModel.serverUrl = textField.text
         }
     }
 }

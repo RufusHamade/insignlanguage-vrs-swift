@@ -14,6 +14,7 @@ class ReadyToCallController: UIViewController, ProviderHandler {
 
     @IBOutlet weak var nameField: UILabel!
     @IBOutlet weak var notesField: UITextView!
+    @IBOutlet weak var numberField: UITextField!
     @IBOutlet weak var providerAvailabilityField: UILabel!
     @IBOutlet weak var callButton: UIButton!
 
@@ -21,10 +22,14 @@ class ReadyToCallController: UIViewController, ProviderHandler {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.notesField.layer.borderWidth = 1.0;
-        self.notesField.layer.cornerRadius = 5.0;
+        self.notesField.layer.borderWidth = 1.0
+        self.notesField.layer.cornerRadius = 3.0
         self.notesField.text = sessionModel.getNotes()
         self.notesField.delegate = self
+        self.numberField.layer.borderWidth = 1.0
+        self.numberField.layer.cornerRadius = 3.0
+        self.numberField.delegate = self
+        self.numberField.layer.borderWidth = 1.0
         self.sessionModel.setProviderHandler(self)
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
@@ -75,6 +80,16 @@ class ReadyToCallController: UIViewController, ProviderHandler {
 
 extension ReadyToCallController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
-        sessionModel.setNotes(textView.text)
+        if textView == self.notesField {
+            self.sessionModel.setNotes(textView.text)
+        }
+    }
+}
+
+extension ReadyToCallController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == self.numberField {
+            self.sessionModel.setNumber(textField.text)
+        }
     }
 }
