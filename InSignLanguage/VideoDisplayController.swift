@@ -9,9 +9,24 @@
 import UIKit
 import OpenTok
 
-class VideoDisplayController: UIViewController, ErrorHandler, DialHandler {
+extension UIView {
+    func rotate360Degrees(duration:CFTimeInterval = 1.0, completionDelegate: CAAnimationDelegate? = nil) {
+        let animation = CABasicAnimation(keyPath: "transform.rotation")
+        animation.fromValue = 0.0
+        animation.toValue = CGFloat(.pi * 2.0)
+        animation.duration = 1.0
+        if let delegate: CAAnimationDelegate = completionDelegate {
+            animation.delegate = delegate
+        }
+        self.layer.add(animation, forKey: nil)
+    }
+}
+
+class VideoDisplayController: UIViewController, ErrorHandler, DialHandler, CAAnimationDelegate {
 
     @IBOutlet weak var hangupButton: UIButton!
+    @IBOutlet weak var placeholder: UIImageView!
+    @IBOutlet weak var placeholder2: UIImageView!
     var mainView: UIView?
     var insertView: UIView?
 
@@ -30,6 +45,19 @@ class VideoDisplayController: UIViewController, ErrorHandler, DialHandler {
         connectionModel.setVideoDisplayer(self)
         connectionModel.setErrorHandler(self)
         sessionModel.dial()
+        self.placeholder.isHidden = false
+        self.placeholder2.isHidden = false
+        self.placeholder.rotate360Degrees(duration: 2.0, completionDelegate: self)
+    }
+
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        if self.connectionModel.otSubscriber == nil {
+            self.placeholder.rotate360Degrees(duration: 2.0, completionDelegate: self)
+        }
+        else {
+            self.placeholder.isHidden = true
+            self.placeholder2.isHidden = true
+        }
     }
 
     func onDialFailure(_ reason: String) {

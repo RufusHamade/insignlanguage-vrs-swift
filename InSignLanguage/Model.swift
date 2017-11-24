@@ -340,7 +340,7 @@ class ConnectionModel: NSObject {
         return OTPublisher(delegate: self, settings: settings)!
     }()
 
-    var subscriber: OTSubscriber?
+    var otSubscriber: OTSubscriber?
     var subscribeToSelf = false // Set true to see your own video stream....
 
     var videoDisplayer: VideoDisplayer?
@@ -398,19 +398,19 @@ class ConnectionModel: NSObject {
         defer {
             processOTError(error)
         }
-        subscriber = OTSubscriber(stream: stream, delegate: self)
+        self.otSubscriber = OTSubscriber(stream: stream, delegate: self)
 
-        self.otSession!.subscribe(subscriber!, error: &error)
+        self.otSession!.subscribe(self.otSubscriber!, error: &error)
     }
 
     func cleanupSubscriber() {
-        if let subscriber = self.subscriber {
+        if let subscriber = self.otSubscriber {
             subscriber.view?.removeFromSuperview()
             var error: OTError?
             self.otSession!.unsubscribe(subscriber, error: &error)
             self.processOTError(error)
         }
-        self.subscriber = nil
+        self.otSubscriber = nil
     }
 
     //MARK: Error handling
@@ -426,7 +426,6 @@ extension ConnectionModel: OTSessionDelegate {
     func sessionDidConnect(_ session: OTSession) {
         print("Session connected")
         self.connectionId = self.otSession?.connection?.connectionId
-        self.doPublish()
     }
 
     func sessionDidDisconnect(_ session: OTSession) {
@@ -436,14 +435,15 @@ extension ConnectionModel: OTSessionDelegate {
 
     func session(_ session: OTSession, streamCreated stream: OTStream) {
         print("Session streamCreated: \(stream.streamId)")
-        if subscriber == nil && !subscribeToSelf {
-            doSubscribe(stream)
+        if self.otSubscriber == nil && !subscribeToSelf {
+            self.doSubscribe(stream)
+            self.doPublish()
         }
     }
 
     func session(_ session: OTSession, streamDestroyed stream: OTStream) {
         print("Session streamDestroyed: \(stream.streamId)")
-        if let subStream = subscriber?.stream, subStream.streamId == stream.streamId {
+        if let subStream = otSubscriber?.stream, subStream.streamId == stream.streamId {
             self.errorHandler?.onHangupSuccess()
         }
     }
@@ -451,20 +451,19 @@ extension ConnectionModel: OTSessionDelegate {
     func session(_ session: OTSession, didFailWithError error: OTError) {
         print("session Failed to connect: \(error.localizedDescription)")
     }
-
 }
 
 
 // MARK: - OTPublisher delegate callbacks
 extension ConnectionModel: OTPublisherDelegate {
     func publisher(_ publisher: OTPublisherKit, streamCreated stream: OTStream) {
-        if subscriber == nil && subscribeToSelf {
+        if self.otSubscriber == nil && subscribeToSelf {
             doSubscribe(stream)
         }
     }
 
     func publisher(_ publisher: OTPublisherKit, streamDestroyed stream: OTStream) {
-        if let subStream = subscriber?.stream, subStream.streamId == stream.streamId {
+        if let subStream = self.otSubscriber?.stream, subStream.streamId == stream.streamId {
             cleanupSubscriber()
         }
     }
@@ -477,7 +476,7 @@ extension ConnectionModel: OTPublisherDelegate {
 // MARK: - OTSubscriber delegate callbacks
 extension ConnectionModel: OTSubscriberDelegate {
     func subscriberDidConnect(toStream subscriberKit: OTSubscriberKit) {
-        if let subsView = subscriber?.view {
+        if let subsView = self.otSubscriber?.view {
             self.videoDisplayer?.displayVideo(subsView)
         }
     }

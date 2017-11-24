@@ -168,25 +168,40 @@
                                     <navigationItem title="In Call" id="YGQ-W7-9pS"/>
                                 </items>
                             </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onhold-circle.png" translatesAutoresizingMaskIntoConstraints="NO" id="sbF-3K-Lro">
+                                <rect key="frame" x="22" y="146" width="276" height="276"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="sbF-3K-Lro" secondAttribute="height" multiplier="1:1" id="NPm-zr-YJ8"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onhold-image.png" translatesAutoresizingMaskIntoConstraints="NO" id="0wz-DV-X09">
+                                <rect key="frame" x="73" y="200" width="174" height="168"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.19359250663129979" green="0.19359250663129979" blue="0.19359250663129979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="nBa-O8-2go" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="5Cb-ve-rcB"/>
+                            <constraint firstItem="sbF-3K-Lro" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GEa-Gu-4Aw"/>
+                            <constraint firstItem="0wz-DV-X09" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jaa-TX-pjP"/>
+                            <constraint firstItem="sbF-3K-Lro" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="QBB-AY-4v1"/>
                             <constraint firstItem="nBa-O8-2go" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="YLT-8M-qpe"/>
                             <constraint firstItem="Bjr-Z8-O8t" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="c4m-qc-WOw"/>
                             <constraint firstAttribute="trailing" secondItem="nBa-O8-2go" secondAttribute="trailing" id="iak-xh-io7"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Bjr-Z8-O8t" secondAttribute="bottom" constant="35" id="taU-Ap-nzy"/>
+                            <constraint firstItem="0wz-DV-X09" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ts5-XH-qAM"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="hangupButton" destination="Bjr-Z8-O8t" id="vMd-kw-Tmm"/>
+                        <outlet property="placeholder" destination="sbF-3K-Lro" id="hXU-4Z-iRb"/>
+                        <outlet property="placeholder2" destination="0wz-DV-X09" id="RKt-RG-WbH"/>
                         <segue destination="NxE-M2-0UC" kind="unwind" identifier="unwindToReadyToCall" unwindAction="unwindToReadyToCallWithSegue:" id="Yyk-6Q-smB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="NxE-M2-0UC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1466" y="-785"/>
+            <point key="canvasLocation" x="1464.375" y="-785.91549295774644"/>
         </scene>
         <!--Login Page-->
         <scene sceneID="HNX-hs-tvL">
@@ -294,6 +309,8 @@
     <resources>
         <image name="hangup.png" width="128" height="128"/>
         <image name="logo.png" width="2978" height="502"/>
+        <image name="onhold-circle.png" width="276" height="276"/>
+        <image name="onhold-image.png" width="174" height="168"/>
         <image name="phone.png" width="128" height="128"/>
     </resources>
 </document>

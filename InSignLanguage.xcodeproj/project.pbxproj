@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		40CF89581F34ABFEBE524F92 /* Pods_InSignLanguage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8230F9041DA7EE9932C7AA17 /* Pods_InSignLanguage.framework */; };
+		EE22E67F1FC49F910088A49E /* onhold-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = EE22E67E1FC49F910088A49E /* onhold-circle.png */; };
+		EE22E6811FC82C180088A49E /* onhold-image.png in Resources */ = {isa = PBXBuildFile; fileRef = EE22E6801FC82C180088A49E /* onhold-image.png */; };
 		EE3325151EC9F395002D9543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3325141EC9F395002D9543 /* AppDelegate.swift */; };
 		EE33251A1EC9F395002D9543 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE3325181EC9F395002D9543 /* Main.storyboard */; };
 		EE4D6DB41ECA124D00EB2E63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE4D6DB31ECA124D00EB2E63 /* Assets.xcassets */; };
@@ -25,6 +27,8 @@
 		6CE316CF5A1693807A51241E /* Pods-InSignLanguage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InSignLanguage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InSignLanguage/Pods-InSignLanguage.debug.xcconfig"; sourceTree = "<group>"; };
 		8230F9041DA7EE9932C7AA17 /* Pods_InSignLanguage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InSignLanguage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98433EAD26FC19263B3AAB5F /* Pods-InSignLanguage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InSignLanguage.release.xcconfig"; path = "Pods/Target Support Files/Pods-InSignLanguage/Pods-InSignLanguage.release.xcconfig"; sourceTree = "<group>"; };
+		EE22E67E1FC49F910088A49E /* onhold-circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onhold-circle.png"; sourceTree = "<group>"; };
+		EE22E6801FC82C180088A49E /* onhold-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onhold-image.png"; sourceTree = "<group>"; };
 		EE3325111EC9F395002D9543 /* InSignLanguage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InSignLanguage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE3325141EC9F395002D9543 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE3325191EC9F395002D9543 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -91,12 +95,14 @@
 			isa = PBXGroup;
 			children = (
 				EE4D6DB31ECA124D00EB2E63 /* Assets.xcassets */,
-				EEC248041EC9F58B003EEDA1 /* hangup.png */,
 				EEC248051EC9F58B003EEDA1 /* LoginController.swift */,
 				EEC248091EC9F58B003EEDA1 /* ReadyToCallController.swift */,
 				EEC2480A1EC9F58B003EEDA1 /* VideoDisplayController.swift */,
 				EEC248071EC9F58B003EEDA1 /* Model.swift */,
+				EEC248041EC9F58B003EEDA1 /* hangup.png */,
 				EEC248061EC9F58B003EEDA1 /* logo.png */,
+				EE22E67E1FC49F910088A49E /* onhold-circle.png */,
+				EE22E6801FC82C180088A49E /* onhold-image.png */,
 				EEC248081EC9F58B003EEDA1 /* phone.png */,
 				EEC2480C1EC9F58B003EEDA1 /* Base.lproj */,
 				EE3325141EC9F395002D9543 /* AppDelegate.swift */,
@@ -170,11 +176,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEC2480D1EC9F58B003EEDA1 /* hangup.png in Resources */,
+				EE22E67F1FC49F910088A49E /* onhold-circle.png in Resources */,
 				EEC2480F1EC9F58B003EEDA1 /* logo.png in Resources */,
 				EEC248151EC9F58B003EEDA1 /* Base.lproj in Resources */,
 				EEC248111EC9F58B003EEDA1 /* phone.png in Resources */,
 				EE4D6DB41ECA124D00EB2E63 /* Assets.xcassets in Resources */,
 				EE33251A1EC9F395002D9543 /* Main.storyboard in Resources */,
+				EE22E6811FC82C180088A49E /* onhold-image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
