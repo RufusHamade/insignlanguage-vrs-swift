@@ -38,13 +38,14 @@ class VideoDisplayController: UIViewController, ErrorHandler, DialHandler, CAAni
     override func viewDidLoad() {
         super.viewDidLoad()
         sessionModel.setDialHandler(self)
+        self.hangupButton.isEnabled = false
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        connectionModel.setVideoDisplayer(self)
-        connectionModel.setErrorHandler(self)
-        sessionModel.dial()
+        self.connectionModel.setVideoDisplayer(self)
+        self.connectionModel.setErrorHandler(self)
+        self.sessionModel.dial()
         self.placeholder.isHidden = false
         self.placeholder2.isHidden = false
         self.placeholder.rotate360Degrees(duration: 2.0, completionDelegate: self)
@@ -66,13 +67,18 @@ class VideoDisplayController: UIViewController, ErrorHandler, DialHandler, CAAni
 
     //MARK: Session/State transition functions
     func onDialSuccess() {
+        self.hangupButton.isEnabled = true
         self.connectionModel.connect()
     }
 
     func onHangupSuccess() {
         self.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
     }
-    
+
+    func onDisconnectComplete() {
+        self.sessionModel.hangUp()
+    }
+
     //MARK: UI Actions
     @IBAction func hangupClicked(_ sender: Any) {
         if self.connectionModel.otSession == nil {
@@ -81,17 +87,10 @@ class VideoDisplayController: UIViewController, ErrorHandler, DialHandler, CAAni
             return
         }
 
-        self.connectionModel.cleanupSubscriber()
-        if let mainView = self.mainView {
-            mainView.removeFromSuperview()
-            self.mainView = nil
-        }
-        if let insertView = self.insertView {
-            insertView.removeFromSuperview()
-            self.insertView = nil
-        }
+        self.connectionModel.cleanupPublisher()
+        self.connectionModel.cleanupSubscriber(streamDestroyed: false)
         self.connectionModel.disconnect()
-        sessionModel.hangUp()
+        self.onDisconnectComplete()
     }
 
     //MARK: Error handling

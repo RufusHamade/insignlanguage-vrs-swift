@@ -329,11 +329,11 @@ class SessionModel {
 protocol VideoDisplayer {
     func displayVideo(_ publisherView: UIView) -> Void
     func displayInsert(_ subscriberView: UIView) -> Void
+    func onDisconnectComplete() -> Void
 }
 
 protocol ErrorHandler {
     func showAlert(_ err: String) -> Void
-    func onHangupSuccess() -> Void
 }
 
 class ConnectionModel: NSObject {
@@ -344,11 +344,12 @@ class ConnectionModel: NSObject {
     var otSession: OTSession?
     var connectionId: String?
 
-    lazy var publisher: OTPublisher = {
+    lazy var otPublisher: OTPublisher = {
         let settings = OTPublisherSettings()
         settings.name = UIDevice.current.name
         return OTPublisher(delegate: self, settings: settings)!
     }()
+    var publisherIsActive = false
 
     var otSubscriber: OTSubscriber?
     var subscribeToSelf = false // Set true to see your own video stream....
@@ -390,11 +391,13 @@ class ConnectionModel: NSObject {
             self.processOTError(error)
         }
 
-        self.otSession!.publish(publisher, error: &error)
+        self.otSession!.publish(self.otPublisher, error: &error)
 
-        if let pubView = publisher.view {
+        if let pubView = self.otPublisher.view {
             self.videoDisplayer?.displayInsert(pubView)
         }
+        self.publisherIsActive = true
+        print("doing publish")
     }
 
     /**
@@ -409,16 +412,32 @@ class ConnectionModel: NSObject {
             processOTError(error)
         }
         self.otSubscriber = OTSubscriber(stream: stream, delegate: self)
-
         self.otSession!.subscribe(self.otSubscriber!, error: &error)
+        print("doing subscribe")
     }
 
-    func cleanupSubscriber() {
+    func cleanupPublisher(){
+        if !publisherIsActive {
+            return
+        }
+        print("cleanup publisher")
+        self.otPublisher.view?.removeFromSuperview()
+        var error: OTError?
+        self.otSession!.unpublish(self.otPublisher, error: &error)
+        processOTError(error)
+        self.publisherIsActive = false
+    }
+
+    func cleanupSubscriber(streamDestroyed: Bool) {
         if let subscriber = self.otSubscriber {
+            print("cleanup subscriber")
             subscriber.view?.removeFromSuperview()
-            var error: OTError?
-            self.otSession!.unsubscribe(subscriber, error: &error)
-            self.processOTError(error)
+            if !streamDestroyed {
+                print("Unsubscribing")
+                var error: OTError?
+                self.otSession!.unsubscribe(subscriber, error: &error)
+                self.processOTError(error)
+            }
         }
         self.otSubscriber = nil
     }
@@ -453,8 +472,12 @@ extension ConnectionModel: OTSessionDelegate {
 
     func session(_ session: OTSession, streamDestroyed stream: OTStream) {
         print("Session streamDestroyed: \(stream.streamId)")
-        if let subStream = otSubscriber?.stream, subStream.streamId == stream.streamId {
-            self.errorHandler?.onHangupSuccess()
+        if let subStream = self.otSubscriber?.stream, subStream.streamId == stream.streamId {
+            print("they disconnected")
+            self.cleanupPublisher()
+            self.cleanupSubscriber(streamDestroyed:true)
+            self.disconnect()
+            self.videoDisplayer?.onDisconnectComplete()
         }
     }
 
@@ -468,13 +491,17 @@ extension ConnectionModel: OTSessionDelegate {
 extension ConnectionModel: OTPublisherDelegate {
     func publisher(_ publisher: OTPublisherKit, streamCreated stream: OTStream) {
         if self.otSubscriber == nil && subscribeToSelf {
+            print("self subscribing")
             doSubscribe(stream)
         }
     }
 
     func publisher(_ publisher: OTPublisherKit, streamDestroyed stream: OTStream) {
         if let subStream = self.otSubscriber?.stream, subStream.streamId == stream.streamId {
-            cleanupSubscriber()
+            print("self subscribing cleanup")
+            self.cleanupPublisher()
+            self.cleanupSubscriber(streamDestroyed:true)
+            self.videoDisplayer?.onDisconnectComplete()
         }
     }
 
@@ -487,6 +514,7 @@ extension ConnectionModel: OTPublisherDelegate {
 extension ConnectionModel: OTSubscriberDelegate {
     func subscriberDidConnect(toStream subscriberKit: OTSubscriberKit) {
         if let subsView = self.otSubscriber?.view {
+            print("displaying remote video")
             self.videoDisplayer?.displayVideo(subsView)
         }
     }
