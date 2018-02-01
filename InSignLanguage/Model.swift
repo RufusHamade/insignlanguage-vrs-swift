@@ -153,7 +153,7 @@ class SessionModel {
             "password": self.password!
         ]
         
-        Alamofire.request(self.serverUrl! + "/call/api-token-auth/",
+        Alamofire.request(self.serverUrl! + "/api/account/token-auth/",
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default)
@@ -184,7 +184,7 @@ class SessionModel {
             "Authorization": "Token " + self.sessionToken!,
             "Accept": "application/json"
         ]
-        Alamofire.request(self.serverUrl! + "/call/ping/",
+        Alamofire.request(self.serverUrl! + "/api/call/ping/",
                           headers: headers)
             .responseJSON { response in
                 if response.response == nil {
@@ -240,7 +240,7 @@ class SessionModel {
         let parameters:Parameters = ["notes": self.getNotes(),
                                      "number": self.getNumber()]
 
-        Alamofire.request(self.serverUrl! + "/call/call/",
+        Alamofire.request(self.serverUrl! + "/api/call/call/",
                           method: .post,
                           parameters: parameters,
                           headers: headers)
@@ -273,7 +273,7 @@ class SessionModel {
             "Accept": "application/json"
         ]
 
-        Alamofire.request(self.serverUrl! + "/call/hangup/\(self.callId!)/", headers: headers)
+        Alamofire.request(self.serverUrl! + "/api/call/hangup/\(self.callId!)/", headers: headers)
             .responseJSON { response in
                 self.hangupResult()
         }
@@ -285,7 +285,7 @@ class SessionModel {
             "Accept": "application/json"
         ]
 
-        Alamofire.request(self.serverUrl! + "/call/poll/", headers: headers)
+        Alamofire.request(self.serverUrl! + "/api/call/poll/", headers: headers)
             .responseJSON { response in
 
                 switch response.result {
@@ -304,7 +304,6 @@ class SessionModel {
                 }
 
         }
-
     }
     func setNotes(_ notes:String?) {
         self.notes = notes

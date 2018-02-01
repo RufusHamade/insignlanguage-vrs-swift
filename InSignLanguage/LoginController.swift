@@ -25,7 +25,6 @@ class LoginController: UIViewController, SessionHandler {
         nameField.delegate = self
         passwordField.delegate = self
         serverUrlField.delegate = self
-
         serverUrlField.text = sessionModel.serverUrl
         sessionModel.setSessionHandler(self)
         onCredentialsChange()
@@ -75,7 +74,6 @@ class LoginController: UIViewController, SessionHandler {
 }
 
 extension LoginController: UITextFieldDelegate {
-    //MARK: UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
