@@ -374,6 +374,10 @@ class SessionModel {
                 if response.response == nil {
                     self.registerHandler?.done(false, "Server Unavailable")
                 }
+                else if response.response!.statusCode == 400 {
+                    let jsonResult = response.result.value as! [String: Any]
+                    self.registerHandler?.done(false, (jsonResult["error"] as! String))
+                }
                 else if response.response!.statusCode != 200 {
                     self.registerHandler?.done(false, "Internal Server error")
                 }
