@@ -107,6 +107,7 @@
 				EEC2480C1EC9F58B003EEDA1 /* Base.lproj */,
 				EE3325141EC9F395002D9543 /* AppDelegate.swift */,
 				EE3325181EC9F395002D9543 /* Main.storyboard */,
+				EEF06A401FE42120004626C1 /* LaunchScreen.storyboard */,
 				EE3325201EC9F395002D9543 /* Info.plist */,
 			);
 			path = InSignLanguage;
@@ -258,6 +259,14 @@
 				EE3325191EC9F395002D9543 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EEF06A401FE42120004626C1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EEF06A411FE42120004626C1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
