@@ -31,6 +31,10 @@ protocol DialHandler {
     func onHangupSuccess() -> Void
 }
 
+protocol ActionHandler {
+    func done(_ success: Bool, _ message: String?) -> Void
+}
+
 class SessionModel {
     static let sharedInstance = SessionModel();
     
@@ -62,6 +66,7 @@ class SessionModel {
     var sessionHandler: SessionHandler?
     var providerHandler: ProviderHandler?
     var dialHandler: DialHandler?
+    var passwordResetHandler: ActionHandler?
 
     // MARK: Initialization
     private init() {
@@ -81,6 +86,10 @@ class SessionModel {
 
     func setDialHandler(_ dh: DialHandler ) {
         self.dialHandler = dh
+    }
+
+    func setPasswordResetHandler(_ prh: ActionHandler) {
+        self.passwordResetHandler = prh
     }
 
     func resetProviderAvailabilityCheck() {
@@ -321,6 +330,28 @@ class SessionModel {
 
     func getNumber() -> String {
         return self.number != nil ? self.number! : ""
+    }
+
+    func resetPassword(_ email: String) {
+        let parameters = [
+            "email": email,
+        ]
+
+        Alamofire.request(self.serverUrl! + "/api/account/request-password-reset/",
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default)
+            .responseJSON { response in
+                if response.response == nil {
+                    self.passwordResetHandler?.done(false, "Server Unavailable")
+                }
+                else if response.response!.statusCode != 200 {
+                    self.passwordResetHandler?.done(false, "Internal Server error")
+                }
+                else {
+                    self.passwordResetHandler?.done(true, nil)
+                }
+        }
     }
 }
 
