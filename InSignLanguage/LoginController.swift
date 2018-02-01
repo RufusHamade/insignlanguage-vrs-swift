@@ -70,7 +70,11 @@ class LoginController: UIViewController, SessionHandler {
         sessionModel.authenticate()
     }
 
-    @IBAction func unwindToLogin(segue: UIStoryboardSegue) {}
+    @IBAction func unwindToLogin(segue: UIStoryboardSegue) {
+        // May have got here via register page, so make sure nameField
+        // is up-to-date
+        nameField.text = sessionModel.name
+    }
 }
 
 extension LoginController: UITextFieldDelegate {

@@ -67,6 +67,7 @@ class SessionModel {
     var providerHandler: ProviderHandler?
     var dialHandler: DialHandler?
     var passwordResetHandler: ActionHandler?
+    var registerHandler: ActionHandler?
 
     // MARK: Initialization
     private init() {
@@ -90,6 +91,10 @@ class SessionModel {
 
     func setPasswordResetHandler(_ prh: ActionHandler) {
         self.passwordResetHandler = prh
+    }
+
+    func setRegisterHandler(_ rh: ActionHandler) {
+        self.registerHandler = rh
     }
 
     func resetProviderAvailabilityCheck() {
@@ -145,23 +150,23 @@ class SessionModel {
         preferences.set(self.sessionToken, forKey: "sessionToken")
         self.authSuccess()
     }
-    
+
     func authenticateFailure(_ reason: String){
         loginState = .unauthenticated
         self.sessionHandler?.onAuthFailure(reason)
     }
-    
+
     func authenticate () {
         if !self.isAuthenticable() {
             // no point doing anything.
             return
         }
-        
+
         let parameters = [
             "username": self.name!,
             "password": self.password!
         ]
-        
+
         Alamofire.request(self.serverUrl! + "/api/account/token-auth/",
                           method: .post,
                           parameters: parameters,
@@ -183,7 +188,7 @@ class SessionModel {
                 }
         }
     }
-    
+
     func checkToken () {
         if self.sessionToken == nil {
             return
@@ -211,7 +216,7 @@ class SessionModel {
                 }
         }
     }
-    
+
     func logout () {
         self.loginState = .unauthenticated
         self.sessionToken = nil
@@ -222,7 +227,7 @@ class SessionModel {
         }
         preferences.set(self.sessionToken, forKey: "sessionToken")
     }
-    
+
     //MARK: Execute dial
     func dialFailure(_ error: String) {
         self.dialHandler?.onDialFailure(error)
@@ -235,12 +240,12 @@ class SessionModel {
         self.videoState = .connected
         self.dialHandler?.onDialSuccess()
     }
-    
+
     func dial() {
         if self.videoState != .disconnected {
             return
         }
-        
+
         let headers: HTTPHeaders = [
             "Authorization": "Token " + self.sessionToken!,
             "Accept": "application/json"
@@ -264,14 +269,14 @@ class SessionModel {
                                 token: jsonResult["token"] as! String)
         }
     }
-    
+
     //MARK: Execute hangup
     func hangupResult() {
         self.callId = nil
         self.videoState = .disconnected
         self.dialHandler?.onHangupSuccess()
     }
-    
+
     func hangUp() {
         if self.videoState != .connected {
             return
@@ -314,6 +319,7 @@ class SessionModel {
 
         }
     }
+
     func setNotes(_ notes:String?) {
         self.notes = notes
         let preferences = UserDefaults.standard
@@ -350,6 +356,32 @@ class SessionModel {
                 }
                 else {
                     self.passwordResetHandler?.done(true, nil)
+                }
+        }
+    }
+
+    func register(_ email: String, _ password: String) {
+        let parameters = [
+            "email": email,
+            "password": password
+        ]
+
+        Alamofire.request(self.serverUrl! + "/api/account/register/",
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default)
+            .responseJSON { response in
+                if response.response == nil {
+                    self.registerHandler?.done(false, "Server Unavailable")
+                }
+                else if response.response!.statusCode != 200 {
+                    self.registerHandler?.done(false, "Internal Server error")
+                }
+                else {
+                    let jsonResult = response.result.value as! [String: Any]
+                    self.setName(email)
+                    self.authenticateResult(token: jsonResult["token"] as! String)
+                    self.registerHandler?.done(true, nil)
                 }
         }
     }
