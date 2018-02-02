@@ -351,6 +351,10 @@ class SessionModel {
                 if response.response == nil {
                     self.passwordResetHandler?.done(false, "Server Unavailable")
                 }
+                else if response.response!.statusCode == 400 {
+                    let jsonResult = response.result.value as! [String: Any]
+                    self.passwordResetHandler?.done(false, (jsonResult["error"] as! String))
+                }
                 else if response.response!.statusCode != 200 {
                     self.passwordResetHandler?.done(false, "Internal Server error")
                 }

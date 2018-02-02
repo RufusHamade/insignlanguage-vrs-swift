@@ -22,14 +22,7 @@ class ResetPasswordController: UIViewController, ActionHandler {
         emailField.text = sessionModel.name
         emailField.delegate = self
 
-        if emailField.text == nil || emailField.text == "" {
-            resetButton.isEnabled = false
-            resetButton.alpha = 0.5
-        }
-        else {
-            resetButton.isEnabled = true
-            resetButton.alpha = 1.0
-        }
+        self.enableReset(self.emailField.text != nil && self.emailField.text != "")
         resetResults.isHidden = true
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
@@ -43,10 +36,20 @@ class ResetPasswordController: UIViewController, ActionHandler {
         view.endEditing(true)
     }
 
+    func enableReset(_ enable: Bool) {
+        if enable {
+            self.resetButton.isEnabled = true
+            self.resetButton.alpha = 1.0
+        }
+        else {
+            self.resetButton.isEnabled = false
+            self.resetButton.alpha = 0.5
+        }
+    }
+
     @IBAction func resetClicked(_ sender: Any) {
-        resetButton.isEnabled = false
-        resetButton.alpha = 0.5
-        sessionModel.resetPassword(emailField.text!)
+        self.enableReset(false)
+        self.sessionModel.resetPassword(emailField.text!)
     }
 
     func done(_ success: Bool, _ message: String?) -> Void {
@@ -55,8 +58,7 @@ class ResetPasswordController: UIViewController, ActionHandler {
         if !success {
             resetResults.text = "Reset failed: " + message!
             resetResults.textColor = .red
-            resetButton.isEnabled = true
-            resetButton.alpha = 1.0
+            self.enableReset(true)
         }
         else {
             resetResults.text = "Reset succeeded.  Now check your email"
@@ -71,14 +73,7 @@ extension ResetPasswordController: UITextFieldDelegate {
         return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if (textField.text == "") {
-            resetButton.isEnabled = false
-            resetButton.alpha = 0.5
-        }
-        else {
-            resetButton.isEnabled = true
-            resetButton.alpha = 1.0
-        }
+        self.enableReset(textField.text != "")
     }
 }
 
