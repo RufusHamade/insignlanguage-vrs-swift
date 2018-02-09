@@ -11,11 +11,20 @@ class CustomerDetailsController: UIViewController {
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
 
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard),
                                        name: Notification.Name.UIKeyboardWillShow, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard),
                                        name: Notification.Name.UIKeyboardWillHide, object: nil)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self, name: Notification.Name.UIKeyboardWillShow, object: nil)
+        notificationCenter.removeObserver(self, name: Notification.Name.UIKeyboardWillHide, object: nil)
     }
 
     func dismissKeyboard() {

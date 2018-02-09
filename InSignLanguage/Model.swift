@@ -68,6 +68,7 @@ class SessionModel {
     var dialHandler: DialHandler?
     var passwordResetHandler: ActionHandler?
     var registerHandler: ActionHandler?
+    var changePasswordHandler: ActionHandler?
 
     // MARK: Initialization
     private init() {
@@ -95,6 +96,10 @@ class SessionModel {
 
     func setRegisterHandler(_ rh: ActionHandler) {
         self.registerHandler = rh
+    }
+
+    func setChangePasswordHandler(_ rh: ActionHandler) {
+        self.changePasswordHandler = rh
     }
 
     func resetProviderAvailabilityCheck() {
@@ -136,12 +141,26 @@ class SessionModel {
 
     func authSuccess() -> Void {
         loginState = .authenticated
+        self.sessionHandler?.onAuthSuccess()
+    }
+
+    func startProviderPoll() {
+        if self.pollTimer != nil {
+            return
+        }
+
         self.pollTimer = Timer.scheduledTimer(timeInterval: 10,
                                               target: self,
                                               selector: #selector(self.checkProviderAvailability),
                                               userInfo: nil,
                                               repeats: true)
-        self.sessionHandler?.onAuthSuccess()
+    }
+
+    func stopProviderPoll() {
+        if self.pollTimer != nil {
+            self.pollTimer!.invalidate()
+            self.pollTimer = nil
+        }
     }
 
     func authenticateResult(token: String) {
@@ -221,10 +240,6 @@ class SessionModel {
         self.loginState = .unauthenticated
         self.sessionToken = nil
         let preferences = UserDefaults.standard
-        if self.pollTimer != nil {
-            self.pollTimer!.invalidate()
-            self.pollTimer = nil
-        }
         preferences.set(self.sessionToken, forKey: "sessionToken")
     }
 
@@ -364,6 +379,44 @@ class SessionModel {
         }
     }
 
+    func changePassword(_ oldPassword: String, _ newPassword: String) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Token " + self.sessionToken!,
+            "Accept": "application/json"
+        ]
+
+        let parameters = [
+            "old_password": oldPassword,
+            "new_password": newPassword
+        ]
+
+        Alamofire.request(self.serverUrl! + "/api/account/change-password/",
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default,
+                          headers: headers)
+            .responseJSON { response in
+                if response.response == nil {
+                    self.changePasswordHandler?.done(false, "Server Unavailable")
+                    return
+                }
+                let status = response.response!.statusCode
+                print(response.result.value!)
+                if status == 400 {
+                    let jsonResult = response.result.value as! [String: Any]
+                    self.changePasswordHandler?.done(false, (jsonResult["error"] as! String))
+                }
+                else if status != 200 {
+                    self.changePasswordHandler?.done(false, "Internal Server error")
+                }
+                else {
+                    let jsonResult = response.result.value as! [String: Any]
+                    self.authenticateResult(token: jsonResult["token"] as! String)
+                    self.changePasswordHandler?.done(true, nil)
+                }
+        }
+    }
+
     func register(_ email: String, _ password: String) {
         let parameters = [
             "email": email,
@@ -387,7 +440,6 @@ class SessionModel {
                 }
                 else {
                     let jsonResult = response.result.value as! [String: Any]
-                    self.setName(email)
                     self.authenticateResult(token: jsonResult["token"] as! String)
                     self.registerHandler?.done(true, nil)
                 }

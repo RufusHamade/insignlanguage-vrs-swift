@@ -37,6 +37,14 @@ class ReadyToCallController: UIViewController, ProviderHandler {
         view.addGestureRecognizer(tap)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        self.sessionModel.startProviderPoll()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        self.sessionModel.stopProviderPoll()
+    }
+
     func dismissKeyboard() {
         view.endEditing(true)
     }
