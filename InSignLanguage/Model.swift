@@ -15,10 +15,24 @@ let SESSION_SERVER = Bundle.main.infoDictionary!["APP_SESSION_SERVER"] as! Strin
 
 //MARK: SessionModel
 
+protocol CheckTokenHandler {
+    func tokenOk() -> Void
+    func tokenNotOk() -> Void
+    func failure(_ message: String) -> Void
+}
+
+protocol GetPersonalProfileHandler {
+    func getPersonalProfileOk() -> Void
+    func failure(_ message: String) -> Void
+}
+
 protocol SessionHandler {
     func onCredentialsChange() -> Void
-    func onAuthSuccess() -> Void
-    func onAuthFailure(_ reason: String) -> Void
+}
+
+protocol AuthenticateHandler {
+    func authenticateOk() -> Void
+    func failure(_ message: String) -> Void
 }
 
 protocol ProviderHandler {
@@ -45,6 +59,7 @@ class SessionModel {
     var sessionToken: String?
     var notes: String?
     var number: String?
+    var personalProfile: [String: Any]?
 
     var providersAvailable: Int = -1
     var pollTimer: Timer?
@@ -139,11 +154,18 @@ class SessionModel {
         return true
     }
 
-    func authSuccess() -> Void {
-        loginState = .authenticated
-        self.sessionHandler?.onAuthSuccess()
-    }
+    func isProfileOk() -> Bool {
+        if self.personalProfile == nil {
+            return false
+        }
 
+        if self.personalProfile?["first_name"] == nil {
+            return false
+        }
+
+        return true
+    }
+    
     func startProviderPoll() {
         if self.pollTimer != nil {
             return
@@ -163,19 +185,13 @@ class SessionModel {
         }
     }
 
-    func authenticateResult(token: String) {
+    func authenticateResult(_ token: String) {
         sessionToken = token
         let preferences = UserDefaults.standard
         preferences.set(self.sessionToken, forKey: "sessionToken")
-        self.authSuccess()
     }
 
-    func authenticateFailure(_ reason: String){
-        loginState = .unauthenticated
-        self.sessionHandler?.onAuthFailure(reason)
-    }
-
-    func authenticate () {
+    func authenticate (_ handler: AuthenticateHandler) {
         if !self.isAuthenticable() {
             // no point doing anything.
             return
@@ -192,47 +208,58 @@ class SessionModel {
                           encoding: JSONEncoding.default)
             .responseJSON { response in
                 if response.response == nil {
-                    self.authenticateFailure("Server Unavailable")
+                    self.loginState = .unauthenticated
+                    handler.failure("Server Unavailable")
                     return
                 }
                 if response.response!.statusCode == 400 {
-                    self.authenticateFailure("Invalid Credentials")
+                    self.loginState = .unauthenticated
+                    handler.failure("Invalid Credentials")
                 }
                 else if response.response!.statusCode != 200 {
-                    self.authenticateFailure("Internal Server error")
+                    self.loginState = .unauthenticated
+                    handler.failure("Internal Server error")
                 }
                 else {
                     let jsonResult = response.result.value as! [String: Any]
-                    self.authenticateResult(token: jsonResult["token"] as! String)
+                    self.authenticateResult(jsonResult["token"] as! String)
+                    self.loginState = .authenticated
+                    handler.authenticateOk()
                 }
         }
     }
 
-    func checkToken () {
-        if self.sessionToken == nil {
-            return
-        }
-
-        let headers: HTTPHeaders = [
+    func getAuthHeaders() -> HTTPHeaders {
+        return [
             "Authorization": "Token " + self.sessionToken!,
             "Accept": "application/json"
         ]
+    }
+
+    func checkToken(_ handler: CheckTokenHandler) {
+        if self.sessionToken == nil {
+            handler.tokenNotOk()
+            return
+        }
+
         Alamofire.request(self.serverUrl! + "/api/call/ping/",
-                          headers: headers)
+                          headers: self.getAuthHeaders())
             .responseJSON { response in
                 if response.response == nil {
-                    self.authenticateFailure("Server Unavailable")
+                    handler.failure("Server Unavailable")
+                    self.loginState = .unauthenticated
                     return
                 }
                 if response.response?.statusCode == 200 {
-                    self.authSuccess()
+                    handler.tokenOk()
+                    self.loginState = .authenticated
+                    return
                 }
-                else {
-                    self.sessionToken = nil
-                    let preferences = UserDefaults.standard
-                    preferences.set(self.sessionToken, forKey: "sessionToken")
-                    self.loginState = .unauthenticated
-                }
+                handler.tokenNotOk()
+                self.sessionToken = nil
+                let preferences = UserDefaults.standard
+                preferences.set(self.sessionToken, forKey: "sessionToken")
+                self.loginState = .unauthenticated
         }
     }
 
@@ -411,7 +438,7 @@ class SessionModel {
                 }
                 else {
                     let jsonResult = response.result.value as! [String: Any]
-                    self.authenticateResult(token: jsonResult["token"] as! String)
+                    self.authenticateResult(jsonResult["token"] as! String)
                     self.changePasswordHandler?.done(true, nil)
                 }
         }
@@ -440,9 +467,27 @@ class SessionModel {
                 }
                 else {
                     let jsonResult = response.result.value as! [String: Any]
-                    self.authenticateResult(token: jsonResult["token"] as! String)
+                    self.authenticateResult(jsonResult["token"] as! String)
                     self.registerHandler?.done(true, nil)
                 }
+        }
+    }
+
+    func getPersonalProfile(_ handler: GetPersonalProfileHandler) {
+        Alamofire.request(self.serverUrl! + "/api/call/ping/",
+                          headers: self.getAuthHeaders())
+            .responseJSON { response in
+                if response.response == nil {
+                    handler.failure("Server Unavailable")
+                    return
+                }
+                else if response.response!.statusCode != 200 {
+                    handler.failure("Internal Server error")
+                    return
+                }
+
+                self.personalProfile = response.result.value as? [String: Any]
+                handler.getPersonalProfileOk()
         }
     }
 }

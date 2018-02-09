@@ -21,6 +21,7 @@ class RegisterController: UIViewController, ActionHandler {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        emailField.text = sessionModel.name
         emailField.delegate = self
         passwordField.delegate = self
         confirmPasswordField.delegate = self

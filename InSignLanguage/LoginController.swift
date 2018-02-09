@@ -8,14 +8,13 @@
 
 import UIKit
 
-class LoginController: UIViewController, SessionHandler {
+class LoginController: UIViewController, AuthenticateHandler, SessionHandler {
 
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var loginErrors: UILabel!
-    @IBOutlet weak var serverUrlField: UITextField!
-    
+
     var sessionModel = SessionModel.sharedInstance
 
     override func viewDidLoad() {
@@ -24,11 +23,8 @@ class LoginController: UIViewController, SessionHandler {
         nameField.text = sessionModel.name
         nameField.delegate = self
         passwordField.delegate = self
-        serverUrlField.delegate = self
-        serverUrlField.text = sessionModel.serverUrl
         sessionModel.setSessionHandler(self)
         onCredentialsChange()
-        sessionModel.checkToken()
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -39,16 +35,15 @@ class LoginController: UIViewController, SessionHandler {
         view.endEditing(true)
     }
 
-    func onAuthSuccess() {
+    func authenticateOk() {
         loginButton.isEnabled = true
         loginButton.alpha = 1.0
         self.performSegue(withIdentifier: "loginSuccess", sender: self)
     }
 
-    func onAuthFailure(_ reason: String) {
+    func failure(_ reason: String) {
         loginErrors.isHidden = false
         loginErrors.text = "Login failed: " + reason
-        loginErrors.textAlignment = .center
         onCredentialsChange()
     }
 
@@ -67,7 +62,7 @@ class LoginController: UIViewController, SessionHandler {
         loginErrors.isHidden = true
         loginButton.isEnabled = false
         loginButton.alpha = 0.5
-        sessionModel.authenticate()
+        sessionModel.authenticate(self)
     }
 
     @IBAction func unwindToLogin(segue: UIStoryboardSegue) {
@@ -89,9 +84,6 @@ extension LoginController: UITextFieldDelegate {
         }
         else if textField == self.passwordField {
             sessionModel.setPassword(textField.text)
-        }
-        else if textField == self.serverUrlField {
-            sessionModel.serverUrl = textField.text
         }
     }
 }

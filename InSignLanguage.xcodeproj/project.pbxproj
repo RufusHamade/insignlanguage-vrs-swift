@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		40CF89581F34ABFEBE524F92 /* Pods_InSignLanguage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8230F9041DA7EE9932C7AA17 /* Pods_InSignLanguage.framework */; };
 		8B24AE89202C943600DFA74B /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24AE88202C943600DFA74B /* ChangePasswordController.swift */; };
-		8B24AE8B202C949700DFA74B /* CustomerDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24AE8A202C949700DFA74B /* CustomerDetailsController.swift */; };
+		8B24AE8B202C949700DFA74B /* PersonalProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24AE8A202C949700DFA74B /* PersonalProfileController.swift */; };
 		8B24AE8D202C94B800DFA74B /* BillingDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24AE8C202C94B800DFA74B /* BillingDetailsController.swift */; };
+		8B24AE8F202E100D00DFA74B /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24AE8E202E100D00DFA74B /* SplashController.swift */; };
 		8BC4D4F720235DFE00B68D27 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC4D4F620235DFE00B68D27 /* Model.swift */; };
 		EE22E67F1FC49F910088A49E /* onhold-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = EE22E67E1FC49F910088A49E /* onhold-circle.png */; };
 		EE22E6811FC82C180088A49E /* onhold-image.png in Resources */ = {isa = PBXBuildFile; fileRef = EE22E6801FC82C180088A49E /* onhold-image.png */; };
@@ -34,8 +35,9 @@
 		6CE316CF5A1693807A51241E /* Pods-InSignLanguage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InSignLanguage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InSignLanguage/Pods-InSignLanguage.debug.xcconfig"; sourceTree = "<group>"; };
 		8230F9041DA7EE9932C7AA17 /* Pods_InSignLanguage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InSignLanguage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B24AE88202C943600DFA74B /* ChangePasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
-		8B24AE8A202C949700DFA74B /* CustomerDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerDetailsController.swift; sourceTree = "<group>"; };
+		8B24AE8A202C949700DFA74B /* PersonalProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalProfileController.swift; sourceTree = "<group>"; };
 		8B24AE8C202C94B800DFA74B /* BillingDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillingDetailsController.swift; sourceTree = "<group>"; };
+		8B24AE8E202E100D00DFA74B /* SplashController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
 		8BC4D4F620235DFE00B68D27 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		98433EAD26FC19263B3AAB5F /* Pods-InSignLanguage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InSignLanguage.release.xcconfig"; path = "Pods/Target Support Files/Pods-InSignLanguage/Pods-InSignLanguage.release.xcconfig"; sourceTree = "<group>"; };
 		EE22E67E1FC49F910088A49E /* onhold-circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onhold-circle.png"; sourceTree = "<group>"; };
@@ -109,15 +111,17 @@
 			isa = PBXGroup;
 			children = (
 				EE4D6DB31ECA124D00EB2E63 /* Assets.xcassets */,
+				8B24AE8E202E100D00DFA74B /* SplashController.swift */,
 				EEC248051EC9F58B003EEDA1 /* LoginController.swift */,
 				EE7C497E1FE95100009E9A12 /* RegisterController.swift */,
 				EE7C49801FE95291009E9A12 /* ResetPasswordController.swift */,
-				8B24AE8A202C949700DFA74B /* CustomerDetailsController.swift */,
+				8B24AE8A202C949700DFA74B /* PersonalProfileController.swift */,
 				8B24AE88202C943600DFA74B /* ChangePasswordController.swift */,
 				8B24AE8C202C94B800DFA74B /* BillingDetailsController.swift */,
 				EEC248091EC9F58B003EEDA1 /* ReadyToCallController.swift */,
 				EEC2480A1EC9F58B003EEDA1 /* VideoDisplayController.swift */,
 				8BC4D4F620235DFE00B68D27 /* Model.swift */,
+				EE3325181EC9F395002D9543 /* Main.storyboard */,
 				EE66CD5F1FE94054004B1F29 /* back.png */,
 				EEC248041EC9F58B003EEDA1 /* hangup.png */,
 				EEC248061EC9F58B003EEDA1 /* logo.png */,
@@ -126,7 +130,6 @@
 				EEC248081EC9F58B003EEDA1 /* phone.png */,
 				EEC2480C1EC9F58B003EEDA1 /* Base.lproj */,
 				EE3325141EC9F395002D9543 /* AppDelegate.swift */,
-				EE3325181EC9F395002D9543 /* Main.storyboard */,
 				EEF06A401FE42120004626C1 /* LaunchScreen.storyboard */,
 				EE3325201EC9F395002D9543 /* Info.plist */,
 			);
@@ -267,9 +270,10 @@
 				EEC248131EC9F58B003EEDA1 /* VideoDisplayController.swift in Sources */,
 				EE7C49811FE95291009E9A12 /* ResetPasswordController.swift in Sources */,
 				EE7C497F1FE95100009E9A12 /* RegisterController.swift in Sources */,
-				8B24AE8B202C949700DFA74B /* CustomerDetailsController.swift in Sources */,
+				8B24AE8B202C949700DFA74B /* PersonalProfileController.swift in Sources */,
 				EE3325151EC9F395002D9543 /* AppDelegate.swift in Sources */,
 				EEC248121EC9F58B003EEDA1 /* ReadyToCallController.swift in Sources */,
+				8B24AE8F202E100D00DFA74B /* SplashController.swift in Sources */,
 				8B24AE8D202C94B800DFA74B /* BillingDetailsController.swift in Sources */,
 				8B24AE89202C943600DFA74B /* ChangePasswordController.swift in Sources */,
 				EEC2480E1EC9F58B003EEDA1 /* LoginController.swift in Sources */,
