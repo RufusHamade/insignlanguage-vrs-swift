@@ -40,6 +40,11 @@ protocol AuthenticateHandler {
     func failure(_ message: String) -> Void
 }
 
+protocol RegisterHandler {
+    func registerOk() -> Void
+    func failure(_ message: String) -> Void
+}
+
 protocol ProviderHandler {
     func onProviderAvailability(_ availableProviders: Int) -> Void
 }
@@ -97,7 +102,6 @@ class SessionModel {
     var providerHandler: ProviderHandler?
     var dialHandler: DialHandler?
     var passwordResetHandler: ActionHandler?
-    var registerHandler: ActionHandler?
     var changePasswordHandler: ActionHandler?
 
     let preferences = UserDefaults.standard
@@ -123,10 +127,6 @@ class SessionModel {
 
     func setPasswordResetHandler(_ prh: ActionHandler) {
         self.passwordResetHandler = prh
-    }
-
-    func setRegisterHandler(_ rh: ActionHandler) {
-        self.registerHandler = rh
     }
 
     func setChangePasswordHandler(_ rh: ActionHandler) {
@@ -452,7 +452,7 @@ class SessionModel {
         }
     }
 
-    func register(_ email: String, _ password: String) {
+    func register(_ email: String, _ password: String, _ handler: RegisterHandler) {
         let parameters = [
             "email": email,
             "password": password
@@ -464,19 +464,21 @@ class SessionModel {
                           encoding: JSONEncoding.default)
             .responseJSON { response in
                 if response.response == nil {
-                    self.registerHandler?.done(false, "Server Unavailable")
+                    handler.failure("Server Unavailable")
                 }
                 else if response.response!.statusCode == 400 {
                     let jsonResult = response.result.value as! [String: Any]
-                    self.registerHandler?.done(false, (jsonResult["error"] as! String))
+                    handler.failure((jsonResult["error"] as! String))
                 }
                 else if response.response!.statusCode != 200 {
-                    self.registerHandler?.done(false, "Internal Server error")
+                    handler.failure("Internal Server error")
                 }
                 else {
                     let jsonResult = response.result.value as! [String: Any]
                     self.authenticateResult(jsonResult["token"] as! String)
-                    self.registerHandler?.done(true, nil)
+                    self.name = email
+                    self.preferences.set(self.name, forKey: "name")
+                    handler.registerOk()
                 }
         }
     }

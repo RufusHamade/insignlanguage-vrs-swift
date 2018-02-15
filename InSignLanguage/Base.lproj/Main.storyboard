@@ -15,7 +15,7 @@
         <!--Ready To Call-->
         <scene sceneID="YOO-uA-LZa">
             <objects>
-                <viewController title="Ready To Call" id="V4X-10-FnW" customClass="ReadyToCallController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReadyToCall" title="Ready To Call" id="V4X-10-FnW" customClass="ReadyToCallController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1P5-A5-OBr"/>
                         <viewControllerLayoutGuide type="bottom" id="d40-Hy-F7P"/>
@@ -311,12 +311,34 @@ Follow the link inside and enter a new password.</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rnH-5L-aN4">
+                                <rect key="frame" x="10" y="459" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="0JN-bB-iqn"/>
+                                    <constraint firstAttribute="height" constant="50" id="cBz-vq-Rx2"/>
+                                </constraints>
+                                <state key="normal" title="Back" image="back.png"/>
+                                <connections>
+                                    <action selector="backClicked:" destination="2TO-6m-JuQ" eventType="touchUpInside" id="Twx-Lq-P2P"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5k3-eZ-EYU">
+                                <rect key="frame" x="10" y="479" width="48" height="30"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutClicked:" destination="2TO-6m-JuQ" eventType="touchUpInside" id="czt-YN-jHh"/>
+                                    <action selector="logoutClicked:" destination="GJo-AR-60g" eventType="touchUpInside" id="tAW-7U-H81"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="sKG-f3-m54" firstAttribute="top" secondItem="ElE-lm-sjU" secondAttribute="bottom" constant="20" id="19A-qD-FrM"/>
+                            <constraint firstItem="5k3-eZ-EYU" firstAttribute="leading" secondItem="42R-AC-Urv" secondAttribute="leading" constant="10" id="2BH-EJ-m8a"/>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="width" secondItem="ElE-lm-sjU" secondAttribute="height" multiplier="2978:502" id="5D3-f3-YGV"/>
                             <constraint firstItem="g9l-f8-v4A" firstAttribute="centerX" secondItem="42R-AC-Urv" secondAttribute="centerX" id="5sd-JP-iua"/>
+                            <constraint firstItem="dlG-cj-cjv" firstAttribute="top" secondItem="5k3-eZ-EYU" secondAttribute="bottom" constant="10" id="8an-6g-ByD"/>
+                            <constraint firstItem="rnH-5L-aN4" firstAttribute="leading" secondItem="42R-AC-Urv" secondAttribute="leading" constant="10" id="Fqs-0T-AoJ"/>
                             <constraint firstItem="sKG-f3-m54" firstAttribute="centerX" secondItem="42R-AC-Urv" secondAttribute="centerX" id="Mbj-vm-xhh"/>
                             <constraint firstAttribute="trailing" secondItem="ElE-lm-sjU" secondAttribute="trailing" constant="10" id="NwB-SP-ehy"/>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="leading" secondItem="42R-AC-Urv" secondAttribute="leading" constant="10" id="QCW-xD-PPU"/>
@@ -324,18 +346,26 @@ Follow the link inside and enter a new password.</string>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="width" secondItem="ElE-lm-sjU" secondAttribute="height" multiplier="2978:502" id="inC-eQ-0tx"/>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="top" secondItem="cS5-Hd-aYq" secondAttribute="bottom" constant="10" id="q7x-t4-TFh"/>
                             <constraint firstItem="CNE-Bx-KXs" firstAttribute="centerX" secondItem="42R-AC-Urv" secondAttribute="centerX" id="rmH-Sd-owI"/>
+                            <constraint firstItem="dlG-cj-cjv" firstAttribute="top" secondItem="rnH-5L-aN4" secondAttribute="bottom" constant="10" id="wHg-37-LwZ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Billing" id="hMz-H4-Wi4"/>
+                    <connections>
+                        <outlet property="back" destination="rnH-5L-aN4" id="LMQ-GL-R5q"/>
+                        <outlet property="logout" destination="5k3-eZ-EYU" id="okI-5G-Yvb"/>
+                        <segue destination="SEf-CQ-JJM" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="ocL-b8-ZRE"/>
+                        <segue destination="SEf-CQ-JJM" kind="unwind" identifier="unwindToReadyToCall" unwindAction="unwindToReadyToCallWithSegue:" id="0sl-v8-Zoo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zI1-nH-VWU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="SEf-CQ-JJM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="879" y="-1705"/>
         </scene>
-        <!--Password-->
+        <!--Change Password-->
         <scene sceneID="Zhy-8d-h1b">
             <objects>
-                <viewController id="CHq-hz-H1Q" customClass="ChangePasswordController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Change Password" id="CHq-hz-H1Q" customClass="ChangePasswordController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oAV-is-5HM"/>
                         <viewControllerLayoutGuide type="bottom" id="5fk-w7-Vmi"/>
@@ -411,7 +441,8 @@ Follow the link inside and enter a new password.</string>
                                 </constraints>
                                 <state key="normal" title="Back" image="back.png"/>
                                 <connections>
-                                    <segue destination="mjw-y3-oX1" kind="unwind" unwindAction="unwindToReadyToCallWithSegue:" id="qgI-si-0Rg"/>
+                                    <action selector="backClicked:" destination="CHq-hz-H1Q" eventType="touchUpInside" id="mW1-ks-R0g"/>
+                                    <segue destination="mjw-y3-oX1" kind="unwind" identifier="unwindToReadyToCall" unwindAction="unwindToReadyToCallWithSegue:" id="qgI-si-0Rg"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="sHE-bs-kSD">
@@ -420,16 +451,26 @@ Follow the link inside and enter a new password.</string>
                                     <constraint firstAttribute="width" secondItem="sHE-bs-kSD" secondAttribute="height" multiplier="2978:502" id="Hu3-5l-Cgo"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcR-MA-EsG">
+                                <rect key="frame" x="10" y="479" width="48" height="30"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutClicked:" destination="GJo-AR-60g" eventType="touchUpInside" id="OUT-3J-Y2a"/>
+                                    <action selector="logoutClicked:" destination="CHq-hz-H1Q" eventType="touchUpInside" id="pbz-E1-vAV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="44t-lS-L9W" firstAttribute="top" secondItem="nco-of-BRT" secondAttribute="bottom" constant="20" id="951-7p-cUy"/>
+                            <constraint firstItem="kcR-MA-EsG" firstAttribute="leading" secondItem="YpM-Bz-9QC" secondAttribute="leading" constant="10" id="Dlp-Et-ae5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PZw-Vt-cjP" secondAttribute="trailing" constant="40" id="Fzc-MJ-omo"/>
                             <constraint firstItem="nco-of-BRT" firstAttribute="centerX" secondItem="YpM-Bz-9QC" secondAttribute="centerX" id="JcM-tS-VNc"/>
                             <constraint firstItem="rrk-mQ-xai" firstAttribute="top" secondItem="yr4-d5-7of" secondAttribute="bottom" constant="15" id="NWs-pw-ula"/>
                             <constraint firstItem="44t-lS-L9W" firstAttribute="centerX" secondItem="YpM-Bz-9QC" secondAttribute="centerX" id="OKs-c5-1vy"/>
                             <constraint firstItem="PZw-Vt-cjP" firstAttribute="top" secondItem="44t-lS-L9W" secondAttribute="bottom" constant="20" id="VZo-D6-ax4"/>
                             <constraint firstItem="yr4-d5-7of" firstAttribute="top" secondItem="MWW-00-cIO" secondAttribute="bottom" constant="15" id="Vtm-VF-b8x"/>
+                            <constraint firstItem="5fk-w7-Vmi" firstAttribute="top" secondItem="kcR-MA-EsG" secondAttribute="bottom" constant="10" id="Weu-fI-Djr"/>
                             <constraint firstItem="PZw-Vt-cjP" firstAttribute="centerX" secondItem="YpM-Bz-9QC" secondAttribute="centerX" id="aoh-V1-BV4"/>
                             <constraint firstItem="xH2-R5-hTm" firstAttribute="leading" secondItem="YpM-Bz-9QC" secondAttribute="leading" constant="10" id="cb0-vZ-pkU"/>
                             <constraint firstItem="MWW-00-cIO" firstAttribute="centerX" secondItem="YpM-Bz-9QC" secondAttribute="centerX" id="eJn-sm-bMe"/>
@@ -447,11 +488,14 @@ Follow the link inside and enter a new password.</string>
                     <tabBarItem key="tabBarItem" title="Password" id="tW1-9Z-l2w"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="back" destination="xH2-R5-hTm" id="HmD-QP-8hf"/>
+                        <outlet property="logout" destination="kcR-MA-EsG" id="XMI-8B-bSg"/>
                         <outlet property="messages" destination="PZw-Vt-cjP" id="j1E-kd-BXc"/>
                         <outlet property="newPassword1" destination="rrk-mQ-xai" id="7iK-rU-N2a"/>
                         <outlet property="newPassword2" destination="nco-of-BRT" id="C2U-XQ-khk"/>
                         <outlet property="oldPassword" destination="yr4-d5-7of" id="gXE-hq-lbf"/>
                         <outlet property="submit" destination="44t-lS-L9W" id="Kte-kl-ngU"/>
+                        <segue destination="mjw-y3-oX1" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="Dsk-zD-fEc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e9R-W0-ZLo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -639,6 +683,16 @@ Follow the link inside and enter a new password.</string>
                                                     <constraint firstAttribute="height" constant="50" id="hQ1-38-qWO"/>
                                                 </constraints>
                                                 <state key="normal" title="Back" image="back.png"/>
+                                                <connections>
+                                                    <action selector="backClicked:" destination="GJo-AR-60g" eventType="touchUpInside" id="tuC-Ye-e9T"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DMG-vF-bME">
+                                                <rect key="frame" x="10" y="991" width="48" height="30"/>
+                                                <state key="normal" title="Logout"/>
+                                                <connections>
+                                                    <action selector="logoutClicked:" destination="GJo-AR-60g" eventType="touchUpInside" id="Ja5-e7-EbQ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -647,6 +701,7 @@ Follow the link inside and enter a new password.</string>
                                             <constraint firstAttribute="trailing" secondItem="mKH-GT-iVs" secondAttribute="trailing" constant="40" id="1gA-wD-ivI"/>
                                             <constraint firstItem="kxA-b2-4ko" firstAttribute="centerX" secondItem="fzW-MZ-63O" secondAttribute="centerX" id="3h2-TB-z06"/>
                                             <constraint firstItem="jpZ-Gy-B4R" firstAttribute="centerX" secondItem="fzW-MZ-63O" secondAttribute="centerX" id="598-Hl-d7X"/>
+                                            <constraint firstItem="DMG-vF-bME" firstAttribute="leading" secondItem="fzW-MZ-63O" secondAttribute="leading" constant="10" id="6gp-ky-dnC"/>
                                             <constraint firstItem="p3Y-7P-ZXu" firstAttribute="centerX" secondItem="fzW-MZ-63O" secondAttribute="centerX" id="7U3-28-OMk"/>
                                             <constraint firstAttribute="bottom" secondItem="L5k-HW-924" secondAttribute="bottom" constant="10" id="8iL-5K-gDG"/>
                                             <constraint firstAttribute="trailing" secondItem="kxA-b2-4ko" secondAttribute="trailing" constant="30" id="8mO-hY-EoL"/>
@@ -677,6 +732,7 @@ Follow the link inside and enter a new password.</string>
                                             <constraint firstAttribute="trailing" secondItem="RGE-5W-S3j" secondAttribute="trailing" constant="40" id="YMe-y1-v2y"/>
                                             <constraint firstItem="d9B-yQ-91b" firstAttribute="top" secondItem="p3Y-7P-ZXu" secondAttribute="bottom" constant="30" id="Z3V-XM-n7Q"/>
                                             <constraint firstAttribute="trailing" secondItem="ywv-qF-q1b" secondAttribute="trailing" constant="40" id="Zkf-gi-CcY"/>
+                                            <constraint firstAttribute="bottom" secondItem="DMG-vF-bME" secondAttribute="bottom" constant="10" id="aJS-Ju-dMy"/>
                                             <constraint firstItem="OsJ-Dt-gfT" firstAttribute="top" secondItem="fzW-MZ-63O" secondAttribute="top" constant="10" id="ayY-7n-3bU"/>
                                             <constraint firstItem="ywv-qF-q1b" firstAttribute="top" secondItem="XN4-M0-9kj" secondAttribute="bottom" constant="20" id="dFI-Kb-V6I"/>
                                             <constraint firstAttribute="trailing" secondItem="e1M-50-6P9" secondAttribute="trailing" constant="40" id="fBe-oL-yVX"/>
@@ -724,6 +780,7 @@ Follow the link inside and enter a new password.</string>
                     <size key="freeformSize" width="320" height="1100"/>
                     <connections>
                         <outlet property="back" destination="L5k-HW-924" id="aTe-L4-tcN"/>
+                        <outlet property="logout" destination="DMG-vF-bME" id="TKW-gW-MFm"/>
                         <outlet property="messages" destination="ywv-qF-q1b" id="iBM-FG-HkR"/>
                         <outlet property="scrollView" destination="85D-aE-3QN" id="Tzq-SI-fbh"/>
                         <outlet property="submit" destination="XN4-M0-9kj" id="dX8-xq-Io7"/>
@@ -735,16 +792,19 @@ Follow the link inside and enter a new password.</string>
                         <outletCollection property="fields" destination="xtd-Er-eSV" collectionClass="NSMutableArray" id="f2w-KM-k4c"/>
                         <outletCollection property="fields" destination="e1M-50-6P9" collectionClass="NSMutableArray" id="kLS-uv-aFM"/>
                         <outletCollection property="fields" destination="mKH-GT-iVs" collectionClass="NSMutableArray" id="qOo-Lt-goo"/>
+                        <segue destination="Uug-9y-QIN" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="08m-tv-Fr7"/>
+                        <segue destination="Uug-9y-QIN" kind="unwind" identifier="unwindToReadyToCall" unwindAction="unwindToReadyToCallWithSegue:" id="meE-uN-ywg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Stu-Ro-Utx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Uug-9y-QIN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="129" y="-2348"/>
+            <point key="canvasLocation" x="127.5" y="-2348.2394366197182"/>
         </scene>
         <!--Settings Controller-->
         <scene sceneID="xvl-p7-IkY">
             <objects>
-                <tabBarController id="itN-pN-axK" customClass="SettingsController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="Settings" id="itN-pN-axK" customClass="SettingsController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="HkL-xt-dti">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -763,7 +823,7 @@ Follow the link inside and enter a new password.</string>
         <!--Register-->
         <scene sceneID="1Sz-Wv-sak">
             <objects>
-                <viewController title="Register" id="drY-6L-Kun" customClass="RegisterController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterController" title="Register" id="drY-6L-Kun" customClass="RegisterController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="N0n-6f-ANh"/>
                         <viewControllerLayoutGuide type="bottom" id="Yh4-fP-CIe"/>
@@ -883,12 +943,13 @@ Follow the link inside and enter a new password.</string>
                         <outlet property="passwordField" destination="nVR-n9-r30" id="HgV-eN-x4X"/>
                         <outlet property="registerButton" destination="8Z7-yT-qj1" id="rPu-9L-1Jr"/>
                         <outlet property="registerResults" destination="CPq-LX-D6P" id="qFQ-zK-Pek"/>
+                        <segue destination="itN-pN-axK" kind="show" identifier="completeRegistration" id="M4b-dJ-Dq0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="avB-p2-csK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="PtC-sf-L1P" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-591" y="-2974"/>
+            <point key="canvasLocation" x="-591" y="-2920"/>
         </scene>
         <!--Video Display-->
         <scene sceneID="tne-QT-ifu">
@@ -997,19 +1058,17 @@ Follow the link inside and enter a new password.</string>
                     </view>
                     <connections>
                         <outlet property="messages" destination="uWX-t5-seo" id="yEe-eT-KjJ"/>
-                        <segue destination="itN-pN-axK" kind="show" identifier="completeRegistration" id="sdh-Le-TIE"/>
                         <segue destination="S38-Cp-FME" kind="show" identifier="login" id="T5A-XU-Ijp"/>
-                        <segue destination="V4X-10-FnW" kind="show" identifier="readyToCall" id="2vr-b6-xPH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FcR-uc-aHm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2535" y="-2189"/>
+            <point key="canvasLocation" x="-2513" y="-3189"/>
         </scene>
         <!--Login Page-->
         <scene sceneID="HNX-hs-tvL">
             <objects>
-                <viewController title="Login Page" id="S38-Cp-FME" customClass="LoginController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login" title="Login Page" id="S38-Cp-FME" customClass="LoginController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jvs-bw-Ilv"/>
                         <viewControllerLayoutGuide type="bottom" id="PaV-EE-VC5"/>
@@ -1127,7 +1186,6 @@ Follow the link inside and enter a new password.</string>
         <image name="phone.png" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WQS-cu-Mi4"/>
-        <segue reference="6er-TY-e94"/>
+        <segue reference="M4b-dJ-Dq0"/>
     </inferredMetricsTieBreakers>
 </document>

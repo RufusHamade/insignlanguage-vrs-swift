@@ -6,6 +6,7 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler 
     @IBOutlet weak var submit: UIButton!
     @IBOutlet weak var messages: UILabel!
     @IBOutlet weak var back: UIButton!
+    @IBOutlet weak var logout: UIButton!
 
     @IBOutlet var fields: [UITextField]!
     static var FIELD_MAP = [
@@ -57,13 +58,18 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler 
                                        name: Notification.Name.UIKeyboardWillShow, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard),
                                        name: Notification.Name.UIKeyboardWillHide, object: nil)
+
         if self.sessionModel.isProfileOk() {
             self.back.isHidden = false
             self.back.isEnabled = true
+            self.logout.isHidden = true
+            self.logout.isEnabled = false
         }
         else {
             self.back.isHidden = true
             self.back.isEnabled = false
+            self.logout.isHidden = false
+            self.logout.isEnabled = true
         }
     }
 
@@ -117,6 +123,15 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler 
         self.submit.alpha = 0.5
         self.showMessage(false, "Submitting...")
         self.sessionModel.updatePersonalProfile(self)
+    }
+
+    @IBAction func backClicked(_ sender: Any) {
+        self.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
+    }
+
+    @IBAction func logoutClicked(_ sender: Any) {
+        sessionModel.logout()
+        self.performSegue(withIdentifier: "unwindToLogin", sender: self)
     }
 
     func updatePersonalProfileOk() {

@@ -34,10 +34,30 @@ class SplashController: UIViewController, CheckTokenHandler, GetPersonalProfileH
 
     func getPersonalProfileOk() {
         if (self.sessionModel.isProfileOk()) {
-            self.performSegue(withIdentifier: "readyToCall", sender: self)
+            self.segueToReadyToCall()
         }
         else {
-            self.performSegue(withIdentifier: "completeRegistration", sender: self)
+            self.segueToCompleteRegistration()
+        }
+    }
+
+    func segueToCompleteRegistration() {
+        // Push login controller onto stack so logout buttons can unwind to it.
+        if let sb = self.storyboard {
+            let login = sb.instantiateViewController(withIdentifier: "Login")
+            self.present(login, animated: true)
+            let register = sb.instantiateViewController(withIdentifier: "Settings")
+            login.present(register, animated: true)
+        }
+    }
+
+    func segueToReadyToCall() {
+        // Push login controller onto stack so logout buttons can unwind to it.
+        if let sb = self.storyboard {
+            let login = sb.instantiateViewController(withIdentifier: "Login")
+            self.present(login, animated: true)
+            let register = sb.instantiateViewController(withIdentifier: "ReadyToCall")
+            login.present(register, animated: true)
         }
     }
 

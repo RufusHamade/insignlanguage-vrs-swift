@@ -6,6 +6,9 @@ class ChangePasswordController: UIViewController, ActionHandler {
     @IBOutlet weak var newPassword2: UITextField!
     @IBOutlet weak var submit: UIButton!
     @IBOutlet weak var messages: UILabel!
+    @IBOutlet weak var back: UIButton!
+    @IBOutlet weak var logout: UIButton!
+
 
     var sessionModel = SessionModel.sharedInstance
 
@@ -27,6 +30,19 @@ class ChangePasswordController: UIViewController, ActionHandler {
         self.oldPassword.text = ""
         self.newPassword1.text = ""
         self.newPassword2.text = ""
+
+        if self.sessionModel.isProfileOk() {
+            self.back.isHidden = false
+            self.back.isEnabled = true
+            self.logout.isHidden = true
+            self.logout.isEnabled = false
+        }
+        else {
+            self.back.isHidden = true
+            self.back.isEnabled = false
+            self.logout.isHidden = false
+            self.logout.isEnabled = true
+        }
     }
 
     func dismissKeyboard() {
@@ -66,6 +82,15 @@ class ChangePasswordController: UIViewController, ActionHandler {
         self.submit.isEnabled = false
         self.submit.alpha = 0.5
         self.sessionModel.changePassword(self.oldPassword.text!, self.newPassword1.text!)
+    }
+
+    @IBAction func backClicked(_ sender: Any) {
+        self.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
+    }
+
+    @IBAction func logoutClicked(_ sender: Any) {
+        sessionModel.logout()
+        self.performSegue(withIdentifier: "unwindToLogin", sender: self)
     }
 
     func done(_ success: Bool, _ message: String?) -> Void {

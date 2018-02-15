@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterController: UIViewController, ActionHandler {
+class RegisterController: UIViewController, RegisterHandler {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -31,8 +31,6 @@ class RegisterController: UIViewController, ActionHandler {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-
-        sessionModel.setRegisterHandler(self)
     }
 
     func dismissKeyboard() {
@@ -68,16 +66,16 @@ class RegisterController: UIViewController, ActionHandler {
 
     @IBAction func registerClicked(_ sender: Any) {
         enableRegister(false)
-        sessionModel.register(emailField.text!, passwordField.text!)
+        sessionModel.register(emailField.text!, passwordField.text!, self)
     }
 
-    func done(_ success: Bool, _ message: String?) {
-        if !success {
-            enableRegister(true)
-            setResults(false, "Registration failed: " + (message == nil ? "none" : message!))
-            return
-        }
-        self.performSegue(withIdentifier: "registerSuccess", sender: self)
+    func registerOk() {
+        self.performSegue(withIdentifier: "completeRegistration", sender: self)
+    }
+
+    func failure(_ message: String) {
+        enableRegister(true)
+        setResults(false, "Registration failed: " + message)
     }
 }
 
