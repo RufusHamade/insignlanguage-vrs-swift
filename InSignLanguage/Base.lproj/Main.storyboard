@@ -160,7 +160,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gA1-aQ-kAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="q5D-5Q-71a" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-2514" y="-980"/>
+            <point key="canvasLocation" x="-2514" y="-983"/>
         </scene>
         <!--Password Reset-->
         <scene sceneID="HY3-Xh-6kN">
@@ -265,7 +265,7 @@ Follow the link inside and enter a new password.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WJM-Dx-1c7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="f4j-6N-4Wq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-589" y="-3659"/>
+            <point key="canvasLocation" x="-639" y="-3921"/>
         </scene>
         <!--Billing-->
         <scene sceneID="29w-YT-RHI">
@@ -352,14 +352,11 @@ Follow the link inside and enter a new password.</string>
                     <connections>
                         <outlet property="back" destination="rnH-5L-aN4" id="LMQ-GL-R5q"/>
                         <outlet property="logout" destination="5k3-eZ-EYU" id="okI-5G-Yvb"/>
-                        <segue destination="SEf-CQ-JJM" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="ocL-b8-ZRE"/>
-                        <segue destination="SEf-CQ-JJM" kind="unwind" identifier="unwindToReadyToCall" unwindAction="unwindToReadyToCallWithSegue:" id="0sl-v8-Zoo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zI1-nH-VWU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="SEf-CQ-JJM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="879" y="-1705"/>
+            <point key="canvasLocation" x="870" y="-1778"/>
         </scene>
         <!--Change Password-->
         <scene sceneID="Zhy-8d-h1b">
@@ -441,7 +438,6 @@ Follow the link inside and enter a new password.</string>
                                 <state key="normal" title="Back" image="back.png"/>
                                 <connections>
                                     <action selector="backClicked:" destination="CHq-hz-H1Q" eventType="touchUpInside" id="mW1-ks-R0g"/>
-                                    <segue destination="mjw-y3-oX1" kind="unwind" identifier="unwindToReadyToCall" unwindAction="unwindToReadyToCallWithSegue:" id="qgI-si-0Rg"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="sHE-bs-kSD">
@@ -493,11 +489,9 @@ Follow the link inside and enter a new password.</string>
                         <outlet property="newPassword2" destination="nco-of-BRT" id="C2U-XQ-khk"/>
                         <outlet property="oldPassword" destination="yr4-d5-7of" id="gXE-hq-lbf"/>
                         <outlet property="submit" destination="44t-lS-L9W" id="Kte-kl-ngU"/>
-                        <segue destination="mjw-y3-oX1" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="Dsk-zD-fEc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e9R-W0-ZLo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="mjw-y3-oX1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="128" y="-1256"/>
         </scene>
@@ -790,14 +784,11 @@ Follow the link inside and enter a new password.</string>
                         <outletCollection property="fields" destination="xtd-Er-eSV" collectionClass="NSMutableArray" id="f2w-KM-k4c"/>
                         <outletCollection property="fields" destination="e1M-50-6P9" collectionClass="NSMutableArray" id="kLS-uv-aFM"/>
                         <outletCollection property="fields" destination="mKH-GT-iVs" collectionClass="NSMutableArray" id="qOo-Lt-goo"/>
-                        <segue destination="Uug-9y-QIN" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="08m-tv-Fr7"/>
-                        <segue destination="Uug-9y-QIN" kind="unwind" identifier="unwindToReadyToCall" unwindAction="unwindToReadyToCallWithSegue:" id="meE-uN-ywg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Stu-Ro-Utx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="Uug-9y-QIN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="127.5" y="-2348.2394366197182"/>
+            <point key="canvasLocation" x="128" y="-2442"/>
         </scene>
         <!--Settings Controller-->
         <scene sceneID="xvl-p7-IkY">
@@ -813,11 +804,14 @@ Follow the link inside and enter a new password.</string>
                         <segue destination="2TO-6m-JuQ" kind="relationship" relationship="viewControllers" id="MLb-xH-ojO"/>
                         <segue destination="CHq-hz-H1Q" kind="relationship" relationship="viewControllers" id="ize-NU-DlD"/>
                         <segue destination="V4X-10-FnW" kind="show" identifier="registrationComplete" id="H1Q-p2-MXU"/>
+                        <segue destination="Faf-vM-jkW" kind="unwind" identifier="unwindToReadyToCall" unwindAction="unwindToReadyToCallWithSegue:" id="729-mr-uP3"/>
+                        <segue destination="Faf-vM-jkW" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="lHV-fi-4Hf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3V-3Z-7Wk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Faf-vM-jkW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1275" y="-1773"/>
+            <point key="canvasLocation" x="-1112" y="-1788"/>
         </scene>
         <!--Register-->
         <scene sceneID="1Sz-Wv-sak">
@@ -948,7 +942,7 @@ Follow the link inside and enter a new password.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="avB-p2-csK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="PtC-sf-L1P" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-591" y="-2920"/>
+            <point key="canvasLocation" x="-638" y="-3189"/>
         </scene>
         <!--Video Display-->
         <scene sceneID="tne-QT-ifu">
@@ -1185,7 +1179,7 @@ Follow the link inside and enter a new password.</string>
         <image name="phone.png" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6er-TY-e94"/>
         <segue reference="WQS-cu-Mi4"/>
+        <segue reference="H1Q-p2-MXU"/>
     </inferredMetricsTieBreakers>
 </document>

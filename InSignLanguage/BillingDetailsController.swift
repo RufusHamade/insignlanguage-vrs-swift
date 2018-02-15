@@ -31,12 +31,12 @@ class BillingDetailsController: UIViewController {
     }
 
     @IBAction func backClicked(_ sender: Any) {
-        self.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
+        self.parent?.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
     }
 
     @IBAction func logoutClicked(_ sender: Any) {
         sessionModel.logout()
-        self.performSegue(withIdentifier: "unwindToLogin", sender: self)
+        self.parent?.performSegue(withIdentifier: "unwindToLogin", sender: self)
     }
 
     func dismissKeyboard() {
