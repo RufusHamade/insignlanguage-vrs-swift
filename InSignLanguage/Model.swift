@@ -26,6 +26,11 @@ protocol GetPersonalProfileHandler {
     func failure(_ message: String) -> Void
 }
 
+protocol UpdatePersonalProfileHandler {
+    func updatePersonalProfileOk() -> Void
+    func failure(_ message: String) -> Void
+}
+
 protocol SessionHandler {
     func onCredentialsChange() -> Void
 }
@@ -51,7 +56,17 @@ protocol ActionHandler {
 
 class SessionModel {
     static let sharedInstance = SessionModel();
-    
+
+    static let PROFILE_MANDATORY_FIELDS = [
+        "first_name",
+        "last_name",
+        "email",
+        "phone",
+        "address1",
+        "address3",
+        "postcode"
+    ]
+
     // MARK: Properties
     var serverUrl: String? = SESSION_SERVER
     var name: String?
@@ -59,7 +74,7 @@ class SessionModel {
     var sessionToken: String?
     var notes: String?
     var number: String?
-    var personalProfile: [String: Any]?
+    var personalProfile: [String: String?] = [:]
 
     var providersAvailable: Int = -1
     var pollTimer: Timer?
@@ -85,12 +100,13 @@ class SessionModel {
     var registerHandler: ActionHandler?
     var changePasswordHandler: ActionHandler?
 
+    let preferences = UserDefaults.standard
+
     // MARK: Initialization
     private init() {
-        let preferences = UserDefaults.standard
-        self.name = preferences.object(forKey: "name") as? String
-        self.sessionToken = preferences.object(forKey: "sessionToken") as? String
-        self.notes = preferences.object(forKey: "notes") as? String
+        self.name = self.preferences.object(forKey: "name") as? String
+        self.sessionToken = self.preferences.object(forKey: "sessionToken") as? String
+        self.notes = self.preferences.object(forKey: "notes") as? String
     }
 
     func setSessionHandler(_ sh: SessionHandler) {
@@ -127,9 +143,8 @@ class SessionModel {
         if self.name != name {
             self.name = name
             self.sessionToken = nil
-            let preferences = UserDefaults.standard
-            preferences.set(self.name, forKey: "name")
-            preferences.set(self.sessionToken, forKey: "sessionToken")
+            self.preferences.set(self.name, forKey: "name")
+            self.preferences.set(self.sessionToken, forKey: "sessionToken")
             self.sessionHandler?.onCredentialsChange()
         }
     }
@@ -138,8 +153,7 @@ class SessionModel {
         if self.password != password {
             self.password = password
             self.sessionToken = nil
-            let preferences = UserDefaults.standard
-            preferences.set(self.sessionToken, forKey: "sessionToken")
+            self.preferences.set(self.sessionToken, forKey: "sessionToken")
             self.sessionHandler?.onCredentialsChange()
         }
     }
@@ -155,12 +169,10 @@ class SessionModel {
     }
 
     func isProfileOk() -> Bool {
-        if self.personalProfile == nil {
-            return false
-        }
-
-        if self.personalProfile?["first_name"] == nil {
-            return false
+        for i in SessionModel.PROFILE_MANDATORY_FIELDS {
+            if self.personalProfile[i] == nil || self.personalProfile[i]! == "" {
+                return false
+            }
         }
 
         return true
@@ -187,8 +199,7 @@ class SessionModel {
 
     func authenticateResult(_ token: String) {
         sessionToken = token
-        let preferences = UserDefaults.standard
-        preferences.set(self.sessionToken, forKey: "sessionToken")
+        self.preferences.set(self.sessionToken, forKey: "sessionToken")
     }
 
     func authenticate (_ handler: AuthenticateHandler) {
@@ -257,8 +268,7 @@ class SessionModel {
                 }
                 handler.tokenNotOk()
                 self.sessionToken = nil
-                let preferences = UserDefaults.standard
-                preferences.set(self.sessionToken, forKey: "sessionToken")
+                self.preferences.set(self.sessionToken, forKey: "sessionToken")
                 self.loginState = .unauthenticated
         }
     }
@@ -266,8 +276,7 @@ class SessionModel {
     func logout () {
         self.loginState = .unauthenticated
         self.sessionToken = nil
-        let preferences = UserDefaults.standard
-        preferences.set(self.sessionToken, forKey: "sessionToken")
+        self.preferences.set(self.sessionToken, forKey: "sessionToken")
     }
 
     //MARK: Execute dial
@@ -364,8 +373,7 @@ class SessionModel {
 
     func setNotes(_ notes:String?) {
         self.notes = notes
-        let preferences = UserDefaults.standard
-        preferences.set(self.notes, forKey: "notes")
+        self.preferences.set(self.notes, forKey: "notes")
     }
 
     func getNotes() -> String {
@@ -474,7 +482,8 @@ class SessionModel {
     }
 
     func getPersonalProfile(_ handler: GetPersonalProfileHandler) {
-        Alamofire.request(self.serverUrl! + "/api/call/ping/",
+        Alamofire.request(self.serverUrl! + "/api/account/get-personal-profile/",
+                          encoding: JSONEncoding.default,
                           headers: self.getAuthHeaders())
             .responseJSON { response in
                 if response.response == nil {
@@ -486,9 +495,44 @@ class SessionModel {
                     return
                 }
 
-                self.personalProfile = response.result.value as? [String: Any]
+                self.personalProfile = response.result.value as! [String: String?]
                 handler.getPersonalProfileOk()
         }
+    }
+
+    func updatePersonalProfile(_ handler: UpdatePersonalProfileHandler) {
+        var params = [String: String]()
+        for (k, v) in self.personalProfile {
+            if v != nil {
+                params[k] = v
+            }
+        }
+
+        Alamofire.request(self.serverUrl! + "/api/account/update-personal-profile/",
+                          method: .post,
+                          parameters: params,
+                          encoding: JSONEncoding.default,
+                          headers: self.getAuthHeaders())
+            .responseJSON { response in
+                if response.response == nil {
+                    handler.failure("Server Unavailable")
+                    return
+                }
+                let status = response.response!.statusCode
+                if  status == 400 {
+                    let jsonResult = response.result.value as! [String: Any]
+                    handler.failure(jsonResult["error"] as! String)
+                }
+                else if status != 200 {
+                    handler.failure("Internal Server error")
+                }
+                else {
+                    self.name = self.personalProfile["email"]!
+                    self.preferences.set(self.name, forKey: "name")
+                    handler.updatePersonalProfileOk()
+                }
+        }
+
     }
 }
 

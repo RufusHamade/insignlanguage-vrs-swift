@@ -13,6 +13,7 @@
 		8B24AE8D202C94B800DFA74B /* BillingDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24AE8C202C94B800DFA74B /* BillingDetailsController.swift */; };
 		8B24AE8F202E100D00DFA74B /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24AE8E202E100D00DFA74B /* SplashController.swift */; };
 		8BC4D4F720235DFE00B68D27 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC4D4F620235DFE00B68D27 /* Model.swift */; };
+		8BE2589F2035C929004E570F /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE2589E2035C929004E570F /* SettingsController.swift */; };
 		EE22E67F1FC49F910088A49E /* onhold-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = EE22E67E1FC49F910088A49E /* onhold-circle.png */; };
 		EE22E6811FC82C180088A49E /* onhold-image.png in Resources */ = {isa = PBXBuildFile; fileRef = EE22E6801FC82C180088A49E /* onhold-image.png */; };
 		EE3325151EC9F395002D9543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3325141EC9F395002D9543 /* AppDelegate.swift */; };
@@ -39,6 +40,7 @@
 		8B24AE8C202C94B800DFA74B /* BillingDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillingDetailsController.swift; sourceTree = "<group>"; };
 		8B24AE8E202E100D00DFA74B /* SplashController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
 		8BC4D4F620235DFE00B68D27 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		8BE2589E2035C929004E570F /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		98433EAD26FC19263B3AAB5F /* Pods-InSignLanguage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InSignLanguage.release.xcconfig"; path = "Pods/Target Support Files/Pods-InSignLanguage/Pods-InSignLanguage.release.xcconfig"; sourceTree = "<group>"; };
 		EE22E67E1FC49F910088A49E /* onhold-circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onhold-circle.png"; sourceTree = "<group>"; };
 		EE22E6801FC82C180088A49E /* onhold-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onhold-image.png"; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				EEC248051EC9F58B003EEDA1 /* LoginController.swift */,
 				EE7C497E1FE95100009E9A12 /* RegisterController.swift */,
 				EE7C49801FE95291009E9A12 /* ResetPasswordController.swift */,
+				8BE2589E2035C929004E570F /* SettingsController.swift */,
 				8B24AE8A202C949700DFA74B /* PersonalProfileController.swift */,
 				8B24AE88202C943600DFA74B /* ChangePasswordController.swift */,
 				8B24AE8C202C94B800DFA74B /* BillingDetailsController.swift */,
@@ -267,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BE2589F2035C929004E570F /* SettingsController.swift in Sources */,
 				EEC248131EC9F58B003EEDA1 /* VideoDisplayController.swift in Sources */,
 				EE7C49811FE95291009E9A12 /* ResetPasswordController.swift in Sources */,
 				EE7C497F1FE95100009E9A12 /* RegisterController.swift in Sources */,

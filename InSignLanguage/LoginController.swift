@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginController: UIViewController, AuthenticateHandler, SessionHandler {
+class LoginController: UIViewController, AuthenticateHandler, SessionHandler, GetPersonalProfileHandler {
 
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -38,7 +38,16 @@ class LoginController: UIViewController, AuthenticateHandler, SessionHandler {
     func authenticateOk() {
         loginButton.isEnabled = true
         loginButton.alpha = 1.0
-        self.performSegue(withIdentifier: "loginSuccess", sender: self)
+        self.sessionModel.getPersonalProfile(self)
+    }
+
+    func getPersonalProfileOk() {
+        if self.sessionModel.isProfileOk() {
+            self.performSegue(withIdentifier: "loginSuccess", sender: self)
+        }
+        else {
+            self.performSegue(withIdentifier: "returnToPersonalDetails", sender: self)
+        }
     }
 
     func failure(_ reason: String) {

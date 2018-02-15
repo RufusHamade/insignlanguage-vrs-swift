@@ -1,24 +1,50 @@
 import UIKit
 
-class PersonalProfileController: UIViewController, ActionHandler {
+class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler {
 
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var firstName: UITextField!
-    @IBOutlet weak var lastName: UITextField!
-    @IBOutlet weak var email: UITextField!
-    @IBOutlet weak var mobile: UITextField!
-    @IBOutlet weak var address1: UITextField!
-    @IBOutlet weak var address2: UITextField!
-    @IBOutlet weak var city: UITextField!
-    @IBOutlet weak var postcode: UITextField!
     @IBOutlet weak var submit: UIButton!
     @IBOutlet weak var messages: UILabel!
     @IBOutlet weak var back: UIButton!
+
+    @IBOutlet var fields: [UITextField]!
+    static var FIELD_MAP = [
+        "first_name",
+        "last_name",
+        "email",
+        "phone",
+        "address1",
+        "address2",
+        "address3",
+        "postcode"
+    ]
+    static func getFieldIdxFromName(_ name:String) ->Int {
+        for (i, v) in FIELD_MAP.enumerated() {
+            if v == name {
+                return i
+            }
+        }
+        return -1
+    }
+    static func getNameFromIdx(_ idx: Int) -> String {
+        return FIELD_MAP[idx]
+    }
 
     var sessionModel = SessionModel.sharedInstance
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        for (i, f) in self.fields.enumerated() {
+            f.delegate = self
+            let n = PersonalProfileController.getNameFromIdx(i)
+            if sessionModel.personalProfile[n] == nil {
+                f.text = ""
+            }
+            else {
+                f.text = sessionModel.personalProfile[n]!
+            }
+        }
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -31,6 +57,14 @@ class PersonalProfileController: UIViewController, ActionHandler {
                                        name: Notification.Name.UIKeyboardWillShow, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard),
                                        name: Notification.Name.UIKeyboardWillHide, object: nil)
+        if self.sessionModel.isProfileOk() {
+            self.back.isHidden = false
+            self.back.isEnabled = true
+        }
+        else {
+            self.back.isHidden = true
+            self.back.isEnabled = false
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -68,25 +102,33 @@ class PersonalProfileController: UIViewController, ActionHandler {
         }
     }
 
-    @IBAction func submitClicked(_ sender: Any) {
-    }
-
-    func done(_ success: Bool, _ message: String?) -> Void {
+    func showMessage(_ isError: Bool, _ message: String) {
         self.messages.isHidden = false
-
-        if !success {
-            self.messages.text = "Update failed: " + message!
-            self.messages.textColor = .red
-            self.submit.isEnabled = true
-            self.submit.alpha = 1.0
-        }
-        else {
-            self.messages.text = "Update succeeded"
-            self.messages.textColor = UIColor(red: 0.2, green: 0.4, blue: 0.2, alpha: 1.0)
-            // TODO: Segue to next scene
-        }
+        self.messages.textColor = isError ? .red : UIColor(red: 0.2, green: 0.4, blue: 0.2, alpha: 1.0)
+        self.messages.text = message
     }
 
+    @IBAction func submitClicked(_ sender: Any) {
+        if !self.sessionModel.isProfileOk() {
+            self.showMessage(true, "You need to fill in all * fields...")
+            return
+        }
+        self.submit.isEnabled = false
+        self.submit.alpha = 0.5
+        self.showMessage(false, "Submitting...")
+        self.sessionModel.updatePersonalProfile(self)
+    }
+
+    func updatePersonalProfileOk() {
+        self.showMessage(false, "Update succeeded")
+        // TODO: Segue to next scene
+    }
+
+    func failure(_ message: String) {
+        self.submit.isEnabled = true
+        self.submit.alpha = 1.0
+        self.showMessage(true, "Update failed: " + message)
+    }
 }
 
 extension PersonalProfileController: UITextFieldDelegate {
@@ -95,5 +137,14 @@ extension PersonalProfileController: UITextFieldDelegate {
         return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
+        for (i, f) in self.fields.enumerated() {
+            if f == textField {
+                let n = PersonalProfileController.getNameFromIdx(i)
+                self.sessionModel.personalProfile[n] = f.text
+            }
+        }
+        self.submit.alpha = self.sessionModel.isProfileOk() ? 1.0 : 0.5
+        self.submit.isEnabled = true
+        self.messages.isHidden = true
     }
 }
