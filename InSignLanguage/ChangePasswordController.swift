@@ -1,6 +1,6 @@
 import UIKit
 
-class ChangePasswordController: UIViewController, ActionHandler {
+class ChangePasswordController: UIViewController, ChangePasswordHandler {
     @IBOutlet weak var oldPassword: UITextField!
     @IBOutlet weak var newPassword1: UITextField!
     @IBOutlet weak var newPassword2: UITextField!
@@ -18,7 +18,6 @@ class ChangePasswordController: UIViewController, ActionHandler {
         self.oldPassword.delegate = self
         self.newPassword1.delegate = self
         self.newPassword2.delegate = self
-        self.sessionModel.setChangePasswordHandler(self)
         self.maybeEnableSubmit()
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
@@ -81,7 +80,7 @@ class ChangePasswordController: UIViewController, ActionHandler {
     @IBAction func submitClicked(_ sender: Any) {
         self.submit.isEnabled = false
         self.submit.alpha = 0.5
-        self.sessionModel.changePassword(self.oldPassword.text!, self.newPassword1.text!)
+        self.sessionModel.changePassword(self.oldPassword.text!, self.newPassword1.text!, self)
     }
 
     @IBAction func backClicked(_ sender: Any) {
@@ -93,19 +92,19 @@ class ChangePasswordController: UIViewController, ActionHandler {
         self.performSegue(withIdentifier: "unwindToLogin", sender: self)
     }
 
-    func done(_ success: Bool, _ message: String?) -> Void {
+    func changePasswordOk() {
         self.messages.isHidden = false
+        self.messages.text = "Password updated successfully"
+        self.messages.textColor = UIColor(red: 0.2, green: 0.4, blue: 0.2, alpha: 1.0)
+    }
 
-        if !success {
-            self.messages.text = "Password change failed: " + message!
-            self.messages.textColor = .red
-            self.submit.isEnabled = true
-            self.submit.alpha = 1.0
-        }
-        else {
-            self.messages.text = "Password updated successfully"
-            self.messages.textColor = UIColor(red: 0.2, green: 0.4, blue: 0.2, alpha: 1.0)
-        }
+    func failure(_ message: String) {
+        self.messages.isHidden = false
+        self.messages.text = "Password change failed: " + message
+        self.messages.textColor = .red
+        self.submit.isEnabled = true
+        self.submit.alpha = 1.0
+
     }
 }
 

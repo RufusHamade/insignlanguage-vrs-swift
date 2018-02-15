@@ -327,7 +327,6 @@ Follow the link inside and enter a new password.</string>
                                 <state key="normal" title="Logout"/>
                                 <connections>
                                     <action selector="logoutClicked:" destination="2TO-6m-JuQ" eventType="touchUpInside" id="czt-YN-jHh"/>
-                                    <action selector="logoutClicked:" destination="GJo-AR-60g" eventType="touchUpInside" id="tAW-7U-H81"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -455,7 +454,6 @@ Follow the link inside and enter a new password.</string>
                                 <rect key="frame" x="10" y="479" width="48" height="30"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
-                                    <action selector="logoutClicked:" destination="GJo-AR-60g" eventType="touchUpInside" id="OUT-3J-Y2a"/>
                                     <action selector="logoutClicked:" destination="CHq-hz-H1Q" eventType="touchUpInside" id="pbz-E1-vAV"/>
                                 </connections>
                             </button>

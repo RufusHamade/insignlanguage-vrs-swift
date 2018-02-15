@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ResetPasswordController: UIViewController, ActionHandler {
+class ResetPasswordController: UIViewController, ResetPasswordHandler {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var resetButton: UIButton!
@@ -28,8 +28,6 @@ class ResetPasswordController: UIViewController, ActionHandler {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-        
-        sessionModel.setPasswordResetHandler(self)
     }
 
     func dismissKeyboard() {
@@ -49,21 +47,20 @@ class ResetPasswordController: UIViewController, ActionHandler {
 
     @IBAction func resetClicked(_ sender: Any) {
         self.enableReset(false)
-        self.sessionModel.resetPassword(emailField.text!)
+        self.sessionModel.resetPassword(emailField.text!, self)
     }
 
-    func done(_ success: Bool, _ message: String?) -> Void {
+    func resetPasswordOk() {
         resetResults.isHidden = false
+        resetResults.text = "Reset succeeded.  Now check your email"
+        resetResults.textColor = UIColor(red: 0.2, green: 0.4, blue: 0.2, alpha: 1.0)
+    }
 
-        if !success {
-            resetResults.text = "Reset failed: " + message!
-            resetResults.textColor = .red
-            self.enableReset(true)
-        }
-        else {
-            resetResults.text = "Reset succeeded.  Now check your email"
-            resetResults.textColor = UIColor(red: 0.2, green: 0.4, blue: 0.2, alpha: 1.0)
-        }
+    func failure(_ message: String) {
+        resetResults.isHidden = false
+        resetResults.text = "Reset failed: " + message
+        resetResults.textColor = .red
+        self.enableReset(true)
     }
 }
 

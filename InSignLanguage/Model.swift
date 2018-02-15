@@ -45,6 +45,16 @@ protocol RegisterHandler {
     func failure(_ message: String) -> Void
 }
 
+protocol ChangePasswordHandler {
+    func changePasswordOk() -> Void
+    func failure(_ message: String) -> Void
+}
+
+protocol ResetPasswordHandler {
+    func resetPasswordOk() -> Void
+    func failure(_ message: String) -> Void
+}
+
 protocol ProviderHandler {
     func onProviderAvailability(_ availableProviders: Int) -> Void
 }
@@ -53,10 +63,6 @@ protocol DialHandler {
     func onDialSuccess() -> Void
     func onDialFailure(_ reason: String) -> Void
     func onHangupSuccess() -> Void
-}
-
-protocol ActionHandler {
-    func done(_ success: Bool, _ message: String?) -> Void
 }
 
 class SessionModel {
@@ -101,8 +107,6 @@ class SessionModel {
     var sessionHandler: SessionHandler?
     var providerHandler: ProviderHandler?
     var dialHandler: DialHandler?
-    var passwordResetHandler: ActionHandler?
-    var changePasswordHandler: ActionHandler?
 
     let preferences = UserDefaults.standard
 
@@ -123,14 +127,6 @@ class SessionModel {
 
     func setDialHandler(_ dh: DialHandler ) {
         self.dialHandler = dh
-    }
-
-    func setPasswordResetHandler(_ prh: ActionHandler) {
-        self.passwordResetHandler = prh
-    }
-
-    func setChangePasswordHandler(_ rh: ActionHandler) {
-        self.changePasswordHandler = rh
     }
 
     func resetProviderAvailabilityCheck() {
@@ -388,7 +384,7 @@ class SessionModel {
         return self.number != nil ? self.number! : ""
     }
 
-    func resetPassword(_ email: String) {
+    func resetPassword(_ email: String, _ handler: ResetPasswordHandler) {
         let parameters = [
             "email": email,
         ]
@@ -399,22 +395,22 @@ class SessionModel {
                           encoding: JSONEncoding.default)
             .responseJSON { response in
                 if response.response == nil {
-                    self.passwordResetHandler?.done(false, "Server Unavailable")
+                    handler.failure("Server Unavailable")
                 }
                 else if response.response!.statusCode == 400 {
                     let jsonResult = response.result.value as! [String: Any]
-                    self.passwordResetHandler?.done(false, (jsonResult["error"] as! String))
+                    handler.failure(jsonResult["error"] as! String)
                 }
                 else if response.response!.statusCode != 200 {
-                    self.passwordResetHandler?.done(false, "Internal Server error")
+                    handler.failure("Internal Server error")
                 }
                 else {
-                    self.passwordResetHandler?.done(true, nil)
+                    handler.resetPasswordOk()
                 }
         }
     }
 
-    func changePassword(_ oldPassword: String, _ newPassword: String) {
+    func changePassword(_ oldPassword: String, _ newPassword: String, _ handler: ChangePasswordHandler) {
         let headers: HTTPHeaders = [
             "Authorization": "Token " + self.sessionToken!,
             "Accept": "application/json"
@@ -432,22 +428,22 @@ class SessionModel {
                           headers: headers)
             .responseJSON { response in
                 if response.response == nil {
-                    self.changePasswordHandler?.done(false, "Server Unavailable")
+                    handler.failure("Server Unavailable")
                     return
                 }
                 let status = response.response!.statusCode
                 print(response.result.value!)
                 if status == 400 {
                     let jsonResult = response.result.value as! [String: Any]
-                    self.changePasswordHandler?.done(false, (jsonResult["error"] as! String))
+                    handler.failure(jsonResult["error"] as! String)
                 }
                 else if status != 200 {
-                    self.changePasswordHandler?.done(false, "Internal Server error")
+                    handler.failure("Internal Server error")
                 }
                 else {
                     let jsonResult = response.result.value as! [String: Any]
                     self.authenticateResult(jsonResult["token"] as! String)
-                    self.changePasswordHandler?.done(true, nil)
+                    handler.changePasswordOk()
                 }
         }
     }
