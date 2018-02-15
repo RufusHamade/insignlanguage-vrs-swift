@@ -160,7 +160,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gA1-aQ-kAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="q5D-5Q-71a" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-2468" y="-946"/>
+            <point key="canvasLocation" x="-2514" y="-980"/>
         </scene>
         <!--Password Reset-->
         <scene sceneID="HY3-Xh-6kN">
@@ -812,6 +812,7 @@ Follow the link inside and enter a new password.</string>
                         <segue destination="GJo-AR-60g" kind="relationship" relationship="viewControllers" id="zsP-mV-U1k"/>
                         <segue destination="2TO-6m-JuQ" kind="relationship" relationship="viewControllers" id="MLb-xH-ojO"/>
                         <segue destination="CHq-hz-H1Q" kind="relationship" relationship="viewControllers" id="ize-NU-DlD"/>
+                        <segue destination="V4X-10-FnW" kind="show" identifier="registrationComplete" id="H1Q-p2-MXU"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3V-3Z-7Wk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -880,7 +881,7 @@ Follow the link inside and enter a new password.</string>
                                 </constraints>
                                 <state key="normal" title="Back" image="back.png"/>
                                 <connections>
-                                    <segue destination="PtC-sf-L1P" kind="unwind" unwindAction="unwindToLoginWithSegue:" id="aK8-A5-NP0"/>
+                                    <segue destination="PtC-sf-L1P" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="aK8-A5-NP0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Z7-yT-qj1">
@@ -1013,7 +1014,7 @@ Follow the link inside and enter a new password.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="NxE-M2-0UC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1275" y="-946"/>
+            <point key="canvasLocation" x="-2514" y="-231"/>
         </scene>
         <!--Splash View-->
         <scene sceneID="2j3-NL-yL6">
@@ -1184,6 +1185,7 @@ Follow the link inside and enter a new password.</string>
         <image name="phone.png" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="M4b-dJ-Dq0"/>
+        <segue reference="6er-TY-e94"/>
+        <segue reference="WQS-cu-Mi4"/>
     </inferredMetricsTieBreakers>
 </document>

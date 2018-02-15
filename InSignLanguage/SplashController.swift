@@ -28,7 +28,6 @@ class SplashController: UIViewController, CheckTokenHandler, GetPersonalProfileH
     }
 
     func tokenNotOk() {
-        //self.performSegue(withIdentifier: "completeRegistration", sender: self)
         self.performSegue(withIdentifier: "login", sender: self)
     }
 

@@ -136,7 +136,7 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler 
 
     func updatePersonalProfileOk() {
         self.showMessage(false, "Update succeeded")
-        // TODO: Segue to next scene
+        self.parent?.performSegue(withIdentifier: "registrationComplete", sender: self)
     }
 
     func failure(_ message: String) {
