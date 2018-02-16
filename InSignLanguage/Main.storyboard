@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QRB-W3-JWU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CXN-iI-j7x">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -749,7 +749,7 @@ Follow the link inside and enter a new password.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Stu-Ro-Utx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="128" y="-2442"/>
+            <point key="canvasLocation" x="1125" y="-2442.5"/>
         </scene>
         <!--Settings Controller-->
         <scene sceneID="xvl-p7-IkY">
@@ -912,7 +912,7 @@ Follow the link inside and enter a new password.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="avB-p2-csK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="PtC-sf-L1P" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-638" y="-3189"/>
+            <point key="canvasLocation" x="358.125" y="-3190"/>
         </scene>
         <!--Video Display-->
         <scene sceneID="tne-QT-ifu">
@@ -997,7 +997,7 @@ Follow the link inside and enter a new password.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="UdD-zv-2Ce">
-                                <rect key="frame" x="26" y="30" width="268" height="45"/>
+                                <rect key="frame" x="26" y="74" width="268" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="UdD-zv-2Ce" secondAttribute="height" multiplier="2978:502" priority="900" id="kLn-Jy-B4r"/>
                                 </constraints>
@@ -1023,6 +1023,7 @@ Follow the link inside and enter a new password.</string>
                             <constraint firstItem="UdD-zv-2Ce" firstAttribute="leading" secondItem="wbE-1C-Sti" secondAttribute="leadingMargin" constant="10" id="reY-l0-hj7"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Pk7-yt-hCz"/>
                     <connections>
                         <outlet property="messages" destination="uWX-t5-seo" id="yEe-eT-KjJ"/>
                         <segue destination="S38-Cp-FME" kind="show" identifier="login" id="T5A-XU-Ijp"/>
@@ -1030,7 +1031,7 @@ Follow the link inside and enter a new password.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FcR-uc-aHm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2513" y="-3189"/>
+            <point key="canvasLocation" x="-2229" y="-3190"/>
         </scene>
         <!--Login Page-->
         <scene sceneID="HNX-hs-tvL">
@@ -1141,7 +1142,25 @@ Follow the link inside and enter a new password.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n4q-ZP-VfS" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1569" y="-3189"/>
+            <point key="canvasLocation" x="-1444" y="-3190"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="GAC-cI-and">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="CXN-iI-j7x" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lO2-tr-1qV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QRB-W3-JWU" kind="relationship" relationship="rootViewController" id="kNH-Wp-K6n"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zK8-w9-Qqx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3053" y="-3190"/>
         </scene>
     </scenes>
     <resources>
@@ -1153,6 +1172,6 @@ Follow the link inside and enter a new password.</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6er-TY-e94"/>
-        <segue reference="WQS-cu-Mi4"/>
+        <segue reference="nVK-5w-fVy"/>
     </inferredMetricsTieBreakers>
 </document>
