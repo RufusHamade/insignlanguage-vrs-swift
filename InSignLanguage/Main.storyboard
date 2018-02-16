@@ -930,7 +930,11 @@ Follow the link inside and enter a new password.</string>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onhold-image.png" translatesAutoresizingMaskIntoConstraints="NO" id="0wz-DV-X09">
-                                <rect key="frame" x="73" y="200" width="174" height="168"/>
+                                <rect key="frame" x="75" y="202" width="170" height="164"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="JdP-zJ-zQb"/>
+                                    <constraint firstAttribute="width" secondItem="0wz-DV-X09" secondAttribute="height" multiplier="29:28" id="vAp-1K-tAN"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.19359250663129979" green="0.19359250663129979" blue="0.19359250663129979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -971,7 +975,7 @@ Follow the link inside and enter a new password.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="UdD-zv-2Ce">
-                                <rect key="frame" x="26" y="30" width="268" height="45.5"/>
+                                <rect key="frame" x="26" y="30" width="268" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="UdD-zv-2Ce" secondAttribute="height" multiplier="2978:502" priority="900" id="kLn-Jy-B4r"/>
                                 </constraints>
@@ -1122,7 +1126,7 @@ Follow the link inside and enter a new password.</string>
         <image name="hangup.png" width="128" height="128"/>
         <image name="logo.png" width="2978" height="502"/>
         <image name="onhold-circle.png" width="276" height="276"/>
-        <image name="onhold-image.png" width="174" height="168"/>
+        <image name="onhold-image.png" width="298" height="371"/>
         <image name="phone.png" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
