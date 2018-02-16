@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  InSignLanguage
-//
-//  Created by Yvonne Eva Hannah Louise DeBrett on 17/04/2017.
-//
-//
 
 import UIKit
 

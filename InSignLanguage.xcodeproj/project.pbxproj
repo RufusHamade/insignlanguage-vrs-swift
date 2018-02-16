@@ -28,7 +28,6 @@
 		EEC248111EC9F58B003EEDA1 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC248081EC9F58B003EEDA1 /* phone.png */; };
 		EEC248121EC9F58B003EEDA1 /* ReadyToCallController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC248091EC9F58B003EEDA1 /* ReadyToCallController.swift */; };
 		EEC248131EC9F58B003EEDA1 /* VideoDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC2480A1EC9F58B003EEDA1 /* VideoDisplayController.swift */; };
-		EEC248151EC9F58B003EEDA1 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = EEC2480C1EC9F58B003EEDA1 /* Base.lproj */; };
 		EEF06A421FE42120004626C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEF06A401FE42120004626C1 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +57,6 @@
 		EEC248081EC9F58B003EEDA1 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 		EEC248091EC9F58B003EEDA1 /* ReadyToCallController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadyToCallController.swift; sourceTree = "<group>"; };
 		EEC2480A1EC9F58B003EEDA1 /* VideoDisplayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDisplayController.swift; sourceTree = "<group>"; };
-		EEC2480C1EC9F58B003EEDA1 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
 		EEF06A411FE42120004626C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,7 +129,6 @@
 				EE22E67E1FC49F910088A49E /* onhold-circle.png */,
 				EE22E6801FC82C180088A49E /* onhold-image.png */,
 				EEC248081EC9F58B003EEDA1 /* phone.png */,
-				EEC2480C1EC9F58B003EEDA1 /* Base.lproj */,
 				EE3325141EC9F395002D9543 /* AppDelegate.swift */,
 				EEF06A401FE42120004626C1 /* LaunchScreen.storyboard */,
 				EE3325201EC9F395002D9543 /* Info.plist */,
@@ -206,7 +203,6 @@
 				EEC2480D1EC9F58B003EEDA1 /* hangup.png in Resources */,
 				EE22E67F1FC49F910088A49E /* onhold-circle.png in Resources */,
 				EEC2480F1EC9F58B003EEDA1 /* logo.png in Resources */,
-				EEC248151EC9F58B003EEDA1 /* Base.lproj in Resources */,
 				EEC248111EC9F58B003EEDA1 /* phone.png in Resources */,
 				EE66CD601FE94054004B1F29 /* back.png in Resources */,
 				EE4D6DB41ECA124D00EB2E63 /* Assets.xcassets in Resources */,

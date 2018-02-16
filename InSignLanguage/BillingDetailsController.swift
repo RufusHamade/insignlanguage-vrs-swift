@@ -3,7 +3,6 @@ import UIKit
 class BillingDetailsController: UIViewController {
 
     @IBOutlet weak var back: UIButton!
-    @IBOutlet weak var logout: UIButton!
 
     var sessionModel = SessionModel.sharedInstance
 
@@ -17,29 +16,24 @@ class BillingDetailsController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         if self.sessionModel.isProfileOk() {
-            self.back.isHidden = false
-            self.back.isEnabled = true
-            self.logout.isHidden = true
-            self.logout.isEnabled = false
+            self.back.setTitle("Back", for: .normal)
         }
         else {
-            self.back.isHidden = true
-            self.back.isEnabled = false
-            self.logout.isHidden = false
-            self.logout.isEnabled = true
+            self.back.setTitle("Logout", for: .normal)
         }
-    }
-
-    @IBAction func backClicked(_ sender: Any) {
-        self.parent?.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
-    }
-
-    @IBAction func logoutClicked(_ sender: Any) {
-        sessionModel.logout()
-        self.parent?.performSegue(withIdentifier: "unwindToLogin", sender: self)
     }
 
     func dismissKeyboard() {
         view.endEditing(true)
+    }
+
+    @IBAction func backClicked(_ sender: Any) {
+        if self.sessionModel.isProfileOk() {
+            self.parent?.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
+        }
+        else {
+            sessionModel.logout()
+            self.parent?.performSegue(withIdentifier: "unwindToLogin", sender: self)
+        }
     }
 }

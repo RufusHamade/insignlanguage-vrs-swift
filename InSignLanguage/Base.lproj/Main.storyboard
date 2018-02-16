@@ -31,39 +31,35 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JdP-Bv-Z0s">
-                                <rect key="frame" x="36" y="125" width="248" height="20"/>
+                                <rect key="frame" x="36" y="125" width="248" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSU-wy-dYH">
-                                <rect key="frame" x="230" y="518" width="80" height="30"/>
-                                <color key="backgroundColor" red="0.54131130920000003" green="0.53152239720000005" blue="0.56077963080000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="20" y="518" width="65" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="erc-pv-XXi"/>
-                                    <constraint firstAttribute="height" constant="30" id="zID-Pj-nMI"/>
+                                    <constraint firstAttribute="width" constant="65" id="i2a-i6-aCh"/>
                                 </constraints>
-                                <state key="normal" title="Logout">
-                                    <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                </state>
+                                <state key="normal" title="Logout"/>
                                 <connections>
                                     <action selector="logoutClicked:" destination="V4X-10-FnW" eventType="touchUpInside" id="CEn-al-fOY"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are logged in as:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdC-gW-80c">
-                                <rect key="frame" x="105.5" y="101" width="109" height="14"/>
+                                <rect key="frame" x="105" y="101" width="110" height="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message for the interpreter?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bac-Zc-KaC">
-                                <rect key="frame" x="91" y="165" width="138" height="12"/>
+                                <rect key="frame" x="91" y="166" width="138" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AxL-CV-Z3F">
-                                <rect key="frame" x="51" y="185" width="218" height="70"/>
+                                <rect key="frame" x="51" y="186" width="218" height="70"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration" label="Is there anythin"/>
                                 <constraints>
@@ -73,13 +69,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unfortunately, there are no translators available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXf-Je-7JI">
-                                <rect key="frame" x="35" y="404" width="250" height="14"/>
+                                <rect key="frame" x="35" y="376" width="250" height="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.25" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6y-0k-9yC">
-                                <rect key="frame" x="110" y="448" width="100" height="100"/>
+                                <rect key="frame" x="96" y="420" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="250" id="NHB-Lz-6ay" userLabel="height = 125"/>
                                     <constraint firstAttribute="width" secondItem="s6y-0k-9yC" secondAttribute="height" multiplier="1:1" id="QLy-AG-ZEp"/>
@@ -92,19 +88,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number for interpreter to call?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="772-Nu-Dti">
-                                <rect key="frame" x="86.5" y="263" width="147" height="12"/>
+                                <rect key="frame" x="86.5" y="264" width="147" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gvx-OD-NII">
-                                <rect key="frame" x="51" y="283" width="218" height="30"/>
+                                <rect key="frame" x="51" y="284" width="218" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rx3-qP-XT2">
-                                <rect key="frame" x="10" y="518" width="57" height="30"/>
+                                <rect key="frame" x="243" y="518" width="57" height="30"/>
                                 <state key="normal" title="Settings"/>
                                 <connections>
                                     <segue destination="itN-pN-axK" kind="show" id="WQS-cu-Mi4"/>
@@ -123,18 +119,17 @@
                             <constraint firstItem="Bac-Zc-KaC" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="EvP-td-vVI"/>
                             <constraint firstItem="AxL-CV-Z3F" firstAttribute="top" secondItem="Bac-Zc-KaC" secondAttribute="bottom" constant="8" id="HCr-9M-2MM"/>
                             <constraint firstItem="d40-Hy-F7P" firstAttribute="top" secondItem="rx3-qP-XT2" secondAttribute="bottom" constant="20" id="HLB-ot-j10"/>
-                            <constraint firstAttribute="trailing" secondItem="WSU-wy-dYH" secondAttribute="trailing" constant="10" id="Ih8-6Q-hz4"/>
+                            <constraint firstAttribute="trailing" secondItem="rx3-qP-XT2" secondAttribute="trailing" constant="20" id="HZU-WD-B8p"/>
                             <constraint firstItem="gdC-gW-80c" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="LwI-sL-ccc"/>
                             <constraint firstItem="d40-Hy-F7P" firstAttribute="top" secondItem="s6y-0k-9yC" secondAttribute="bottom" constant="20" id="Pr9-oz-TTv"/>
                             <constraint firstItem="gvx-OD-NII" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="Rq3-Tx-J4o"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JdP-Bv-Z0s" secondAttribute="trailing" constant="20" id="VvA-4R-KU0"/>
                             <constraint firstItem="qXf-Je-7JI" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="WHL-bF-of0"/>
-                            <constraint firstItem="rx3-qP-XT2" firstAttribute="leading" secondItem="FTp-3N-j0k" secondAttribute="leading" constant="10" id="Zmm-Uz-iqi"/>
                             <constraint firstItem="JdP-Bv-Z0s" firstAttribute="top" secondItem="gdC-gW-80c" secondAttribute="bottom" constant="10" id="aSz-Xg-gen"/>
-                            <constraint firstItem="WSU-wy-dYH" firstAttribute="leading" secondItem="s6y-0k-9yC" secondAttribute="trailing" priority="900" constant="20" id="d5i-wS-0Lj"/>
                             <constraint firstItem="Fkw-KY-rSF" firstAttribute="top" secondItem="1P5-A5-OBr" secondAttribute="bottom" constant="10" id="deQ-O6-GgE"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Fkw-KY-rSF" secondAttribute="trailing" id="dpS-oF-xJo"/>
                             <constraint firstItem="Fkw-KY-rSF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FTp-3N-j0k" secondAttribute="leadingMargin" constant="10" id="hnC-ZK-bGO"/>
+                            <constraint firstItem="WSU-wy-dYH" firstAttribute="leading" secondItem="FTp-3N-j0k" secondAttribute="leading" constant="20" id="kYR-aj-mVc"/>
                             <constraint firstItem="Fkw-KY-rSF" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="lw4-NO-wbP"/>
                             <constraint firstItem="qXf-Je-7JI" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="piE-El-7Wv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AxL-CV-Z3F" secondAttribute="trailing" constant="35" id="qN0-97-D1h"/>
@@ -181,7 +176,7 @@
                                 <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="emailAddress"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbB-SZ-Dcx">
-                                <rect key="frame" x="54.5" y="40" width="211.5" height="34"/>
+                                <rect key="frame" x="54" y="40" width="212" height="34"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Password Reset">
                                         <attributes>
@@ -215,13 +210,9 @@ Follow the link inside and enter a new password.</string>
                                     <action selector="resetClicked:" destination="Gw9-mp-nfC" eventType="touchUpInside" id="VwE-Vn-aa2"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12K-vw-ER2">
-                                <rect key="frame" x="10" y="508" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="bcJ-BD-FH7"/>
-                                    <constraint firstAttribute="width" constant="50" id="uNC-gr-hQW"/>
-                                </constraints>
-                                <state key="normal" title="Back" image="back.png"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12K-vw-ER2">
+                                <rect key="frame" x="20" y="518" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
                                 <connections>
                                     <segue destination="f4j-6N-4Wq" kind="unwind" unwindAction="unwindToLoginWithSegue:" id="yJJ-m3-GU0"/>
                                 </connections>
@@ -240,14 +231,14 @@ Follow the link inside and enter a new password.</string>
                         <constraints>
                             <constraint firstItem="0y2-Pg-Zn5" firstAttribute="top" secondItem="gbB-SZ-Dcx" secondAttribute="bottom" constant="20" id="0LK-D4-6UP"/>
                             <constraint firstItem="9wo-Qh-pWw" firstAttribute="centerX" secondItem="8lh-LR-VcB" secondAttribute="centerX" id="5ZM-48-WSy"/>
-                            <constraint firstAttribute="bottom" secondItem="12K-vw-ER2" secondAttribute="bottom" constant="10" id="63l-l6-Idd"/>
+                            <constraint firstAttribute="bottom" secondItem="12K-vw-ER2" secondAttribute="bottom" constant="20" id="63l-l6-Idd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="obF-Vu-IKg" secondAttribute="trailing" constant="50" id="Bfo-Zc-nlR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9wo-Qh-pWw" secondAttribute="trailing" constant="60" id="DCv-7r-pIo"/>
                             <constraint firstItem="obF-Vu-IKg" firstAttribute="centerX" secondItem="8lh-LR-VcB" secondAttribute="centerX" id="THB-mc-WVE"/>
                             <constraint firstItem="obF-Vu-IKg" firstAttribute="top" secondItem="0y2-Pg-Zn5" secondAttribute="bottom" constant="20" id="abn-Qi-sRi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kNE-84-45Y" secondAttribute="trailing" constant="40" id="bjd-4a-ku4"/>
                             <constraint firstItem="gbB-SZ-Dcx" firstAttribute="top" secondItem="Fdc-VJ-QQ2" secondAttribute="bottom" constant="20" id="czz-Pb-OBa"/>
-                            <constraint firstItem="12K-vw-ER2" firstAttribute="leading" secondItem="8lh-LR-VcB" secondAttribute="leading" constant="10" id="fl1-Yf-ycG"/>
+                            <constraint firstItem="12K-vw-ER2" firstAttribute="leading" secondItem="8lh-LR-VcB" secondAttribute="leading" constant="20" id="fl1-Yf-ycG"/>
                             <constraint firstItem="gbB-SZ-Dcx" firstAttribute="centerX" secondItem="8lh-LR-VcB" secondAttribute="centerX" id="ggP-rn-e1E"/>
                             <constraint firstAttribute="trailing" secondItem="0y2-Pg-Zn5" secondAttribute="trailing" constant="50" id="hua-dw-QpT"/>
                             <constraint firstItem="kNE-84-45Y" firstAttribute="top" secondItem="9wo-Qh-pWw" secondAttribute="bottom" constant="20" id="nLa-WY-YxV"/>
@@ -279,17 +270,8 @@ Follow the link inside and enter a new password.</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Billing Change Results" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9l-f8-v4A">
-                                <rect key="frame" x="56" y="441" width="208" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Vvu-2x-vcr"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNE-Bx-KXs">
-                                <rect key="frame" x="85" y="400" width="150" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNE-Bx-KXs">
+                                <rect key="frame" x="81" y="350" width="150" height="30"/>
                                 <color key="backgroundColor" red="0.54131130920000003" green="0.53152239720000005" blue="0.56077963080000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="CcA-ji-76j"/>
@@ -306,38 +288,35 @@ Follow the link inside and enter a new password.</string>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Options" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKG-f3-m54">
-                                <rect key="frame" x="48" y="100.5" width="225" height="34"/>
+                                <rect key="frame" x="47.5" y="100.5" width="225" height="34"/>
                                 <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="29"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rnH-5L-aN4">
-                                <rect key="frame" x="10" y="459" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="0JN-bB-iqn"/>
-                                    <constraint firstAttribute="height" constant="50" id="cBz-vq-Rx2"/>
-                                </constraints>
-                                <state key="normal" title="Back" image="back.png"/>
-                                <connections>
-                                    <action selector="backClicked:" destination="2TO-6m-JuQ" eventType="touchUpInside" id="Twx-Lq-P2P"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5k3-eZ-EYU">
-                                <rect key="frame" x="10" y="479" width="48" height="30"/>
+                                <rect key="frame" x="20" y="469" width="48" height="30"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
-                                    <action selector="logoutClicked:" destination="2TO-6m-JuQ" eventType="touchUpInside" id="czt-YN-jHh"/>
+                                    <action selector="backClicked:" destination="2TO-6m-JuQ" eventType="touchUpInside" id="c13-dw-g52"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Billing Change Results" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9l-f8-v4A">
+                                <rect key="frame" x="56" y="398" width="208" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Vvu-2x-vcr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="sKG-f3-m54" firstAttribute="top" secondItem="ElE-lm-sjU" secondAttribute="bottom" constant="20" id="19A-qD-FrM"/>
-                            <constraint firstItem="5k3-eZ-EYU" firstAttribute="leading" secondItem="42R-AC-Urv" secondAttribute="leading" constant="10" id="2BH-EJ-m8a"/>
+                            <constraint firstItem="5k3-eZ-EYU" firstAttribute="leading" secondItem="42R-AC-Urv" secondAttribute="leading" constant="20" id="51l-om-NHf"/>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="width" secondItem="ElE-lm-sjU" secondAttribute="height" multiplier="2978:502" id="5D3-f3-YGV"/>
                             <constraint firstItem="g9l-f8-v4A" firstAttribute="centerX" secondItem="42R-AC-Urv" secondAttribute="centerX" id="5sd-JP-iua"/>
-                            <constraint firstItem="dlG-cj-cjv" firstAttribute="top" secondItem="5k3-eZ-EYU" secondAttribute="bottom" constant="10" id="8an-6g-ByD"/>
-                            <constraint firstItem="rnH-5L-aN4" firstAttribute="leading" secondItem="42R-AC-Urv" secondAttribute="leading" constant="10" id="Fqs-0T-AoJ"/>
+                            <constraint firstItem="dlG-cj-cjv" firstAttribute="top" secondItem="5k3-eZ-EYU" secondAttribute="bottom" constant="20" id="8tW-Kg-9t5"/>
                             <constraint firstItem="sKG-f3-m54" firstAttribute="centerX" secondItem="42R-AC-Urv" secondAttribute="centerX" id="Mbj-vm-xhh"/>
                             <constraint firstAttribute="trailing" secondItem="ElE-lm-sjU" secondAttribute="trailing" constant="10" id="NwB-SP-ehy"/>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="leading" secondItem="42R-AC-Urv" secondAttribute="leading" constant="10" id="QCW-xD-PPU"/>
@@ -345,18 +324,16 @@ Follow the link inside and enter a new password.</string>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="width" secondItem="ElE-lm-sjU" secondAttribute="height" multiplier="2978:502" id="inC-eQ-0tx"/>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="top" secondItem="cS5-Hd-aYq" secondAttribute="bottom" constant="10" id="q7x-t4-TFh"/>
                             <constraint firstItem="CNE-Bx-KXs" firstAttribute="centerX" secondItem="42R-AC-Urv" secondAttribute="centerX" id="rmH-Sd-owI"/>
-                            <constraint firstItem="dlG-cj-cjv" firstAttribute="top" secondItem="rnH-5L-aN4" secondAttribute="bottom" constant="10" id="wHg-37-LwZ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Billing" id="hMz-H4-Wi4"/>
                     <connections>
-                        <outlet property="back" destination="rnH-5L-aN4" id="LMQ-GL-R5q"/>
-                        <outlet property="logout" destination="5k3-eZ-EYU" id="okI-5G-Yvb"/>
+                        <outlet property="back" destination="5k3-eZ-EYU" id="TPT-5r-Twp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zI1-nH-VWU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="870" y="-1778"/>
+            <point key="canvasLocation" x="870" y="-1778.8732394366198"/>
         </scene>
         <!--Change Password-->
         <scene sceneID="Zhy-8d-h1b">
@@ -371,7 +348,7 @@ Follow the link inside and enter a new password.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWW-00-cIO">
-                                <rect key="frame" x="42" y="100.5" width="237.5" height="34"/>
+                                <rect key="frame" x="41" y="100.5" width="238" height="34"/>
                                 <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="29"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -429,17 +406,6 @@ Follow the link inside and enter a new password.</string>
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xH2-R5-hTm">
-                                <rect key="frame" x="10" y="459" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="fKI-ci-dj3"/>
-                                    <constraint firstAttribute="height" constant="50" id="sAf-rB-kUu"/>
-                                </constraints>
-                                <state key="normal" title="Back" image="back.png"/>
-                                <connections>
-                                    <action selector="backClicked:" destination="CHq-hz-H1Q" eventType="touchUpInside" id="mW1-ks-R0g"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="sHE-bs-kSD">
                                 <rect key="frame" x="10" y="30" width="300" height="50.5"/>
                                 <constraints>
@@ -447,33 +413,31 @@ Follow the link inside and enter a new password.</string>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcR-MA-EsG">
-                                <rect key="frame" x="10" y="479" width="48" height="30"/>
+                                <rect key="frame" x="20" y="469" width="48" height="30"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
-                                    <action selector="logoutClicked:" destination="CHq-hz-H1Q" eventType="touchUpInside" id="pbz-E1-vAV"/>
+                                    <action selector="backClicked:" destination="CHq-hz-H1Q" eventType="touchUpInside" id="GXG-hC-fVg"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="44t-lS-L9W" firstAttribute="top" secondItem="nco-of-BRT" secondAttribute="bottom" constant="20" id="951-7p-cUy"/>
-                            <constraint firstItem="kcR-MA-EsG" firstAttribute="leading" secondItem="YpM-Bz-9QC" secondAttribute="leading" constant="10" id="Dlp-Et-ae5"/>
+                            <constraint firstItem="kcR-MA-EsG" firstAttribute="leading" secondItem="YpM-Bz-9QC" secondAttribute="leading" constant="20" id="Dlp-Et-ae5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PZw-Vt-cjP" secondAttribute="trailing" constant="40" id="Fzc-MJ-omo"/>
                             <constraint firstItem="nco-of-BRT" firstAttribute="centerX" secondItem="YpM-Bz-9QC" secondAttribute="centerX" id="JcM-tS-VNc"/>
                             <constraint firstItem="rrk-mQ-xai" firstAttribute="top" secondItem="yr4-d5-7of" secondAttribute="bottom" constant="15" id="NWs-pw-ula"/>
                             <constraint firstItem="44t-lS-L9W" firstAttribute="centerX" secondItem="YpM-Bz-9QC" secondAttribute="centerX" id="OKs-c5-1vy"/>
                             <constraint firstItem="PZw-Vt-cjP" firstAttribute="top" secondItem="44t-lS-L9W" secondAttribute="bottom" constant="20" id="VZo-D6-ax4"/>
                             <constraint firstItem="yr4-d5-7of" firstAttribute="top" secondItem="MWW-00-cIO" secondAttribute="bottom" constant="15" id="Vtm-VF-b8x"/>
-                            <constraint firstItem="5fk-w7-Vmi" firstAttribute="top" secondItem="kcR-MA-EsG" secondAttribute="bottom" constant="10" id="Weu-fI-Djr"/>
+                            <constraint firstItem="5fk-w7-Vmi" firstAttribute="top" secondItem="kcR-MA-EsG" secondAttribute="bottom" constant="20" id="Weu-fI-Djr"/>
                             <constraint firstItem="PZw-Vt-cjP" firstAttribute="centerX" secondItem="YpM-Bz-9QC" secondAttribute="centerX" id="aoh-V1-BV4"/>
-                            <constraint firstItem="xH2-R5-hTm" firstAttribute="leading" secondItem="YpM-Bz-9QC" secondAttribute="leading" constant="10" id="cb0-vZ-pkU"/>
                             <constraint firstItem="MWW-00-cIO" firstAttribute="centerX" secondItem="YpM-Bz-9QC" secondAttribute="centerX" id="eJn-sm-bMe"/>
                             <constraint firstItem="yr4-d5-7of" firstAttribute="centerX" secondItem="YpM-Bz-9QC" secondAttribute="centerX" id="gh5-of-NLG"/>
                             <constraint firstItem="sHE-bs-kSD" firstAttribute="leading" secondItem="YpM-Bz-9QC" secondAttribute="leading" constant="10" id="iuI-fJ-nBQ"/>
                             <constraint firstItem="MWW-00-cIO" firstAttribute="top" secondItem="sHE-bs-kSD" secondAttribute="bottom" constant="20" id="k4q-Pj-dxb"/>
                             <constraint firstItem="nco-of-BRT" firstAttribute="top" secondItem="rrk-mQ-xai" secondAttribute="bottom" constant="15" id="ke9-TT-I5N"/>
                             <constraint firstAttribute="trailing" secondItem="sHE-bs-kSD" secondAttribute="trailing" constant="10" id="of2-WT-5gZ"/>
-                            <constraint firstItem="5fk-w7-Vmi" firstAttribute="top" secondItem="xH2-R5-hTm" secondAttribute="bottom" constant="10" id="tvQ-vY-iL4"/>
                             <constraint firstItem="sHE-bs-kSD" firstAttribute="width" secondItem="sHE-bs-kSD" secondAttribute="height" multiplier="2978:502" id="vzG-9C-OXn"/>
                             <constraint firstItem="rrk-mQ-xai" firstAttribute="centerX" secondItem="YpM-Bz-9QC" secondAttribute="centerX" id="yU6-mf-344"/>
                             <constraint firstItem="sHE-bs-kSD" firstAttribute="top" secondItem="oAV-is-5HM" secondAttribute="bottom" constant="10" id="ytX-Kn-DmE"/>
@@ -482,8 +446,7 @@ Follow the link inside and enter a new password.</string>
                     <tabBarItem key="tabBarItem" title="Password" id="tW1-9Z-l2w"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="back" destination="xH2-R5-hTm" id="HmD-QP-8hf"/>
-                        <outlet property="logout" destination="kcR-MA-EsG" id="XMI-8B-bSg"/>
+                        <outlet property="back" destination="kcR-MA-EsG" id="ksK-MB-kOL"/>
                         <outlet property="messages" destination="PZw-Vt-cjP" id="j1E-kd-BXc"/>
                         <outlet property="newPassword1" destination="rrk-mQ-xai" id="7iK-rU-N2a"/>
                         <outlet property="newPassword2" destination="nco-of-BRT" id="C2U-XQ-khk"/>
@@ -511,7 +474,7 @@ Follow the link inside and enter a new password.</string>
                                 <rect key="frame" x="0.0" y="20" width="320" height="1031"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzW-MZ-63O">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1031.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="992.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="OsJ-Dt-gfT">
                                                 <rect key="frame" x="10" y="10" width="300" height="50.5"/>
@@ -544,13 +507,13 @@ Follow the link inside and enter a new password.</string>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AbN-UV-HsQ">
-                                                <rect key="frame" x="60" y="294" width="199.5" height="34"/>
+                                                <rect key="frame" x="60" y="294.5" width="200" height="34"/>
                                                 <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="29"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email *" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wmL-Ly-mWP">
-                                                <rect key="frame" x="40.5" y="363" width="239.5" height="40"/>
+                                                <rect key="frame" x="41" y="363.5" width="239" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Qru-8h-qzi"/>
                                                 </constraints>
@@ -559,7 +522,7 @@ Follow the link inside and enter a new password.</string>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Telephone Number *" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p3Y-7P-ZXu">
-                                                <rect key="frame" x="40.5" y="438" width="239.5" height="40"/>
+                                                <rect key="frame" x="41" y="438.5" width="239" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Jlb-At-3Ov"/>
                                                 </constraints>
@@ -568,13 +531,13 @@ Follow the link inside and enter a new password.</string>
                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9B-yQ-91b">
-                                                <rect key="frame" x="107" y="507.5" width="107" height="34"/>
+                                                <rect key="frame" x="107" y="508.5" width="107" height="34"/>
                                                 <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="29"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address *" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gwt-T5-YOh">
-                                                <rect key="frame" x="40" y="556.5" width="240" height="40"/>
+                                                <rect key="frame" x="40" y="557.5" width="240" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="dV5-r8-7Z7"/>
                                                 </constraints>
@@ -583,7 +546,7 @@ Follow the link inside and enter a new password.</string>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xtd-Er-eSV">
-                                                <rect key="frame" x="40" y="611.5" width="240" height="40"/>
+                                                <rect key="frame" x="40" y="612.5" width="240" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="lax-sb-BCr"/>
                                                 </constraints>
@@ -592,7 +555,7 @@ Follow the link inside and enter a new password.</string>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Town/City *" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e1M-50-6P9">
-                                                <rect key="frame" x="40.5" y="686.5" width="239.5" height="40"/>
+                                                <rect key="frame" x="41" y="687.5" width="239" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="did-w7-EYI"/>
                                                 </constraints>
@@ -601,7 +564,7 @@ Follow the link inside and enter a new password.</string>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Postcode *" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mKH-GT-iVs">
-                                                <rect key="frame" x="40" y="761.5" width="240" height="40"/>
+                                                <rect key="frame" x="40" y="762.5" width="240" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="5Su-0W-Va3"/>
                                                 </constraints>
@@ -610,7 +573,7 @@ Follow the link inside and enter a new password.</string>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XN4-M0-9kj">
-                                                <rect key="frame" x="105" y="821.5" width="110" height="30"/>
+                                                <rect key="frame" x="105" y="822.5" width="110" height="30"/>
                                                 <color key="backgroundColor" red="0.54131130920000003" green="0.53152239720000005" blue="0.56077963080000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="1j2-sB-gZa"/>
@@ -624,16 +587,16 @@ Follow the link inside and enter a new password.</string>
                                                 </connections>
                                             </button>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Details Results" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ywv-qF-q1b">
-                                                <rect key="frame" x="40" y="871.5" width="240" height="100"/>
+                                                <rect key="frame" x="40" y="872.5" width="240" height="60"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="100" id="6bb-ap-4F6"/>
+                                                    <constraint firstAttribute="height" constant="60" id="6bb-ap-4F6"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name *" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owt-u4-IW5">
-                                                <rect key="frame" x="40" y="127.5" width="80.5" height="17"/>
+                                                <rect key="frame" x="40" y="127.5" width="81" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -645,45 +608,34 @@ Follow the link inside and enter a new password.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address *" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACN-ee-oFg">
-                                                <rect key="frame" x="40.5" y="341" width="102" height="17"/>
+                                                <rect key="frame" x="41" y="341.5" width="102" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Telephone Number *" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogV-a2-T8A">
-                                                <rect key="frame" x="40" y="416" width="134" height="17"/>
+                                                <rect key="frame" x="41" y="416.5" width="134" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Town/City *" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2D6-KV-xW5">
-                                                <rect key="frame" x="40.5" y="664" width="75.5" height="17"/>
+                                                <rect key="frame" x="41" y="665.5" width="76" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Postcode *" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ylh-Ux-p7U">
-                                                <rect key="frame" x="40" y="739.5" width="71.5" height="17"/>
+                                                <rect key="frame" x="40" y="740.5" width="72" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5k-HW-924">
-                                                <rect key="frame" x="10" y="971.5" width="50" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="bN9-ea-oNg"/>
-                                                    <constraint firstAttribute="height" constant="50" id="hQ1-38-qWO"/>
-                                                </constraints>
-                                                <state key="normal" title="Back" image="back.png"/>
-                                                <connections>
-                                                    <action selector="backClicked:" destination="GJo-AR-60g" eventType="touchUpInside" id="tuC-Ye-e9T"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DMG-vF-bME">
-                                                <rect key="frame" x="10" y="991" width="48" height="30"/>
+                                                <rect key="frame" x="20" y="942.5" width="48" height="30"/>
                                                 <state key="normal" title="Logout"/>
                                                 <connections>
-                                                    <action selector="logoutClicked:" destination="GJo-AR-60g" eventType="touchUpInside" id="Ja5-e7-EbQ"/>
+                                                    <action selector="backClicked:" destination="GJo-AR-60g" eventType="touchUpInside" id="4dQ-Ve-NeI"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -693,9 +645,8 @@ Follow the link inside and enter a new password.</string>
                                             <constraint firstAttribute="trailing" secondItem="mKH-GT-iVs" secondAttribute="trailing" constant="40" id="1gA-wD-ivI"/>
                                             <constraint firstItem="kxA-b2-4ko" firstAttribute="centerX" secondItem="fzW-MZ-63O" secondAttribute="centerX" id="3h2-TB-z06"/>
                                             <constraint firstItem="jpZ-Gy-B4R" firstAttribute="centerX" secondItem="fzW-MZ-63O" secondAttribute="centerX" id="598-Hl-d7X"/>
-                                            <constraint firstItem="DMG-vF-bME" firstAttribute="leading" secondItem="fzW-MZ-63O" secondAttribute="leading" constant="10" id="6gp-ky-dnC"/>
+                                            <constraint firstItem="DMG-vF-bME" firstAttribute="leading" secondItem="fzW-MZ-63O" secondAttribute="leading" constant="20" id="6gp-ky-dnC"/>
                                             <constraint firstItem="p3Y-7P-ZXu" firstAttribute="centerX" secondItem="fzW-MZ-63O" secondAttribute="centerX" id="7U3-28-OMk"/>
-                                            <constraint firstAttribute="bottom" secondItem="L5k-HW-924" secondAttribute="bottom" constant="10" id="8iL-5K-gDG"/>
                                             <constraint firstAttribute="trailing" secondItem="kxA-b2-4ko" secondAttribute="trailing" constant="30" id="8mO-hY-EoL"/>
                                             <constraint firstItem="RGE-5W-S3j" firstAttribute="top" secondItem="kxA-b2-4ko" secondAttribute="bottom" constant="35" id="9Bh-IZ-zIW"/>
                                             <constraint firstAttribute="trailing" secondItem="jpZ-Gy-B4R" secondAttribute="trailing" constant="40" id="9c7-fh-Wrk"/>
@@ -724,7 +675,7 @@ Follow the link inside and enter a new password.</string>
                                             <constraint firstAttribute="trailing" secondItem="RGE-5W-S3j" secondAttribute="trailing" constant="40" id="YMe-y1-v2y"/>
                                             <constraint firstItem="d9B-yQ-91b" firstAttribute="top" secondItem="p3Y-7P-ZXu" secondAttribute="bottom" constant="30" id="Z3V-XM-n7Q"/>
                                             <constraint firstAttribute="trailing" secondItem="ywv-qF-q1b" secondAttribute="trailing" constant="40" id="Zkf-gi-CcY"/>
-                                            <constraint firstAttribute="bottom" secondItem="DMG-vF-bME" secondAttribute="bottom" constant="10" id="aJS-Ju-dMy"/>
+                                            <constraint firstAttribute="bottom" secondItem="DMG-vF-bME" secondAttribute="bottom" constant="20" id="aJS-Ju-dMy"/>
                                             <constraint firstItem="OsJ-Dt-gfT" firstAttribute="top" secondItem="fzW-MZ-63O" secondAttribute="top" constant="10" id="ayY-7n-3bU"/>
                                             <constraint firstItem="ywv-qF-q1b" firstAttribute="top" secondItem="XN4-M0-9kj" secondAttribute="bottom" constant="20" id="dFI-Kb-V6I"/>
                                             <constraint firstAttribute="trailing" secondItem="e1M-50-6P9" secondAttribute="trailing" constant="40" id="fBe-oL-yVX"/>
@@ -738,7 +689,6 @@ Follow the link inside and enter a new password.</string>
                                             <constraint firstItem="AbN-UV-HsQ" firstAttribute="top" secondItem="jpZ-Gy-B4R" secondAttribute="bottom" constant="30" id="pnu-sb-M7B"/>
                                             <constraint firstAttribute="trailing" secondItem="p3Y-7P-ZXu" secondAttribute="trailing" constant="40" id="qng-ch-VYC"/>
                                             <constraint firstItem="e1M-50-6P9" firstAttribute="centerX" secondItem="fzW-MZ-63O" secondAttribute="centerX" id="r15-ng-xI0"/>
-                                            <constraint firstItem="L5k-HW-924" firstAttribute="leading" secondItem="fzW-MZ-63O" secondAttribute="leading" constant="10" id="rVv-Vj-jKS"/>
                                             <constraint firstAttribute="bottom" secondItem="ywv-qF-q1b" secondAttribute="bottom" constant="60" id="tXE-QD-A3F"/>
                                             <constraint firstItem="ogV-a2-T8A" firstAttribute="leading" secondItem="p3Y-7P-ZXu" secondAttribute="leading" id="u0S-Ij-t1K"/>
                                             <constraint firstItem="wmL-Ly-mWP" firstAttribute="top" secondItem="AbN-UV-HsQ" secondAttribute="bottom" constant="35" id="u9P-km-0Sp"/>
@@ -771,8 +721,7 @@ Follow the link inside and enter a new password.</string>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1100"/>
                     <connections>
-                        <outlet property="back" destination="L5k-HW-924" id="aTe-L4-tcN"/>
-                        <outlet property="logout" destination="DMG-vF-bME" id="TKW-gW-MFm"/>
+                        <outlet property="back" destination="DMG-vF-bME" id="IOi-wN-xXd"/>
                         <outlet property="messages" destination="ywv-qF-q1b" id="iBM-FG-HkR"/>
                         <outlet property="scrollView" destination="85D-aE-3QN" id="Tzq-SI-fbh"/>
                         <outlet property="submit" destination="XN4-M0-9kj" id="dX8-xq-Io7"/>
@@ -838,7 +787,7 @@ Follow the link inside and enter a new password.</string>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Register" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zt1-pe-Tra">
-                                <rect key="frame" x="106.5" y="30" width="107.5" height="34"/>
+                                <rect key="frame" x="106" y="30" width="108" height="34"/>
                                 <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="29"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -850,7 +799,7 @@ Follow the link inside and enter a new password.</string>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzv-89-xeV">
-                                <rect key="frame" x="66" y="78" width="45.5" height="21"/>
+                                <rect key="frame" x="66" y="78" width="46" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -862,18 +811,17 @@ Follow the link inside and enter a new password.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyp-q9-w95">
-                                <rect key="frame" x="66" y="148" width="78.5" height="21"/>
+                                <rect key="frame" x="66" y="148" width="79" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8I-SE-7k5">
-                                <rect key="frame" x="10" y="508" width="50" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8I-SE-7k5">
+                                <rect key="frame" x="20" y="518" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="NPv-40-geu"/>
-                                    <constraint firstAttribute="height" constant="50" id="y1u-6b-Uew"/>
                                 </constraints>
-                                <state key="normal" title="Back" image="back.png"/>
+                                <state key="normal" title="Back"/>
                                 <connections>
                                     <segue destination="PtC-sf-L1P" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="aK8-A5-NP0"/>
                                 </connections>
@@ -918,10 +866,10 @@ Follow the link inside and enter a new password.</string>
                             <constraint firstItem="CPq-LX-D6P" firstAttribute="centerX" secondItem="0Lb-1d-yPd" secondAttribute="centerX" id="Qmr-Jc-0bh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8Z7-yT-qj1" secondAttribute="trailing" constant="60" id="V9R-vT-WvA"/>
                             <constraint firstItem="aOZ-ue-g0m" firstAttribute="top" secondItem="nVR-n9-r30" secondAttribute="bottom" constant="40" id="Y2b-eR-QEh"/>
-                            <constraint firstItem="B8I-SE-7k5" firstAttribute="leading" secondItem="0Lb-1d-yPd" secondAttribute="leading" constant="10" id="YR3-Zs-Ys4"/>
+                            <constraint firstItem="B8I-SE-7k5" firstAttribute="leading" secondItem="0Lb-1d-yPd" secondAttribute="leading" constant="20" id="YR3-Zs-Ys4"/>
                             <constraint firstItem="RCP-id-SdY" firstAttribute="top" secondItem="pzv-89-xeV" secondAttribute="bottom" constant="5" id="ZIB-rl-f56"/>
                             <constraint firstItem="pzv-89-xeV" firstAttribute="leading" secondItem="RCP-id-SdY" secondAttribute="leading" id="Zid-VV-ebA"/>
-                            <constraint firstItem="Yh4-fP-CIe" firstAttribute="top" secondItem="B8I-SE-7k5" secondAttribute="bottom" constant="10" id="gUj-5e-t33"/>
+                            <constraint firstItem="Yh4-fP-CIe" firstAttribute="top" secondItem="B8I-SE-7k5" secondAttribute="bottom" constant="20" id="gUj-5e-t33"/>
                             <constraint firstItem="aOZ-ue-g0m" firstAttribute="top" secondItem="HJc-Fk-sHY" secondAttribute="bottom" constant="5" id="gzV-k3-3uX"/>
                             <constraint firstItem="HJc-Fk-sHY" firstAttribute="leading" secondItem="aOZ-ue-g0m" secondAttribute="leading" id="oIX-Qg-iWX"/>
                             <constraint firstItem="nVR-n9-r30" firstAttribute="top" secondItem="Yyp-q9-w95" secondAttribute="bottom" constant="5" id="pUI-DR-8uM"/>
@@ -1023,13 +971,13 @@ Follow the link inside and enter a new password.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="UdD-zv-2Ce">
-                                <rect key="frame" x="26" y="30" width="268" height="45"/>
+                                <rect key="frame" x="26" y="30" width="268" height="45.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="UdD-zv-2Ce" secondAttribute="height" multiplier="2978:502" priority="900" id="kLn-Jy-B4r"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contacting Server..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWX-t5-seo">
-                                <rect key="frame" x="66.5" y="284" width="187.5" height="100"/>
+                                <rect key="frame" x="66" y="284" width="188" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Wwa-bw-3ko"/>
                                 </constraints>
@@ -1171,7 +1119,6 @@ Follow the link inside and enter a new password.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="back.png" width="256" height="256"/>
         <image name="hangup.png" width="128" height="128"/>
         <image name="logo.png" width="2978" height="502"/>
         <image name="onhold-circle.png" width="276" height="276"/>
@@ -1179,7 +1126,7 @@ Follow the link inside and enter a new password.</string>
         <image name="phone.png" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="6er-TY-e94"/>
         <segue reference="WQS-cu-Mi4"/>
-        <segue reference="H1Q-p2-MXU"/>
     </inferredMetricsTieBreakers>
 </document>

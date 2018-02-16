@@ -7,8 +7,6 @@ class ChangePasswordController: UIViewController, ChangePasswordHandler {
     @IBOutlet weak var submit: UIButton!
     @IBOutlet weak var messages: UILabel!
     @IBOutlet weak var back: UIButton!
-    @IBOutlet weak var logout: UIButton!
-
 
     var sessionModel = SessionModel.sharedInstance
 
@@ -31,16 +29,10 @@ class ChangePasswordController: UIViewController, ChangePasswordHandler {
         self.newPassword2.text = ""
 
         if self.sessionModel.isProfileOk() {
-            self.back.isHidden = false
-            self.back.isEnabled = true
-            self.logout.isHidden = true
-            self.logout.isEnabled = false
+            self.back.setTitle("Back", for: .normal)
         }
         else {
-            self.back.isHidden = true
-            self.back.isEnabled = false
-            self.logout.isHidden = false
-            self.logout.isEnabled = true
+            self.back.setTitle("Logout", for: .normal)
         }
     }
 
@@ -84,12 +76,13 @@ class ChangePasswordController: UIViewController, ChangePasswordHandler {
     }
 
     @IBAction func backClicked(_ sender: Any) {
-        self.parent?.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
-    }
-
-    @IBAction func logoutClicked(_ sender: Any) {
-        sessionModel.logout()
-        self.parent?.performSegue(withIdentifier: "unwindToLogin", sender: self)
+        if self.sessionModel.isProfileOk() {
+            self.parent?.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
+        }
+        else {
+            sessionModel.logout()
+            self.parent?.performSegue(withIdentifier: "unwindToLogin", sender: self)
+        }
     }
 
     func changePasswordOk() {
