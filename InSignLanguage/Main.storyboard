@@ -981,19 +981,19 @@ Follow the link inside and enter a new password.</string>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contacting Server..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWX-t5-seo">
-                                <rect key="frame" x="66" y="284" width="188" height="100"/>
+                                <rect key="frame" x="66" y="234" width="188" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Wwa-bw-3ko"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.26611742377281189" green="0.56422513723373413" blue="0.026513298973441124" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="UdD-zv-2Ce" secondAttribute="trailing" constant="10" id="CxT-jL-4U8"/>
-                            <constraint firstItem="uWX-t5-seo" firstAttribute="centerY" secondItem="wbE-1C-Sti" secondAttribute="centerY" constant="50" id="DK8-m3-c1T"/>
+                            <constraint firstItem="uWX-t5-seo" firstAttribute="centerY" secondItem="wbE-1C-Sti" secondAttribute="centerY" id="DK8-m3-c1T"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uWX-t5-seo" secondAttribute="trailing" constant="50" id="I5D-7J-LLx"/>
                             <constraint firstItem="UdD-zv-2Ce" firstAttribute="width" secondItem="UdD-zv-2Ce" secondAttribute="height" multiplier="2978:502" priority="900" id="I8Q-qq-dIh"/>
                             <constraint firstItem="UdD-zv-2Ce" firstAttribute="top" secondItem="lKn-FG-IFJ" secondAttribute="bottom" constant="10" id="JUW-VY-IZa"/>
