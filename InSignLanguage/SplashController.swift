@@ -11,6 +11,7 @@ import UIKit
 class SplashController: UIViewController, CheckTokenHandler, GetPersonalProfileHandler {
 
     @IBOutlet weak var messages: UILabel!
+    @IBOutlet weak var retryButton: UIButton!
 
     var sessionModel = SessionModel.sharedInstance
 
@@ -20,6 +21,8 @@ class SplashController: UIViewController, CheckTokenHandler, GetPersonalProfileH
 
     override func viewDidAppear(_ animated: Bool) {
         self.sessionModel.checkToken(self)
+        self.retryButton.isHidden = true
+        self.retryButton.isEnabled = false
     }
 
     func tokenOk() {
@@ -65,5 +68,16 @@ class SplashController: UIViewController, CheckTokenHandler, GetPersonalProfileH
     func failure(_ message: String) {
         self.messages.text = message
         self.messages.textColor = .red
+        self.retryButton.isHidden = false
+        self.retryButton.isEnabled = true
+        self.retryButton.alpha = 1.0
+    }
+
+    @IBAction func retryClicked(_ sender: Any) {
+        self.messages.text = "Trying again..."
+        self.messages.textColor = HAPPY_COLOR
+        self.sessionModel.checkToken(self)
+        self.retryButton.isEnabled = false
+        self.retryButton.alpha = 0.5
     }
 }

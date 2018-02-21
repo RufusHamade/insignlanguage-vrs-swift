@@ -56,7 +56,7 @@ class RegisterController: UIViewController, RegisterHandler {
         registerResults.isHidden = false
 
         if success {
-            registerResults.textColor = UIColor(red: 0.2, green: 0.4, blue: 0.2, alpha: 1.0)
+            registerResults.textColor = HAPPY_COLOR
         }
         else {
             registerResults.textColor = .red

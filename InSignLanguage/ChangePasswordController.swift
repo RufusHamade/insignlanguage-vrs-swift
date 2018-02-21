@@ -88,7 +88,7 @@ class ChangePasswordController: UIViewController, ChangePasswordHandler {
     func changePasswordOk() {
         self.messages.isHidden = false
         self.messages.text = "Password updated successfully"
-        self.messages.textColor = UIColor(red: 0.2, green: 0.4, blue: 0.2, alpha: 1.0)
+        self.messages.textColor = HAPPY_COLOR
     }
 
     func failure(_ message: String) {

@@ -53,7 +53,7 @@ class ResetPasswordController: UIViewController, ResetPasswordHandler {
     func resetPasswordOk() {
         resetResults.isHidden = false
         resetResults.text = "Reset succeeded.  Now check your email"
-        resetResults.textColor = UIColor(red: 0.2, green: 0.4, blue: 0.2, alpha: 1.0)
+        resetResults.textColor = HAPPY_COLOR
     }
 
     func failure(_ message: String) {

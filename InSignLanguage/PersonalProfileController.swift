@@ -103,7 +103,7 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler 
 
     func showMessage(_ isError: Bool, _ message: String) {
         self.messages.isHidden = false
-        self.messages.textColor = isError ? .red : UIColor(red: 0.2, green: 0.4, blue: 0.2, alpha: 1.0)
+        self.messages.textColor = isError ? .red : HAPPY_COLOR
         self.messages.text = message
     }
 

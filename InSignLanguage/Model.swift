@@ -12,6 +12,7 @@ import OpenTok
 
 let API_KEY = Bundle.main.infoDictionary!["APP_API_KEY"] as! String
 let SESSION_SERVER = Bundle.main.infoDictionary!["APP_SESSION_SERVER"] as! String
+let HAPPY_COLOR = UIColor(red: 0.2, green: 0.4, blue: 0.2, alpha: 1.0)
 
 //MARK: SessionModel
 
@@ -79,7 +80,7 @@ class SessionModel {
     ]
 
     // MARK: Properties
-    var serverUrl: String? = SESSION_SERVER
+    var serverUrl: String = SESSION_SERVER
     var name: String?
     var password: String?
     var sessionToken: String?
@@ -209,14 +210,14 @@ class SessionModel {
             "password": self.password!
         ]
 
-        Alamofire.request(self.serverUrl! + "/api/account/token-auth/",
+        Alamofire.request(self.serverUrl + "/api/account/token-auth/",
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default)
             .responseJSON { response in
                 if response.response == nil {
                     self.loginState = .unauthenticated
-                    handler.failure("Server Unavailable")
+                    handler.failure(String(format:"Server\n%@\nUnavailable", self.serverUrl))
                     return
                 }
                 if response.response!.statusCode == 400 {
@@ -249,11 +250,11 @@ class SessionModel {
             return
         }
 
-        Alamofire.request(self.serverUrl! + "/api/call/ping/",
+        Alamofire.request(self.serverUrl + "/api/call/ping/",
                           headers: self.getAuthHeaders())
             .responseJSON { response in
                 if response.response == nil {
-                    handler.failure("Server Unavailable")
+                    handler.failure(String(format:"Server\n%@\nUnavailable", self.serverUrl))
                     self.loginState = .unauthenticated
                     return
                 }
@@ -293,18 +294,13 @@ class SessionModel {
             return
         }
 
-        let headers: HTTPHeaders = [
-            "Authorization": "Token " + self.sessionToken!,
-            "Accept": "application/json"
-        ]
-
         let parameters:Parameters = ["notes": self.getNotes(),
                                      "number": self.getNumber()]
 
-        Alamofire.request(self.serverUrl! + "/api/call/call/",
+        Alamofire.request(self.serverUrl + "/api/call/call/",
                           method: .post,
                           parameters: parameters,
-                          headers: headers)
+                          headers: self.getAuthHeaders())
             .responseJSON { response in
                 if response.result.value == nil {
                     self.dialFailure("Server Error")
@@ -329,24 +325,14 @@ class SessionModel {
             return
         }
 
-        let headers: HTTPHeaders = [
-            "Authorization": "Token " + self.sessionToken!,
-            "Accept": "application/json"
-        ]
-
-        Alamofire.request(self.serverUrl! + "/api/call/hangup/\(self.callId!)/", headers: headers)
+        Alamofire.request(self.serverUrl + "/api/call/hangup/\(self.callId!)/", headers: self.getAuthHeaders())
             .responseJSON { response in
                 self.hangupResult()
         }
     }
 
     @objc func checkProviderAvailability() {
-        let headers: HTTPHeaders = [
-            "Authorization": "Token " + self.sessionToken!,
-            "Accept": "application/json"
-        ]
-
-        Alamofire.request(self.serverUrl! + "/api/call/poll/", headers: headers)
+        Alamofire.request(self.serverUrl + "/api/call/poll/", headers: self.getAuthHeaders())
             .responseJSON { response in
 
                 switch response.result {
@@ -389,7 +375,7 @@ class SessionModel {
             "email": email,
         ]
 
-        Alamofire.request(self.serverUrl! + "/api/account/request-password-reset/",
+        Alamofire.request(self.serverUrl + "/api/account/request-password-reset/",
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default)
@@ -411,21 +397,16 @@ class SessionModel {
     }
 
     func changePassword(_ oldPassword: String, _ newPassword: String, _ handler: ChangePasswordHandler) {
-        let headers: HTTPHeaders = [
-            "Authorization": "Token " + self.sessionToken!,
-            "Accept": "application/json"
-        ]
-
         let parameters = [
             "old_password": oldPassword,
             "new_password": newPassword
         ]
 
-        Alamofire.request(self.serverUrl! + "/api/account/change-password/",
+        Alamofire.request(self.serverUrl + "/api/account/change-password/",
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default,
-                          headers: headers)
+                          headers: self.getAuthHeaders())
             .responseJSON { response in
                 if response.response == nil {
                     handler.failure("Server Unavailable")
@@ -454,7 +435,7 @@ class SessionModel {
             "password": password
         ]
 
-        Alamofire.request(self.serverUrl! + "/api/account/register/",
+        Alamofire.request(self.serverUrl + "/api/account/register/",
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default)
@@ -480,7 +461,7 @@ class SessionModel {
     }
 
     func getPersonalProfile(_ handler: GetPersonalProfileHandler) {
-        Alamofire.request(self.serverUrl! + "/api/account/get-personal-profile/",
+        Alamofire.request(self.serverUrl + "/api/account/get-personal-profile/",
                           encoding: JSONEncoding.default,
                           headers: self.getAuthHeaders())
             .responseJSON { response in
@@ -506,7 +487,7 @@ class SessionModel {
             }
         }
 
-        Alamofire.request(self.serverUrl! + "/api/account/update-personal-profile/",
+        Alamofire.request(self.serverUrl + "/api/account/update-personal-profile/",
                           method: .post,
                           parameters: params,
                           encoding: JSONEncoding.default,

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CXN-iI-j7x">
-    <device id="retina3_5" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -21,23 +21,23 @@
                         <viewControllerLayoutGuide type="bottom" id="d40-Hy-F7P"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FTp-3N-j0k">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Fkw-KY-rSF">
-                                <rect key="frame" x="46" y="30" width="228" height="38.5"/>
+                                <rect key="frame" x="26" y="30" width="268" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Fkw-KY-rSF" secondAttribute="height" multiplier="2978:502" priority="900" id="E1r-3d-Ayp"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JdP-Bv-Z0s">
-                                <rect key="frame" x="36" y="112.5" width="248" height="21"/>
+                                <rect key="frame" x="36" y="125" width="248" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSU-wy-dYH">
-                                <rect key="frame" x="20" y="430" width="65" height="30"/>
+                                <rect key="frame" x="20" y="518" width="65" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="i2a-i6-aCh"/>
                                 </constraints>
@@ -47,19 +47,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are logged in as:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdC-gW-80c">
-                                <rect key="frame" x="105" y="88.5" width="110" height="14"/>
+                                <rect key="frame" x="105" y="101" width="110" height="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message for the interpreter?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bac-Zc-KaC">
-                                <rect key="frame" x="91" y="153.5" width="138" height="12"/>
+                                <rect key="frame" x="91" y="166" width="138" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AxL-CV-Z3F">
-                                <rect key="frame" x="51" y="173.5" width="218" height="70"/>
+                                <rect key="frame" x="51" y="186" width="218" height="70"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration" label="Is there anythin"/>
                                 <constraints>
@@ -75,7 +75,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.25" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6y-0k-9yC">
-                                <rect key="frame" x="140" y="420" width="40" height="40"/>
+                                <rect key="frame" x="96" y="420" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="250" id="NHB-Lz-6ay" userLabel="height = 125"/>
                                     <constraint firstAttribute="width" secondItem="s6y-0k-9yC" secondAttribute="height" multiplier="1:1" id="QLy-AG-ZEp"/>
@@ -88,19 +88,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number for interpreter to call?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="772-Nu-Dti">
-                                <rect key="frame" x="86.5" y="251.5" width="147" height="12"/>
+                                <rect key="frame" x="86.5" y="264" width="147" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gvx-OD-NII">
-                                <rect key="frame" x="51" y="271.5" width="218" height="30"/>
+                                <rect key="frame" x="51" y="284" width="218" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rx3-qP-XT2">
-                                <rect key="frame" x="243" y="430" width="57" height="30"/>
+                                <rect key="frame" x="243" y="518" width="57" height="30"/>
                                 <state key="normal" title="Settings"/>
                                 <connections>
                                     <segue destination="itN-pN-axK" kind="show" id="WQS-cu-Mi4"/>
@@ -167,7 +167,7 @@
                         <viewControllerLayoutGuide type="bottom" id="nhg-xA-RE8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8lh-LR-VcB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="obF-Vu-IKg">
@@ -212,7 +212,7 @@ Follow the link inside and enter a new password.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12K-vw-ER2">
-                                <rect key="frame" x="20" y="430" width="34" height="30"/>
+                                <rect key="frame" x="20" y="518" width="34" height="30"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <segue destination="f4j-6N-4Wq" kind="unwind" unwindAction="unwindToLoginWithSegue:" id="yJJ-m3-GU0"/>
@@ -279,11 +279,11 @@ Follow the link inside and enter a new password.</string>
                         <viewControllerLayoutGuide type="bottom" id="dlG-cj-cjv"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="42R-AC-Urv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNE-Bx-KXs">
-                                <rect key="frame" x="81" y="350" width="150" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNE-Bx-KXs">
+                                <rect key="frame" x="85" y="350" width="150" height="30"/>
                                 <color key="backgroundColor" red="0.54131130920000003" green="0.53152239720000005" blue="0.56077963080000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="CcA-ji-76j"/>
@@ -306,14 +306,14 @@ Follow the link inside and enter a new password.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5k3-eZ-EYU">
-                                <rect key="frame" x="20" y="381" width="48" height="30"/>
+                                <rect key="frame" x="20" y="469" width="48" height="30"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
                                     <action selector="backClicked:" destination="2TO-6m-JuQ" eventType="touchUpInside" id="c13-dw-g52"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Billing Change Results" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9l-f8-v4A">
-                                <rect key="frame" x="56" y="398" width="208" height="50"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billing Change Results" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9l-f8-v4A">
+                                <rect key="frame" x="56" y="400" width="208" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Vvu-2x-vcr"/>
                                 </constraints>
@@ -329,11 +329,13 @@ Follow the link inside and enter a new password.</string>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="width" secondItem="ElE-lm-sjU" secondAttribute="height" multiplier="2978:502" id="5D3-f3-YGV"/>
                             <constraint firstItem="g9l-f8-v4A" firstAttribute="centerX" secondItem="42R-AC-Urv" secondAttribute="centerX" id="5sd-JP-iua"/>
                             <constraint firstItem="dlG-cj-cjv" firstAttribute="top" secondItem="5k3-eZ-EYU" secondAttribute="bottom" constant="20" id="8tW-Kg-9t5"/>
+                            <constraint firstItem="g9l-f8-v4A" firstAttribute="top" secondItem="CNE-Bx-KXs" secondAttribute="bottom" constant="20" id="IMq-lX-YxF"/>
                             <constraint firstItem="sKG-f3-m54" firstAttribute="centerX" secondItem="42R-AC-Urv" secondAttribute="centerX" id="Mbj-vm-xhh"/>
                             <constraint firstAttribute="trailing" secondItem="ElE-lm-sjU" secondAttribute="trailing" constant="10" id="NwB-SP-ehy"/>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="leading" secondItem="42R-AC-Urv" secondAttribute="leading" constant="10" id="QCW-xD-PPU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="g9l-f8-v4A" secondAttribute="trailing" constant="40" id="R9U-6X-US7"/>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="width" secondItem="ElE-lm-sjU" secondAttribute="height" multiplier="2978:502" id="inC-eQ-0tx"/>
+                            <constraint firstItem="CNE-Bx-KXs" firstAttribute="top" secondItem="sKG-f3-m54" secondAttribute="bottom" constant="215.5" id="jww-XI-jQT"/>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="top" secondItem="cS5-Hd-aYq" secondAttribute="bottom" constant="10" id="q7x-t4-TFh"/>
                             <constraint firstItem="CNE-Bx-KXs" firstAttribute="centerX" secondItem="42R-AC-Urv" secondAttribute="centerX" id="rmH-Sd-owI"/>
                         </constraints>
@@ -345,7 +347,7 @@ Follow the link inside and enter a new password.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zI1-nH-VWU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="870" y="-1778.8732394366198"/>
+            <point key="canvasLocation" x="1138" y="-1490"/>
         </scene>
         <!--Change Password-->
         <scene sceneID="Zhy-8d-h1b">
@@ -356,7 +358,7 @@ Follow the link inside and enter a new password.</string>
                         <viewControllerLayoutGuide type="bottom" id="5fk-w7-Vmi"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YpM-Bz-9QC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWW-00-cIO">
@@ -425,7 +427,7 @@ Follow the link inside and enter a new password.</string>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcR-MA-EsG">
-                                <rect key="frame" x="20" y="381" width="48" height="30"/>
+                                <rect key="frame" x="20" y="469" width="48" height="30"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
                                     <action selector="backClicked:" destination="CHq-hz-H1Q" eventType="touchUpInside" id="GXG-hC-fVg"/>
@@ -783,7 +785,7 @@ Follow the link inside and enter a new password.</string>
                         <viewControllerLayoutGuide type="bottom" id="Yh4-fP-CIe"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0Lb-1d-yPd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nVR-n9-r30">
@@ -823,7 +825,7 @@ Follow the link inside and enter a new password.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8I-SE-7k5">
-                                <rect key="frame" x="20" y="430" width="50" height="30"/>
+                                <rect key="frame" x="20" y="518" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="NPv-40-geu"/>
                                 </constraints>
@@ -923,11 +925,11 @@ Follow the link inside and enter a new password.</string>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bjr-Z8-O8t">
-                                <rect key="frame" x="110" y="345" width="100" height="100"/>
+                                <rect key="frame" x="110" y="433" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="LXh-4y-SRC"/>
                                     <constraint firstAttribute="height" constant="100" id="qty-36-X9k"/>
@@ -946,13 +948,13 @@ Follow the link inside and enter a new password.</string>
                                 </items>
                             </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onhold-circle.png" translatesAutoresizingMaskIntoConstraints="NO" id="sbF-3K-Lro">
-                                <rect key="frame" x="22" y="102" width="276" height="276"/>
+                                <rect key="frame" x="22" y="146" width="276" height="276"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="sbF-3K-Lro" secondAttribute="height" multiplier="1:1" id="NPm-zr-YJ8"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onhold-image.png" translatesAutoresizingMaskIntoConstraints="NO" id="0wz-DV-X09">
-                                <rect key="frame" x="75" y="158" width="170" height="164"/>
+                                <rect key="frame" x="75" y="202" width="170" height="164"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="170" id="JdP-zJ-zQb"/>
                                     <constraint firstAttribute="width" secondItem="0wz-DV-X09" secondAttribute="height" multiplier="29:28" id="vAp-1K-tAN"/>
@@ -993,17 +995,17 @@ Follow the link inside and enter a new password.</string>
                         <viewControllerLayoutGuide type="bottom" id="53W-Lh-KFW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wbE-1C-Sti">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="UdD-zv-2Ce">
-                                <rect key="frame" x="26" y="74" width="268" height="45"/>
+                                <rect key="frame" x="26" y="30" width="268" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="UdD-zv-2Ce" secondAttribute="height" multiplier="2978:502" priority="900" id="kLn-Jy-B4r"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contacting Server..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWX-t5-seo">
-                                <rect key="frame" x="66" y="190" width="188" height="100"/>
+                                <rect key="frame" x="26" y="234" width="268" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Wwa-bw-3ko"/>
                                 </constraints>
@@ -1011,13 +1013,29 @@ Follow the link inside and enter a new password.</string>
                                 <color key="textColor" red="0.26611742377281189" green="0.56422513723373413" blue="0.026513298973441124" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YW3-sN-dkg">
+                                <rect key="frame" x="120" y="364" width="80" height="30"/>
+                                <color key="backgroundColor" red="0.54131130920000003" green="0.53152239720000005" blue="0.56077963080000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Lwb-8O-WPh"/>
+                                    <constraint firstAttribute="width" constant="80" id="nkb-zq-zo3"/>
+                                </constraints>
+                                <state key="normal" title="Retry">
+                                    <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="retryClicked:" destination="QRB-W3-JWU" eventType="touchUpInside" id="ISG-QH-fJH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="YW3-sN-dkg" firstAttribute="top" secondItem="uWX-t5-seo" secondAttribute="bottom" constant="30" id="05L-Za-m9E"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UdD-zv-2Ce" secondAttribute="trailing" constant="10" id="CxT-jL-4U8"/>
                             <constraint firstItem="uWX-t5-seo" firstAttribute="centerY" secondItem="wbE-1C-Sti" secondAttribute="centerY" id="DK8-m3-c1T"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="uWX-t5-seo" secondAttribute="trailing" constant="50" id="I5D-7J-LLx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="uWX-t5-seo" secondAttribute="trailing" constant="10" id="I5D-7J-LLx"/>
                             <constraint firstItem="UdD-zv-2Ce" firstAttribute="width" secondItem="UdD-zv-2Ce" secondAttribute="height" multiplier="2978:502" priority="900" id="I8Q-qq-dIh"/>
+                            <constraint firstItem="YW3-sN-dkg" firstAttribute="centerX" secondItem="wbE-1C-Sti" secondAttribute="centerX" id="IY8-pb-pRK"/>
                             <constraint firstItem="UdD-zv-2Ce" firstAttribute="top" secondItem="lKn-FG-IFJ" secondAttribute="bottom" constant="10" id="JUW-VY-IZa"/>
                             <constraint firstItem="uWX-t5-seo" firstAttribute="centerX" secondItem="wbE-1C-Sti" secondAttribute="centerX" id="ccy-SY-tq3"/>
                             <constraint firstItem="UdD-zv-2Ce" firstAttribute="leading" secondItem="wbE-1C-Sti" secondAttribute="leadingMargin" constant="10" id="reY-l0-hj7"/>
@@ -1026,6 +1044,7 @@ Follow the link inside and enter a new password.</string>
                     <navigationItem key="navigationItem" id="Pk7-yt-hCz"/>
                     <connections>
                         <outlet property="messages" destination="uWX-t5-seo" id="yEe-eT-KjJ"/>
+                        <outlet property="retryButton" destination="YW3-sN-dkg" id="ctp-lP-BKj"/>
                         <segue destination="S38-Cp-FME" kind="show" identifier="login" id="T5A-XU-Ijp"/>
                     </connections>
                 </viewController>
@@ -1042,11 +1061,11 @@ Follow the link inside and enter a new password.</string>
                         <viewControllerLayoutGuide type="bottom" id="PaV-EE-VC5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Owf-gc-uhU" userLabel="Main ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LzT-aO-tw1">
-                                <rect key="frame" x="120" y="203.5" width="80" height="30"/>
+                                <rect key="frame" x="120" y="216" width="80" height="30"/>
                                 <color key="backgroundColor" red="0.54131130920000003" green="0.53152239720000005" blue="0.56077963080000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="48P-Tl-3Oy"/>
@@ -1060,13 +1079,13 @@ Follow the link inside and enter a new password.</string>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eWk-Yk-LGF">
-                                <rect key="frame" x="70" y="98.5" width="180" height="40"/>
+                                <rect key="frame" x="70" y="111" width="180" height="40"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UaK-mb-Pdn">
-                                <rect key="frame" x="70" y="148.5" width="180" height="40"/>
+                                <rect key="frame" x="70" y="161" width="180" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="otU-OT-9Rs"/>
                                     <constraint firstAttribute="width" constant="180" id="tr1-pa-zrR"/>
@@ -1076,29 +1095,29 @@ Follow the link inside and enter a new password.</string>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login Errors" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xO3-00-Mkj">
-                                <rect key="frame" x="26" y="241.5" width="268" height="50"/>
+                                <rect key="frame" x="26" y="254" width="268" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="BOi-Gg-0c2"/>
+                                    <constraint firstAttribute="height" constant="100" id="BOi-Gg-0c2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.035839824889999997" blue="0.13886818140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="ExI-nu-7Y2">
-                                <rect key="frame" x="46" y="30" width="228" height="38.5"/>
+                                <rect key="frame" x="25" y="30" width="270" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ExI-nu-7Y2" secondAttribute="height" multiplier="2978:502" priority="900" id="OYK-Ul-8bH"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ict-aU-Y7a">
-                                <rect key="frame" x="155" y="430" width="145" height="30"/>
+                                <rect key="frame" x="155" y="518" width="145" height="30"/>
                                 <state key="normal" title="Forgotten Password?"/>
                                 <connections>
                                     <segue destination="Gw9-mp-nfC" kind="show" id="C9K-c6-Fij"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kay-v5-Vgf">
-                                <rect key="frame" x="20" y="430" width="110" height="30"/>
+                                <rect key="frame" x="20" y="518" width="110" height="30"/>
                                 <state key="normal" title="Not Registered?"/>
                                 <connections>
                                     <segue destination="drY-6L-Kun" kind="show" id="WuJ-CE-3qh"/>
