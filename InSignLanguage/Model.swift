@@ -32,6 +32,11 @@ protocol UpdatePersonalProfileHandler {
     func failure(_ message: String) -> Void
 }
 
+protocol GetBillingSummaryHandler {
+    func getBillingSummaryOk() -> Void
+    func failure(_ message: String) -> Void
+}
+
 protocol SessionHandler {
     func onCredentialsChange() -> Void
 }
@@ -87,6 +92,7 @@ class SessionModel {
     var notes: String?
     var number: String?
     var personalProfile: [String: String?] = [:]
+    var billingSummary: [String: Any?]?
 
     var providersAvailable: Int = -1
     var pollTimer: Timer?
@@ -512,6 +518,25 @@ class SessionModel {
                 }
         }
 
+    }
+
+    func getBillingSummary(_ handler: GetBillingSummaryHandler) {
+        Alamofire.request(self.serverUrl + "/api/account/get-billing-summary/",
+                          encoding: JSONEncoding.default,
+                          headers: self.getAuthHeaders())
+            .responseJSON { response in
+                if response.response == nil {
+                    handler.failure("Server Unavailable")
+                    return
+                }
+                else if response.response!.statusCode != 200 {
+                    handler.failure("Internal Server error")
+                    return
+                }
+
+                self.billingSummary = response.result.value as? [String: Any?]
+                handler.getBillingSummaryOk()
+        }
     }
 }
 

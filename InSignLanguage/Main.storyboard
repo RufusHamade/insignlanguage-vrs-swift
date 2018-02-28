@@ -282,25 +282,14 @@ Follow the link inside and enter a new password.</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNE-Bx-KXs">
-                                <rect key="frame" x="85" y="350" width="150" height="30"/>
-                                <color key="backgroundColor" red="0.54131130920000003" green="0.53152239720000005" blue="0.56077963080000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="CcA-ji-76j"/>
-                                    <constraint firstAttribute="height" constant="30" id="XxV-HY-fUK"/>
-                                </constraints>
-                                <state key="normal" title="Change Payment">
-                                    <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                </state>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="ElE-lm-sjU">
                                 <rect key="frame" x="10" y="30" width="300" height="50.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ElE-lm-sjU" secondAttribute="height" multiplier="2978:502" id="wTp-5Y-YEA"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Options" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKG-f3-m54">
-                                <rect key="frame" x="47.5" y="100.5" width="225" height="34"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKG-f3-m54">
+                                <rect key="frame" x="121" y="100.5" width="78.5" height="34"/>
                                 <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="29"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -312,13 +301,16 @@ Follow the link inside and enter a new password.</string>
                                     <action selector="backClicked:" destination="2TO-6m-JuQ" eventType="touchUpInside" id="c13-dw-g52"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billing Change Results" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9l-f8-v4A">
-                                <rect key="frame" x="56" y="400" width="208" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Vvu-2x-vcr"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xf-Qw-Oji">
+                                <rect key="frame" x="46" y="180" width="228" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contract Type:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aq9-Dz-igm">
+                                <rect key="frame" x="46" y="155" width="96" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -327,27 +319,28 @@ Follow the link inside and enter a new password.</string>
                             <constraint firstItem="sKG-f3-m54" firstAttribute="top" secondItem="ElE-lm-sjU" secondAttribute="bottom" constant="20" id="19A-qD-FrM"/>
                             <constraint firstItem="5k3-eZ-EYU" firstAttribute="leading" secondItem="42R-AC-Urv" secondAttribute="leading" constant="20" id="51l-om-NHf"/>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="width" secondItem="ElE-lm-sjU" secondAttribute="height" multiplier="2978:502" id="5D3-f3-YGV"/>
-                            <constraint firstItem="g9l-f8-v4A" firstAttribute="centerX" secondItem="42R-AC-Urv" secondAttribute="centerX" id="5sd-JP-iua"/>
                             <constraint firstItem="dlG-cj-cjv" firstAttribute="top" secondItem="5k3-eZ-EYU" secondAttribute="bottom" constant="20" id="8tW-Kg-9t5"/>
-                            <constraint firstItem="g9l-f8-v4A" firstAttribute="top" secondItem="CNE-Bx-KXs" secondAttribute="bottom" constant="20" id="IMq-lX-YxF"/>
+                            <constraint firstItem="5xf-Qw-Oji" firstAttribute="top" secondItem="Aq9-Dz-igm" secondAttribute="bottom" constant="8" id="J1f-Fi-NQR"/>
                             <constraint firstItem="sKG-f3-m54" firstAttribute="centerX" secondItem="42R-AC-Urv" secondAttribute="centerX" id="Mbj-vm-xhh"/>
                             <constraint firstAttribute="trailing" secondItem="ElE-lm-sjU" secondAttribute="trailing" constant="10" id="NwB-SP-ehy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5xf-Qw-Oji" secondAttribute="trailing" constant="30" id="ONj-sI-ymE"/>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="leading" secondItem="42R-AC-Urv" secondAttribute="leading" constant="10" id="QCW-xD-PPU"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="g9l-f8-v4A" secondAttribute="trailing" constant="40" id="R9U-6X-US7"/>
+                            <constraint firstItem="Aq9-Dz-igm" firstAttribute="top" secondItem="sKG-f3-m54" secondAttribute="bottom" constant="20" id="Xfj-Er-ZOp"/>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="width" secondItem="ElE-lm-sjU" secondAttribute="height" multiplier="2978:502" id="inC-eQ-0tx"/>
-                            <constraint firstItem="CNE-Bx-KXs" firstAttribute="top" secondItem="sKG-f3-m54" secondAttribute="bottom" constant="215.5" id="jww-XI-jQT"/>
                             <constraint firstItem="ElE-lm-sjU" firstAttribute="top" secondItem="cS5-Hd-aYq" secondAttribute="bottom" constant="10" id="q7x-t4-TFh"/>
-                            <constraint firstItem="CNE-Bx-KXs" firstAttribute="centerX" secondItem="42R-AC-Urv" secondAttribute="centerX" id="rmH-Sd-owI"/>
+                            <constraint firstItem="5xf-Qw-Oji" firstAttribute="leading" secondItem="42R-AC-Urv" secondAttribute="leadingMargin" constant="30" id="v9L-v4-iVQ"/>
+                            <constraint firstItem="Aq9-Dz-igm" firstAttribute="leading" secondItem="5xf-Qw-Oji" secondAttribute="leading" id="xak-dG-DI7"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Billing" id="hMz-H4-Wi4"/>
                     <connections>
                         <outlet property="back" destination="5k3-eZ-EYU" id="TPT-5r-Twp"/>
+                        <outlet property="contractType" destination="5xf-Qw-Oji" id="FVT-JZ-5zz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zI1-nH-VWU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1138" y="-1490"/>
+            <point key="canvasLocation" x="1136.25" y="-1490.4929577464789"/>
         </scene>
         <!--Change Password-->
         <scene sceneID="Zhy-8d-h1b">
