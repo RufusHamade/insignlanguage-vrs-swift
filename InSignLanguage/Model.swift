@@ -279,6 +279,7 @@ class SessionModel {
     func logout () {
         self.loginState = .unauthenticated
         self.sessionToken = nil
+        self.personalProfile = [:]
         self.preferences.set(self.sessionToken, forKey: "sessionToken")
     }
 

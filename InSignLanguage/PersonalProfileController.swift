@@ -39,7 +39,12 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler 
             f.delegate = self
             let n = PersonalProfileController.getNameFromIdx(i)
             if sessionModel.personalProfile[n] == nil {
-                f.text = ""
+                if n == "email" {
+                    f.text = self.sessionModel.name
+                }
+                else {
+                    f.text = ""
+                }
             }
             else {
                 f.text = sessionModel.personalProfile[n]!
