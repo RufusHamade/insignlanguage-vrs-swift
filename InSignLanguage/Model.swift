@@ -62,7 +62,7 @@ protocol ResetPasswordHandler {
 }
 
 protocol ProviderHandler {
-    func onProviderAvailability(_ availableProviders: Int) -> Void
+    func onProviderAvailability(_ availableProviders: Int, _ minutesRemaining: Int?) -> Void
 }
 
 protocol DialHandler {
@@ -83,6 +83,9 @@ class SessionModel {
         "address3",
         "postcode"
     ]
+
+    static let jsonDateParser = DateFormatter()
+    static let outputDateFormatter = DateFormatter()
 
     // MARK: Properties
     var serverUrl: String = SESSION_SERVER
@@ -122,6 +125,10 @@ class SessionModel {
         self.name = self.preferences.object(forKey: "name") as? String
         self.sessionToken = self.preferences.object(forKey: "sessionToken") as? String
         self.notes = self.preferences.object(forKey: "notes") as? String
+        // Initialise our date formatter here 'cos swift sucks balls
+        SessionModel.jsonDateParser.dateFormat = "YYYY-MM-dd"
+        SessionModel.outputDateFormatter.dateFormat = "MMM dd"
+
     }
 
     func setSessionHandler(_ sh: SessionHandler) {
@@ -346,15 +353,16 @@ class SessionModel {
                 case .success:
                     let jsonResult = response.result.value as! [String: Any]
                     let availableNow:Int = jsonResult["providers_available"] as! Int
+                    let minutesRemaining:Int? = jsonResult["minutes_remaining"] as! Int?
                     if self.providersAvailable != availableNow {
                         self.providersAvailable = availableNow
                         if self.sessionHandler != nil {
-                            self.providerHandler!.onProviderAvailability(availableNow)
+                            self.providerHandler!.onProviderAvailability(availableNow, minutesRemaining)
                         }
                     }
                 case .failure:
                     self.providersAvailable = -1
-                    self.providerHandler!.onProviderAvailability(-1)
+                    self.providerHandler!.onProviderAvailability(-1, nil)
                 }
 
         }

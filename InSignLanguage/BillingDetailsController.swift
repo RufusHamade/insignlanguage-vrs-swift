@@ -90,14 +90,13 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler {
         let remaining = minutes[1] as! Int
         let start = self.sessionModel.billingSummary!["billing_period_start"] as! String
         let end = self.sessionModel.billingSummary!["billing_period_end"] as! String
-        let df = DateFormatter()
-        df.dateFormat = "MMM dd"
-        let dfi = DateFormatter()
-        dfi.dateFormat = "YYYY-MM-dd"
 
         label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+
+        let df = SessionModel.outputDateFormatter
+        let dfi = SessionModel.jsonDateParser
         label.text = String(format:"Billing period: from %@ to %@",
                             df.string(from: dfi.date(from: start)!),
                             df.string(from: dfi.date(from: end)!))
@@ -136,7 +135,6 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler {
     }
 
     func showPaymentMethod() {
-
     }
 
     func getBillingSummaryOk() {

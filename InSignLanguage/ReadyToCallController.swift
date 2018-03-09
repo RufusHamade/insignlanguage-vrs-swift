@@ -15,6 +15,7 @@ class ReadyToCallController: UIViewController, ProviderHandler {
     @IBOutlet weak var nameField: UILabel!
     @IBOutlet weak var notesField: UITextView!
     @IBOutlet weak var numberField: UITextField!
+    @IBOutlet weak var contractDetailsField: UILabel!
     @IBOutlet weak var providerAvailabilityField: UILabel!
     @IBOutlet weak var callButton: UIButton!
 
@@ -50,7 +51,8 @@ class ReadyToCallController: UIViewController, ProviderHandler {
     }
 
 
-    func onProviderAvailability(_ availableProviders: Int) {
+    func onProviderAvailability(_ availableProviders: Int,
+                                _ minutesRemaining: Int?) {
         if availableProviders < 1 {
             if availableProviders == 0 {
                 self.providerAvailabilityField.text = "Unfortunately, there are no translators available."
@@ -67,6 +69,31 @@ class ReadyToCallController: UIViewController, ProviderHandler {
             callButton.alpha = 1
         }
         self.providerAvailabilityField.textAlignment = .center
+
+        if availableProviders >= 0 {
+            let bs = self.sessionModel.billingSummary!
+            let contract_type = bs["contract_type"] as! String
+            let minimum_minutes_charged = bs["minimum_minutes_charged"] as! Int
+            let cost_per_minute = Float(bs["cost_per_minute"] as! String)!
+            var text: String
+            if contract_type == "payg" {
+                text = String(format: "Pay as you go: Calls cost £%.2f per minute,\nminimum %d minutes.",
+                              cost_per_minute, minimum_minutes_charged)
+            }
+            else {
+                let billingPeriodEndStr = self.sessionModel.billingSummary!["billing_period_end"] as! String
+                let df = SessionModel.outputDateFormatter
+                let dfi = SessionModel.jsonDateParser
+                let billingPeriodEnd = df.string(from: dfi.date(from: billingPeriodEndStr)!)
+                text = String(format: "Contract: You have %d minutes left.\nMore minutes on %@",
+                              minutesRemaining!, billingPeriodEnd)
+            }
+            self.contractDetailsField.text = text
+        }
+        else {
+            self.contractDetailsField.text = ""
+        }
+
     }
 
     override func viewWillAppear(_ animated: Bool) {

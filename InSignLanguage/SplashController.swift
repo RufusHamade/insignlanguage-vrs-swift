@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SplashController: UIViewController, CheckTokenHandler, GetPersonalProfileHandler {
+class SplashController: UIViewController, CheckTokenHandler, GetPersonalProfileHandler, GetBillingSummaryHandler {
 
     @IBOutlet weak var messages: UILabel!
     @IBOutlet weak var retryButton: UIButton!
@@ -27,11 +27,15 @@ class SplashController: UIViewController, CheckTokenHandler, GetPersonalProfileH
 
     func tokenOk() {
         self.messages.text = "Checking profile..."
-        self.sessionModel.getPersonalProfile(self)
+        self.sessionModel.getBillingSummary(self)
     }
 
     func tokenNotOk() {
         self.performSegue(withIdentifier: "login", sender: self)
+    }
+
+    func getBillingSummaryOk() {
+        self.sessionModel.getPersonalProfile(self)
     }
 
     func getPersonalProfileOk() {

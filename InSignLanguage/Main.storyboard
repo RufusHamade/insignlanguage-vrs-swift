@@ -69,7 +69,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unfortunately, there are no translators available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXf-Je-7JI">
-                                <rect key="frame" x="35" y="376" width="250" height="14"/>
+                                <rect key="frame" x="35" y="386" width="250" height="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -106,12 +106,23 @@
                                     <segue destination="itN-pN-axK" kind="show" id="WQS-cu-Mi4"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay as you go: Calls cost £2 per minute, minimum 5 minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Smb-Cj-uME">
+                                <rect key="frame" x="10" y="336" width="300" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="FZH-lh-fu0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Smb-Cj-uME" secondAttribute="trailing" constant="10" id="2VZ-fZ-8sc"/>
                             <constraint firstItem="gdC-gW-80c" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Fkw-KY-rSF" secondAttribute="bottom" constant="10" id="4hf-Wb-cjU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gvx-OD-NII" secondAttribute="trailing" constant="35" id="63X-na-vD1"/>
                             <constraint firstItem="d40-Hy-F7P" firstAttribute="top" secondItem="Fkw-KY-rSF" secondAttribute="bottom" multiplier="7" constant="1" id="7sl-ey-rAG"/>
+                            <constraint firstItem="Smb-Cj-uME" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="9hn-7b-Eyv"/>
                             <constraint firstItem="gvx-OD-NII" firstAttribute="top" secondItem="772-Nu-Dti" secondAttribute="bottom" constant="8" id="D7n-s2-PVZ"/>
                             <constraint firstItem="d40-Hy-F7P" firstAttribute="top" secondItem="WSU-wy-dYH" secondAttribute="bottom" constant="20" id="Dlz-J2-Sd4"/>
                             <constraint firstItem="Bac-Zc-KaC" firstAttribute="top" secondItem="JdP-Bv-Z0s" secondAttribute="bottom" constant="20" id="ESG-4F-8HG"/>
@@ -125,6 +136,7 @@
                             <constraint firstItem="gvx-OD-NII" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="Rq3-Tx-J4o"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JdP-Bv-Z0s" secondAttribute="trailing" constant="20" id="VvA-4R-KU0"/>
                             <constraint firstItem="qXf-Je-7JI" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="WHL-bF-of0"/>
+                            <constraint firstItem="qXf-Je-7JI" firstAttribute="top" secondItem="Smb-Cj-uME" secondAttribute="bottom" constant="20" id="ZSp-vZ-Sde"/>
                             <constraint firstItem="JdP-Bv-Z0s" firstAttribute="top" secondItem="gdC-gW-80c" secondAttribute="bottom" constant="10" id="aSz-Xg-gen"/>
                             <constraint firstItem="Fkw-KY-rSF" firstAttribute="top" secondItem="1P5-A5-OBr" secondAttribute="bottom" constant="10" id="deQ-O6-GgE"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Fkw-KY-rSF" secondAttribute="trailing" id="dpS-oF-xJo"/>
@@ -138,7 +150,7 @@
                             <constraint firstItem="gdC-gW-80c" firstAttribute="top" secondItem="Fkw-KY-rSF" secondAttribute="bottom" priority="50" constant="20" id="rlP-Db-zHz"/>
                             <constraint firstItem="AxL-CV-Z3F" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="sDZ-UX-k7Y"/>
                             <constraint firstItem="772-Nu-Dti" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="sln-Mp-w1o"/>
-                            <constraint firstItem="s6y-0k-9yC" firstAttribute="top" secondItem="qXf-Je-7JI" secondAttribute="bottom" constant="30" id="tvy-dl-KSj"/>
+                            <constraint firstItem="s6y-0k-9yC" firstAttribute="top" secondItem="qXf-Je-7JI" secondAttribute="bottom" constant="20" id="tvy-dl-KSj"/>
                             <constraint firstItem="772-Nu-Dti" firstAttribute="top" secondItem="AxL-CV-Z3F" secondAttribute="bottom" constant="8" id="usA-HB-5kM"/>
                             <constraint firstItem="JdP-Bv-Z0s" firstAttribute="leading" secondItem="FTp-3N-j0k" secondAttribute="leadingMargin" constant="20" id="xtz-v6-cbg"/>
                             <constraint firstItem="s6y-0k-9yC" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="zim-Oq-tu7"/>
@@ -146,6 +158,7 @@
                     </view>
                     <connections>
                         <outlet property="callButton" destination="s6y-0k-9yC" id="HnN-fF-qeE"/>
+                        <outlet property="contractDetailsField" destination="Smb-Cj-uME" id="W87-PP-PG2"/>
                         <outlet property="nameField" destination="JdP-Bv-Z0s" id="1JO-Hc-a4l"/>
                         <outlet property="notesField" destination="AxL-CV-Z3F" id="ZVA-BN-81y"/>
                         <outlet property="numberField" destination="gvx-OD-NII" id="WRt-IN-ZHt"/>
@@ -1184,6 +1197,6 @@ Follow the link inside and enter a new password.</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6er-TY-e94"/>
-        <segue reference="nVK-5w-fVy"/>
+        <segue reference="WQS-cu-Mi4"/>
     </inferredMetricsTieBreakers>
 </document>

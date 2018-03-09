@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginController: UIViewController, AuthenticateHandler, SessionHandler, GetPersonalProfileHandler {
+class LoginController: UIViewController, AuthenticateHandler, SessionHandler, GetPersonalProfileHandler, GetBillingSummaryHandler {
 
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -38,6 +38,10 @@ class LoginController: UIViewController, AuthenticateHandler, SessionHandler, Ge
     func authenticateOk() {
         loginButton.isEnabled = true
         loginButton.alpha = 1.0
+        self.sessionModel.getBillingSummary(self)
+    }
+
+    func getBillingSummaryOk() {
         self.sessionModel.getPersonalProfile(self)
     }
 
