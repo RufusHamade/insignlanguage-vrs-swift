@@ -89,6 +89,7 @@ class SessionModel {
 
     // MARK: Properties
     var serverUrl: String = SESSION_SERVER
+    var urls: [String:String]?
     var name: String?
     var password: String?
     var sessionToken: String?
@@ -128,7 +129,10 @@ class SessionModel {
         // Initialise our date formatter here 'cos swift sucks balls
         SessionModel.jsonDateParser.dateFormat = "YYYY-MM-dd"
         SessionModel.outputDateFormatter.dateFormat = "MMM dd"
+    }
 
+    func getUrl(_ base: String) -> String {
+        return self.serverUrl + self.urls![base]!
     }
 
     func setSessionHandler(_ sh: SessionHandler) {
@@ -207,6 +211,23 @@ class SessionModel {
         }
     }
 
+    func connectToServer(_ handler: CheckTokenHandler) {
+        Alamofire.request(self.serverUrl + "/api/urls")
+            .responseJSON { response in
+                if response.response == nil {
+                    handler.failure(String(format:"Server\n%@\nUnavailable", self.serverUrl))
+                    return
+                }
+                if response.response?.statusCode != 200 {
+                    handler.failure(String(format:"Internal Error"))
+                    return
+                }
+                self.urls = response.result.value as? [String: String]
+                self.checkToken(handler)
+        }
+    }
+
+
     func authenticateResult(_ token: String) {
         sessionToken = token
         self.preferences.set(self.sessionToken, forKey: "sessionToken")
@@ -263,7 +284,7 @@ class SessionModel {
             return
         }
 
-        Alamofire.request(self.serverUrl + "/api/call/ping/",
+        Alamofire.request(self.getUrl("api_ping"),
                           headers: self.getAuthHeaders())
             .responseJSON { response in
                 if response.response == nil {

@@ -20,7 +20,7 @@ class SplashController: UIViewController, CheckTokenHandler, GetPersonalProfileH
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        self.sessionModel.checkToken(self)
+        self.sessionModel.connectToServer(self)
         self.retryButton.isHidden = true
         self.retryButton.isEnabled = false
     }

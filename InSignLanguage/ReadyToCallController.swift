@@ -1,13 +1,3 @@
-//
-//  ReadyToCallController.swift
-//  InSignLanguage
-//
-//  Created by Yvonne Eva Hannah Louise DeBrett on 25/04/2017.
-//
-//
-
-import Foundation
-
 import UIKit
 
 class ReadyToCallController: UIViewController, ProviderHandler {
@@ -107,6 +97,13 @@ class ReadyToCallController: UIViewController, ProviderHandler {
     @IBAction func logoutClicked(_ sender: Any) {
         sessionModel.logout()
         self.performSegue(withIdentifier: "unwindToLogin", sender: self)
+    }
+
+    @IBAction func viewSettings(_ sender: Any) {
+        if let sb = self.storyboard, let ns = self.navigationController {
+            let terms = sb.instantiateViewController(withIdentifier: "Settings")
+            ns.pushViewController(terms, animated: true)
+        }
     }
 
     @IBAction func unwindToReadyToCall(segue: UIStoryboardSegue) {}

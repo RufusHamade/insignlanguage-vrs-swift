@@ -31,6 +31,13 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler {
         }
     }
 
+    @IBAction func showTerms(_ sender: Any) {
+        if let sb = self.storyboard, let ns = self.navigationController {
+            let terms = sb.instantiateViewController(withIdentifier: "Terms")
+            ns.pushViewController(terms, animated: true)
+        }
+    }
+
     func showBilling() {
         if self.sessionModel.billingSummary == nil {
             self.contractType.text = "Not yet configured"

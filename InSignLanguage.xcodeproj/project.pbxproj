@@ -12,6 +12,7 @@
 		8B24AE8B202C949700DFA74B /* PersonalProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24AE8A202C949700DFA74B /* PersonalProfileController.swift */; };
 		8B24AE8D202C94B800DFA74B /* BillingDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24AE8C202C94B800DFA74B /* BillingDetailsController.swift */; };
 		8B24AE8F202E100D00DFA74B /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24AE8E202E100D00DFA74B /* SplashController.swift */; };
+		8B595B25205C1CBD00AF3324 /* TermsAndConditionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B595B24205C1CBD00AF3324 /* TermsAndConditionsController.swift */; };
 		8B6606B02036FAAF0084A807 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B6606AF2036FAAF0084A807 /* LaunchScreen.storyboard */; };
 		8B6606B22036FB310084A807 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B6606B12036FB310084A807 /* Main.storyboard */; };
 		8BC4D4F720235DFE00B68D27 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC4D4F620235DFE00B68D27 /* Model.swift */; };
@@ -37,6 +38,7 @@
 		8B24AE8A202C949700DFA74B /* PersonalProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalProfileController.swift; sourceTree = "<group>"; };
 		8B24AE8C202C94B800DFA74B /* BillingDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillingDetailsController.swift; sourceTree = "<group>"; };
 		8B24AE8E202E100D00DFA74B /* SplashController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
+		8B595B24205C1CBD00AF3324 /* TermsAndConditionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsController.swift; sourceTree = "<group>"; };
 		8B6606AF2036FAAF0084A807 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B6606B12036FB310084A807 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8BC4D4F620235DFE00B68D27 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				8B24AE88202C943600DFA74B /* ChangePasswordController.swift */,
 				8B24AE8C202C94B800DFA74B /* BillingDetailsController.swift */,
 				EEC248091EC9F58B003EEDA1 /* ReadyToCallController.swift */,
+				8B595B24205C1CBD00AF3324 /* TermsAndConditionsController.swift */,
 				EEC2480A1EC9F58B003EEDA1 /* VideoDisplayController.swift */,
 				8BC4D4F620235DFE00B68D27 /* Model.swift */,
 				EEC248041EC9F58B003EEDA1 /* hangup.png */,
@@ -274,6 +277,7 @@
 				8B24AE89202C943600DFA74B /* ChangePasswordController.swift in Sources */,
 				EEC2480E1EC9F58B003EEDA1 /* LoginController.swift in Sources */,
 				8BC4D4F720235DFE00B68D27 /* Model.swift in Sources */,
+				8B595B25205C1CBD00AF3324 /* TermsAndConditionsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
