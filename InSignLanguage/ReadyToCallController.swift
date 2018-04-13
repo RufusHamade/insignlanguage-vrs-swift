@@ -64,11 +64,11 @@ class ReadyToCallController: UIViewController, ProviderHandler {
             let bs = self.sessionModel.billingSummary!
             let contract_type = bs["contract_type"] as! String
             let minimum_minutes_charged = bs["minimum_minutes_charged"] as! Int
-            let cost_per_minute = Float(bs["cost_per_minute"] as! String)!
+            let cost_per_minute = bs["cost_per_minute"] as! NSNumber
             var text: String
             if contract_type == "payg" {
-                text = String(format: "Pay as you go: Calls cost £%.2f per minute,\nminimum %d minutes.",
-                              cost_per_minute, minimum_minutes_charged)
+                text = String(format: "Pay as you go: Calls cost £%@ per minute,\nminimum %d minutes.",
+                              cost_per_minute.stringValue, minimum_minutes_charged)
             }
             else {
                 let billingPeriodEndStr = self.sessionModel.billingSummary!["billing_period_end"] as! String

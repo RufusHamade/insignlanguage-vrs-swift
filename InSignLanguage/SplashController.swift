@@ -80,7 +80,7 @@ class SplashController: UIViewController, CheckTokenHandler, GetPersonalProfileH
     @IBAction func retryClicked(_ sender: Any) {
         self.messages.text = "Trying again..."
         self.messages.textColor = HAPPY_COLOR
-        self.sessionModel.checkToken(self)
+        self.sessionModel.connectToServer(self)
         self.retryButton.isEnabled = false
         self.retryButton.alpha = 0.5
     }

@@ -244,7 +244,7 @@ class SessionModel {
             "password": self.password!
         ]
 
-        Alamofire.request(self.serverUrl + "/api/account/token-auth/",
+        Alamofire.request(self.getUrl("api_get_token"),
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default)
@@ -329,10 +329,20 @@ class SessionModel {
             return
         }
 
-        let parameters:Parameters = ["notes": self.getNotes(),
-                                     "number": self.getNumber()]
+        var bill_me_via = "card"
+        if self.billingSummary!["contract_type"] as! NSString != "payg" {
+            let minutes = self.billingSummary!["minutes_used_in_billing_period"] as! NSArray
+            let remaining = minutes[1] as! Int
+            if remaining > 0 {
+                bill_me_via = "contract"
+            }
+        }
 
-        Alamofire.request(self.serverUrl + "/api/call/call/",
+        let parameters:Parameters = ["notes": self.getNotes(),
+                                     "number": self.getNumber(),
+                                     "bill_me_via": bill_me_via]
+
+        Alamofire.request(self.getUrl("api_client_call"),
                           method: .post,
                           parameters: parameters,
                           headers: self.getAuthHeaders())
@@ -360,21 +370,25 @@ class SessionModel {
             return
         }
 
-        Alamofire.request(self.serverUrl + "/api/call/hangup/\(self.callId!)/", headers: self.getAuthHeaders())
+        Alamofire.request(self.getUrl("api_client_hangup") + "\(self.callId!)/",
+                          headers: self.getAuthHeaders())
             .responseJSON { response in
                 self.hangupResult()
         }
     }
 
     @objc func checkProviderAvailability() {
-        Alamofire.request(self.serverUrl + "/api/call/poll/", headers: self.getAuthHeaders())
+        Alamofire.request(self.getUrl("api_client_poll"), headers: self.getAuthHeaders())
             .responseJSON { response in
 
                 switch response.result {
                 case .success:
                     let jsonResult = response.result.value as! [String: Any]
                     let availableNow:Int = jsonResult["providers_available"] as! Int
-                    let minutesRemaining:Int? = jsonResult["minutes_remaining"] as! Int?
+                    var minutesRemaining:Int? = nil
+                    if let mr = jsonResult["minutes_remaining"] as? Int {
+                        minutesRemaining = mr
+                    }
                     if self.providersAvailable != availableNow {
                         self.providersAvailable = availableNow
                         if self.sessionHandler != nil {
@@ -411,7 +425,7 @@ class SessionModel {
             "email": email,
         ]
 
-        Alamofire.request(self.serverUrl + "/api/account/request-password-reset/",
+        Alamofire.request(self.getUrl("api_reset_password"),
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default)
@@ -438,7 +452,7 @@ class SessionModel {
             "new_password": newPassword
         ]
 
-        Alamofire.request(self.serverUrl + "/api/account/change-password/",
+        Alamofire.request(self.getUrl("api_change_password"),
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default,
@@ -471,7 +485,7 @@ class SessionModel {
             "password": password
         ]
 
-        Alamofire.request(self.serverUrl + "/api/account/register/",
+        Alamofire.request(self.getUrl("api_register"),
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default)
@@ -497,7 +511,7 @@ class SessionModel {
     }
 
     func getPersonalProfile(_ handler: GetPersonalProfileHandler) {
-        Alamofire.request(self.serverUrl + "/api/account/get-personal-profile/",
+        Alamofire.request(self.getUrl("api_get_profile"),
                           encoding: JSONEncoding.default,
                           headers: self.getAuthHeaders())
             .responseJSON { response in
@@ -523,7 +537,7 @@ class SessionModel {
             }
         }
 
-        Alamofire.request(self.serverUrl + "/api/account/update-personal-profile/",
+        Alamofire.request(self.getUrl("api_update_profile"),
                           method: .post,
                           parameters: params,
                           encoding: JSONEncoding.default,
@@ -551,7 +565,7 @@ class SessionModel {
     }
 
     func getBillingSummary(_ handler: GetBillingSummaryHandler) {
-        Alamofire.request(self.serverUrl + "/api/account/get-billing-summary/",
+        Alamofire.request(self.getUrl("api_get_billing"),
                           encoding: JSONEncoding.default,
                           headers: self.getAuthHeaders())
             .responseJSON { response in

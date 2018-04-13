@@ -132,7 +132,7 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler {
 
     func showLastMonthsUsage() {
         let minutes = self.sessionModel.billingSummary!["minutes_used_in_billing_period"] as! NSArray
-        let used = minutes[1] as! Int
+        let used = minutes[0] as! Int
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = String(format: "%d minutes used this month", used)
