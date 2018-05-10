@@ -41,6 +41,7 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler 
             if sessionModel.personalProfile[n] == nil {
                 if n == "email" {
                     f.text = self.sessionModel.name
+                    sessionModel.personalProfile[n] = self.sessionModel.name
                 }
                 else {
                     f.text = ""
