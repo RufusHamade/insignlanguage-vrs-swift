@@ -1,6 +1,7 @@
 import UIKit
+import Stripe
 
-class BillingDetailsController: UIViewController, GetBillingSummaryHandler {
+class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPAddCardViewControllerDelegate {
 
     @IBOutlet weak var back: UIButton!
     @IBOutlet weak var contractType: UILabel!
@@ -57,21 +58,28 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler {
         }
     }
 
-    func addConstraints(_ item: UIView, _ previous: UIView, _ distance: CGFloat) {
+    func addConstraints(_ item: UIView, _ previous: UIView, _ distance: CGFloat, centered: Bool = false) {
         self.view.addConstraints([
             NSLayoutConstraint(item: item, attribute: .top,
                                relatedBy: .equal,
                                toItem: previous, attribute: .bottom,
-                               multiplier: 1.0, constant: distance),
-            NSLayoutConstraint(item: item, attribute: .leading,
-                               relatedBy: .equal,
-                               toItem: self.view, attribute: .leading,
-                               multiplier: 1.0, constant: 45.0),
-            NSLayoutConstraint(item: item, attribute: .trailing,
-                               relatedBy: .equal,
-                               toItem: self.view, attribute: .trailing,
-                               multiplier: 1.0, constant: -45.0)
+                               multiplier: 1.0, constant: distance)
             ])
+        if centered {
+            item.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        }
+        else {
+            self.view.addConstraints([
+                NSLayoutConstraint(item: item, attribute: .leading,
+                                   relatedBy: .equal,
+                                   toItem: self.view, attribute: .leading,
+                                   multiplier: 1.0, constant: 25.0),
+                NSLayoutConstraint(item: item, attribute: .trailing,
+                                   relatedBy: .equal,
+                                   toItem: self.view, attribute: .trailing,
+                                   multiplier: 1.0, constant: -25.0)
+                ])
+        }
     }
 
     func showMonthlyUsage() {
@@ -88,7 +96,7 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler {
             label.font = label.font.withSize(12)
             self.view.addSubview(label)
             self.addConstraints(label, self.contractType, 20.0)
-            self.showPaymentMethod()
+            self.showPaymentMethod(label)
             return
         }
 
@@ -126,7 +134,7 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler {
             label.text = "You've used all your minutes.  But you can still Pay As You Go."
             self.addConstraints(label, previousLabel, 20.0)
             self.view.addSubview(label)
-            self.showPaymentMethod()
+            self.showPaymentMethod(label)
         }
     }
 
@@ -139,9 +147,48 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler {
         label.numberOfLines = 0
         self.view.addSubview(label)
         addConstraints(label, self.contractType, 10.0)
+        showPaymentMethod(label)
     }
 
-    func showPaymentMethod() {
+    func showPaymentMethod(_ lastlabel:UIView) {
+        let card = self.sessionModel.billingSummary!["card"]
+
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        if let carddata = card as? [String: String] {
+            label.text = String(format: "Currently using %@: \n  XXXX XXXX XXXX %@\n  Exp %@",
+                                carddata["card_type"]!,
+                                carddata["last_digits"]!,
+                                carddata["expires"]!)
+        }
+        else {
+            label.text = "No card set up on the account"
+        }
+        self.view.addSubview(label)
+        addConstraints(label, lastlabel, 10.0)
+
+        let button = UIButton.init(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .blue
+        button.setTitle("Add new payment card", for: [])
+        button.addTarget(self, action: #selector(self.handleAddCard), for: .touchUpInside)
+        button.layer.cornerRadius = 5;
+        button.clipsToBounds = true;
+
+        self.view.addSubview(button)
+        self.view.addConstraints([
+            NSLayoutConstraint (item: button, attribute: .width,
+                                relatedBy: .equal,
+                                toItem: nil, attribute: .notAnAttribute,
+                                multiplier: 1, constant: 250),
+            NSLayoutConstraint (item: button, attribute: .height,
+                                relatedBy: .equal,
+                                toItem: nil, attribute: .notAnAttribute,
+                                multiplier: 1, constant: 50)
+        ])
+        addConstraints(button, label, 20.0, centered: true)
     }
 
     func getBillingSummaryOk() {
@@ -150,5 +197,35 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler {
 
     func failure(_ message: String) {
         self.showBilling()
+    }
+
+    func handleAddCard() {
+        // Setup add card view controller
+        let addCardViewController = STPAddCardViewController()
+        addCardViewController.delegate = self
+
+        // Present add card view controller
+        let navigationController = UINavigationController(rootViewController: addCardViewController)
+        self.present(navigationController, animated: true)
+    }
+
+    // MARK: STPAddCardViewControllerDelegate
+
+    func addCardViewControllerDidCancel(_ addCardViewController: STPAddCardViewController) {
+        // Dismiss add card view controller
+        self.dismiss(animated: true)
+    }
+
+    func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
+        self.sessionModel.submitTokenToBackend(token, completion: { (error: Error?) in
+            if let error = error {
+                // Show error in add card view controller
+                completion(error)
+            }
+            else {
+                completion(nil)
+                self.dismiss(animated: true)
+            }
+        })
     }
 }

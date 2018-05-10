@@ -6,4 +6,5 @@ target 'InSignLanguage' do
   # Pods for InSignLanguage
   pod 'Alamofire'
   pod 'OpenTok'
+  pod 'Stripe'
 end

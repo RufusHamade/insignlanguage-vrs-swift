@@ -9,10 +9,29 @@
 import Foundation
 import Alamofire
 import OpenTok
+import Stripe
 
 let API_KEY = Bundle.main.infoDictionary!["APP_API_KEY"] as! String
 let SESSION_SERVER = Bundle.main.infoDictionary!["APP_SESSION_SERVER"] as! String
 let HAPPY_COLOR = UIColor(red: 0.2, green: 0.4, blue: 0.2, alpha: 1.0)
+
+
+struct ISLError : LocalizedError
+{
+    var errorDescription: String? { return self.message }
+    var failureReason: String? { return self.details }
+    var recoverySuggestion: String? { return "" }
+    var helpAnchor: String? { return "" }
+
+    private var message : String
+    private var details : String
+
+    init(_ message: String, _ details: String)
+    {
+        self.message = message
+        self.details = details
+    }
+}
 
 //MARK: SessionModel
 
@@ -580,6 +599,38 @@ class SessionModel {
 
                 self.billingSummary = response.result.value as? [String: Any?]
                 handler.getBillingSummaryOk()
+        }
+    }
+
+    func submitTokenToBackend(_ token: STPToken, completion: @escaping STPErrorBlock) {
+        let parameters = [
+            "token": token.tokenId,
+        ]
+
+        Alamofire.request(self.getUrl("api_add_card"),
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default,
+                          headers: self.getAuthHeaders())
+            .responseJSON { response in
+                if response.response == nil {
+                    completion(ISLError("Server Unavailable",
+                                        "Sorry about that."))
+                    return
+                }
+                let status = response.response!.statusCode
+                if  status == 400 {
+                    completion(ISLError("Payment provider rejected request.",
+                                        "Please contact us so we can investigate"))
+                }
+                else if status != 200 {
+                    completion(ISLError("Server has issues.",
+                                        "Sorry about that."))
+                }
+                else {
+                    self.billingSummary = response.result.value as? [String: Any?]
+                    completion(nil)
+                }
         }
     }
 }
