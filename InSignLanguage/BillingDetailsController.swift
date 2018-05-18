@@ -215,7 +215,7 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPA
         self.showBilling()
     }
 
-    func handleAddCard() {
+    @objc func handleAddCard() {
         // Setup add card view controller
         let addCardViewController = STPAddCardViewController()
         addCardViewController.delegate = self

@@ -36,7 +36,7 @@ class ReadyToCallController: UIViewController, ProviderHandler {
         self.sessionModel.stopProviderPoll()
     }
 
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 

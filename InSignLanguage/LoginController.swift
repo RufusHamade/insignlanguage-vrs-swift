@@ -31,7 +31,7 @@ class LoginController: UIViewController, AuthenticateHandler, SessionHandler, Ge
         view.addGestureRecognizer(tap)
     }
 
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 

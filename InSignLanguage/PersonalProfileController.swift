@@ -78,7 +78,7 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler 
         notificationCenter.removeObserver(self, name: Notification.Name.UIKeyboardWillHide, object: nil)
     }
 
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 

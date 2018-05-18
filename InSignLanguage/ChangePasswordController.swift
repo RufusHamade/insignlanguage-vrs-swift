@@ -36,7 +36,7 @@ class ChangePasswordController: UIViewController, ChangePasswordHandler {
         }
     }
 
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 

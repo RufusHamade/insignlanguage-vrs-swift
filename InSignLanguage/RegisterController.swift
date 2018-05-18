@@ -33,7 +33,7 @@ class RegisterController: UIViewController, RegisterHandler {
         view.addGestureRecognizer(tap)
     }
 
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 
