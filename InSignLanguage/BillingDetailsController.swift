@@ -1,6 +1,8 @@
 import UIKit
 import Stripe
 
+let MY_TAG = 1
+
 class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPAddCardViewControllerDelegate {
 
     @IBOutlet weak var back: UIButton!
@@ -40,6 +42,7 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPA
     }
 
     func showBilling() {
+        self.removeItems()
         if self.sessionModel.billingSummary == nil {
             self.contractType.text = "Not yet configured"
             return
@@ -55,6 +58,19 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPA
         default:
             self.contractType.text = "Pay as you go"
             self.showLastMonthsUsage()
+        }
+    }
+
+    func addItem(_ item: UIView) {
+        item.tag = MY_TAG
+        self.view.addSubview(item)
+    }
+
+    func removeItems() {
+        for item in self.view.subviews {
+            if item.tag == MY_TAG {
+                item.removeFromSuperview()
+            }
         }
     }
 
@@ -94,7 +110,7 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPA
                 "In the meantime you can use Pay As You Go."
             label.numberOfLines = 0
             label.font = label.font.withSize(12)
-            self.view.addSubview(label)
+            self.addItem(label)
             self.addConstraints(label, self.contractType, 20.0)
             self.showPaymentMethod(label)
             return
@@ -115,7 +131,7 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPA
         label.text = String(format:"Billing period: from %@ to %@",
                             df.string(from: dfi.date(from: start)!),
                             df.string(from: dfi.date(from: end)!))
-        self.view.addSubview(label)
+        self.addItem(label)
         self.addConstraints(label, self.contractType, 20.0)
 
         let previousLabel = label
@@ -123,7 +139,7 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPA
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = String(format: "%d minutes (of %d) remaining in this period", remaining, total)
         label.numberOfLines = 0
-        self.view.addSubview(label)
+        self.addItem(label)
         addConstraints(label, previousLabel, 10.0)
 
         if remaining == 0 {
@@ -133,7 +149,7 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPA
             label.numberOfLines = 0
             label.text = "You've used all your minutes.  But you can still Pay As You Go."
             self.addConstraints(label, previousLabel, 20.0)
-            self.view.addSubview(label)
+            self.addItem(label)
             self.showPaymentMethod(label)
         }
     }
@@ -145,7 +161,7 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPA
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = String(format: "%d minutes used this month", used)
         label.numberOfLines = 0
-        self.view.addSubview(label)
+        self.addItem(label)
         addConstraints(label, self.contractType, 10.0)
         showPaymentMethod(label)
     }
@@ -166,7 +182,7 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPA
         else {
             label.text = "No card set up on the account"
         }
-        self.view.addSubview(label)
+        self.addItem(label)
         addConstraints(label, lastlabel, 10.0)
 
         let button = UIButton.init(type: .custom)
@@ -177,7 +193,7 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPA
         button.layer.cornerRadius = 5;
         button.clipsToBounds = true;
 
-        self.view.addSubview(button)
+        self.addItem(button)
         self.view.addConstraints([
             NSLayoutConstraint (item: button, attribute: .width,
                                 relatedBy: .equal,
@@ -225,6 +241,7 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPA
             else {
                 completion(nil)
                 self.dismiss(animated: true)
+                self.showBilling()
             }
         })
     }

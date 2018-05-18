@@ -1,106 +1,111 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
       "size" : "20x20",
-      "filename": "ISLicon_40x40.png",
+      "idiom" : "iphone",
+      "filename" : "ISLicon_40x40.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "20x20",
-      "filename": "ISLicon_60x60.png",
+      "idiom" : "iphone",
+      "filename" : "ISLicon_60x60.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename": "ISLicon_58x58.png",
+      "filename" : "ISLicon_58x58.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename": "ISLicon_87x87.png",
+      "filename" : "ISLicon_87x87.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename": "ISLicon_80x80.png",
+      "filename" : "ISLicon_80x80.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename": "ISLicon_120x120.png",
+      "filename" : "ISLicon_120x120.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename": "ISLicon_120x120.png",
+      "filename" : "ISLicon_120x120.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename": "ISLicon_180x180.png",
+      "filename" : "ISLicon_180x180.png",
       "scale" : "3x"
     },
     {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename": "ISLicon_20x20.png",
+      "filename" : "ISLicon_20x20.png",
       "scale" : "1x"
     },
     {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename": "ISLicon_40x40.png",
+      "filename" : "ISLicon_40x40.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename": "ISLicon_29x29.png",
+      "filename" : "ISLicon_29x29.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename": "ISLicon_58x58.png",
+      "filename" : "ISLicon_58x58.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename": "ISLicon_40x40.png",
+      "filename" : "ISLicon_40x40.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename": "ISLicon_80x80.png",
+      "filename" : "ISLicon_80x80.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename": "ISLicon_76x76.png",
+      "filename" : "ISLicon_76x76.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename": "ISLicon_152x152.png",
+      "filename" : "ISLicon_152x152.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename": "ISLicon_167x167.png",
+      "filename" : "ISLicon_167x167.png",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "ios-marketing",
+      "size" : "1024x1024",
+      "scale" : "1x"
     }
   ],
   "info" : {
