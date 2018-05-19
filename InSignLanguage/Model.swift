@@ -81,7 +81,7 @@ protocol ResetPasswordHandler {
 }
 
 protocol ProviderHandler {
-    func onProviderAvailability(_ availableProviders: Int, _ minutesRemaining: Int?) -> Void
+    func onProviderAvailability(_ availableProviders: Int) -> Void
 }
 
 protocol DialHandler {
@@ -116,6 +116,11 @@ class SessionModel {
     var number: String?
     var personalProfile: [String: String?] = [:]
     var billingSummary: [String: Any?]?
+
+    var canCall = false
+    var cardRegistered = false
+    var cardActive = false
+    var minutesRemaining: Int?
 
     var providersAvailable: Int = -1
     var pollTimer: Timer?
@@ -252,7 +257,7 @@ class SessionModel {
         self.preferences.set(self.sessionToken, forKey: "sessionToken")
     }
 
-    func authenticate (_ handler: AuthenticateHandler) {
+    func authenticate(_ handler: AuthenticateHandler) {
         if !self.isAuthenticable() {
             // no point doing anything.
             return
@@ -403,20 +408,20 @@ class SessionModel {
                 switch response.result {
                 case .success:
                     let jsonResult = response.result.value as! [String: Any]
-                    let availableNow:Int = jsonResult["providers_available"] as! Int
-                    var minutesRemaining:Int? = nil
-                    if let mr = jsonResult["minutes_remaining"] as? Int {
-                        minutesRemaining = mr
-                    }
-                    if self.providersAvailable != availableNow {
-                        self.providersAvailable = availableNow
+                    self.canCall = jsonResult["can_call"] as! Bool
+                    self.cardRegistered = jsonResult["card_registered"] as! Bool
+                    self.cardActive = jsonResult["card_active"] as! Bool
+                    self.minutesRemaining = jsonResult["minutes_remaining"] as? Int
+                    let lProvidersAvailable = jsonResult["providers_available"] as! Int
+                    if self.providersAvailable != lProvidersAvailable {
+                        self.providersAvailable = lProvidersAvailable
                         if self.sessionHandler != nil {
-                            self.providerHandler!.onProviderAvailability(availableNow, minutesRemaining)
+                            self.providerHandler!.onProviderAvailability(lProvidersAvailable)
                         }
                     }
                 case .failure:
                     self.providersAvailable = -1
-                    self.providerHandler!.onProviderAvailability(-1, nil)
+                    self.providerHandler!.onProviderAvailability(-1)
                 }
 
         }

@@ -1,5 +1,12 @@
 import UIKit
 
+func dateFromString(_ isoString: String) -> String {
+    let df = SessionModel.outputDateFormatter
+    let dfi = SessionModel.jsonDateParser
+    return df.string(from: dfi.date(from: isoString)!)
+}
+
+
 class ReadyToCallController: UIViewController, ProviderHandler {
 
     @IBOutlet weak var nameField: UILabel!
@@ -40,9 +47,19 @@ class ReadyToCallController: UIViewController, ProviderHandler {
         view.endEditing(true)
     }
 
+    func showPopup(_ title: String, _ message: String) {
+        let alertController = UIAlertController(title: title, message: message,
+                                                preferredStyle: .alert)
 
-    func onProviderAvailability(_ availableProviders: Int,
-                                _ minutesRemaining: Int?) {
+        let okAction = UIAlertAction(title: "OK", style: .default) {
+            (result : UIAlertAction) -> Void in print("You pressed OK")
+        }
+
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    func onProviderAvailability(_ availableProviders: Int) {
         if availableProviders < 1 {
             if availableProviders == 0 {
                 self.providerAvailabilityField.text = "Unfortunately, there are no translators available."
@@ -67,23 +84,33 @@ class ReadyToCallController: UIViewController, ProviderHandler {
             let cost_per_minute = bs["cost_per_minute"] as! NSNumber
             var text: String
             if contract_type == "payg" {
-                text = String(format: "Pay as you go: Calls cost £%@ per minute,\nminimum %d minutes.",
-                              cost_per_minute.stringValue, minimum_minutes_charged)
+                if !self.sessionModel.cardRegistered {
+                    text = String(format: "Pay as you go: No payment method set up.")
+                }
+                else if !self.sessionModel.cardActive {
+                    text = String(format: "Pay as you go: There was a problem with your last payment.")
+                }
+                else {
+                    text = String(format: "Pay as you go: Calls cost £%@ per minute,\nminimum %d minutes.",
+                                  cost_per_minute.stringValue, minimum_minutes_charged)
+                }
             }
             else {
-                let billingPeriodEndStr = self.sessionModel.billingSummary!["billing_period_end"] as! String
-                let df = SessionModel.outputDateFormatter
-                let dfi = SessionModel.jsonDateParser
-                let billingPeriodEnd = df.string(from: dfi.date(from: billingPeriodEndStr)!)
-                text = String(format: "Contract: You have %d minutes left.\nMore minutes on %@",
-                              minutesRemaining!, billingPeriodEnd)
+                if self.sessionModel.minutesRemaining == 0 {
+                    text = String(format: "Contract: You have used up all your minutes.\nContact InSignLanguage to arrange more.")
+                }
+                else {
+                    let billingPeriodEndStr = self.sessionModel.billingSummary!["billing_period_end"] as! String
+                    let billingPeriodEnd = dateFromString(billingPeriodEndStr)
+                    text = String(format: "Contract: You have %d minutes left.\nMore minutes on %@",
+                                  self.sessionModel.minutesRemaining!, billingPeriodEnd)
+                }
             }
             self.contractDetailsField.text = text
         }
         else {
             self.contractDetailsField.text = ""
         }
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -106,8 +133,33 @@ class ReadyToCallController: UIViewController, ProviderHandler {
         }
     }
 
-    @IBAction func unwindToReadyToCall(segue: UIStoryboardSegue) {}
+    @IBAction func dial(_ sender: Any) {
+        if !self.sessionModel.canCall {
+            let bs = self.sessionModel.billingSummary!
+            let contract_type = bs["contract_type"] as! String
+            if contract_type == "payg" {
+                if !self.sessionModel.cardRegistered {
+                    self.showPopup("Payment issue",
+                                   "We have no credit/debit card on file.  Visit the billing details in settings to set up a payment mechanism.")
+                }
+                else {
+                    self.showPopup("Payment issue",
+                                   "There was a problem last time we tried to take a payment from your credit/debit card.  Please visit the billing details in settings to add a new card.")
+                }
+            }
+            else {
+                let billingPeriodEndStr = self.sessionModel.billingSummary!["billing_period_end"] as! String
+                let billingPeriodEnd = dateFromString(billingPeriodEndStr)
+                self.showPopup("No more minutes",
+                               String(format: "No more minutes in this month's contract.  More minutes on %@, or contat the InSignLanguage team to arrange some more.", billingPeriodEnd))
 
+            }
+            return
+        }
+        self.performSegue(withIdentifier: "showInCall", sender: nil)
+    }
+
+    @IBAction func unwindToReadyToCall(segue: UIStoryboardSegue) {}
 }
 
 extension ReadyToCallController: UITextViewDelegate {

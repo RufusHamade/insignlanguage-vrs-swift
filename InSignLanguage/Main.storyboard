@@ -69,7 +69,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unfortunately, there are no translators available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXf-Je-7JI">
-                                <rect key="frame" x="35" y="386" width="250" height="14"/>
+                                <rect key="frame" x="35" y="384" width="250" height="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -84,7 +84,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="InitiateCall" id="1H1-ta-DcC"/>
+                                    <action selector="dial:" destination="V4X-10-FnW" eventType="touchUpInside" id="3ph-gE-ZHO"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number for interpreter to call?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="772-Nu-Dti">
@@ -107,7 +107,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay as you go: Calls cost £2 per minute, minimum 5 minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Smb-Cj-uME">
-                                <rect key="frame" x="10" y="336" width="300" height="30"/>
+                                <rect key="frame" x="10" y="334" width="300" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="FZH-lh-fu0"/>
                                 </constraints>
@@ -144,13 +144,13 @@
                             <constraint firstItem="Fkw-KY-rSF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FTp-3N-j0k" secondAttribute="leadingMargin" constant="10" id="hnC-ZK-bGO"/>
                             <constraint firstItem="WSU-wy-dYH" firstAttribute="leading" secondItem="FTp-3N-j0k" secondAttribute="leading" constant="20" id="kYR-aj-mVc"/>
                             <constraint firstItem="Fkw-KY-rSF" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="lw4-NO-wbP"/>
+                            <constraint firstItem="Smb-Cj-uME" firstAttribute="top" secondItem="gvx-OD-NII" secondAttribute="bottom" constant="20" id="mrL-Kb-Xkc"/>
                             <constraint firstItem="qXf-Je-7JI" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="piE-El-7Wv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AxL-CV-Z3F" secondAttribute="trailing" constant="35" id="qN0-97-D1h"/>
                             <constraint firstItem="s6y-0k-9yC" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="qtQ-29-PTP"/>
                             <constraint firstItem="gdC-gW-80c" firstAttribute="top" secondItem="Fkw-KY-rSF" secondAttribute="bottom" priority="50" constant="20" id="rlP-Db-zHz"/>
                             <constraint firstItem="AxL-CV-Z3F" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="sDZ-UX-k7Y"/>
                             <constraint firstItem="772-Nu-Dti" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="sln-Mp-w1o"/>
-                            <constraint firstItem="s6y-0k-9yC" firstAttribute="top" secondItem="qXf-Je-7JI" secondAttribute="bottom" constant="20" id="tvy-dl-KSj"/>
                             <constraint firstItem="772-Nu-Dti" firstAttribute="top" secondItem="AxL-CV-Z3F" secondAttribute="bottom" constant="8" id="usA-HB-5kM"/>
                             <constraint firstItem="JdP-Bv-Z0s" firstAttribute="leading" secondItem="FTp-3N-j0k" secondAttribute="leadingMargin" constant="20" id="xtz-v6-cbg"/>
                             <constraint firstItem="s6y-0k-9yC" firstAttribute="centerX" secondItem="FTp-3N-j0k" secondAttribute="centerX" id="zim-Oq-tu7"/>
@@ -164,6 +164,7 @@
                         <outlet property="numberField" destination="gvx-OD-NII" id="WRt-IN-ZHt"/>
                         <outlet property="providerAvailabilityField" destination="qXf-Je-7JI" id="Znc-cm-hGZ"/>
                         <segue destination="q5D-5Q-71a" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLoginWithSegue:" id="o5B-mj-5A6"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="showInCall" id="TPm-9F-oIr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gA1-aQ-kAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -985,10 +986,10 @@ Follow the link inside and enter a new password.</string>
             </objects>
             <point key="canvasLocation" x="358.125" y="-3190"/>
         </scene>
-        <!--Video Display-->
+        <!--In Call-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Video Display" id="BYZ-38-t0r" customClass="VideoDisplayController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InCall" title="In Call" id="BYZ-38-t0r" customClass="VideoDisplayController" customModule="InSignLanguage" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -1218,7 +1219,6 @@ Follow the link inside and enter a new password.</string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dialButton" destination="s6y-0k-9yC" id="pUc-bD-W4c"/>
                         <outlet property="loginButton" destination="LzT-aO-tw1" id="5NJ-Id-1gd"/>
                         <outlet property="loginErrors" destination="xO3-00-Mkj" id="NYq-9B-9jW"/>
                         <outlet property="nameField" destination="eWk-Yk-LGF" id="ZN1-IM-8pT"/>
