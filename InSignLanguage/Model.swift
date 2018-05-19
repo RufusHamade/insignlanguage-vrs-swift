@@ -243,10 +243,15 @@ class SessionModel {
                     return
                 }
                 if response.response?.statusCode != 200 {
-                    handler.failure(String(format:"Internal Error"))
+                    handler.failure("Internal Error")
                     return
                 }
+
                 self.urls = response.result.value as? [String: String]
+                if self.urls == nil || self.urls!["version"]! != "1" {
+                    handler.failure("Protocol mismatch.  Please upgrade your app.")
+                    return
+                }
                 self.checkToken(handler)
         }
     }
