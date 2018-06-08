@@ -49,6 +49,7 @@ class VideoDisplayController: UIViewController, ErrorHandler, DialHandler, CAAni
         self.placeholder.isHidden = false
         self.placeholder2.isHidden = false
         self.placeholder.rotate360Degrees(duration: 2.0, completionDelegate: self)
+        UIApplication.shared.isIdleTimerDisabled = true
     }
 
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
@@ -72,6 +73,7 @@ class VideoDisplayController: UIViewController, ErrorHandler, DialHandler, CAAni
     }
 
     func onHangupSuccess() {
+        UIApplication.shared.isIdleTimerDisabled = false
         self.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
     }
 
@@ -83,6 +85,7 @@ class VideoDisplayController: UIViewController, ErrorHandler, DialHandler, CAAni
     @IBAction func hangupClicked(_ sender: Any) {
         if self.connectionModel.otSession == nil {
             // This is probably the second time we've hit hangup.  So just segue
+            UIApplication.shared.isIdleTimerDisabled = false
             self.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
             return
         }
