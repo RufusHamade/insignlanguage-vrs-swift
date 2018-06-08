@@ -239,7 +239,7 @@ class SessionModel {
         Alamofire.request(self.serverUrl + "/api/urls")
             .responseJSON { response in
                 if response.response == nil {
-                    handler.failure(String(format:"Server\n%@\nUnavailable", self.serverUrl))
+                    handler.failure("Server Unavailable")
                     return
                 }
                 if response.response?.statusCode != 200 {

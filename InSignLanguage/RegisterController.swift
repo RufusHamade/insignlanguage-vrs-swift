@@ -14,58 +14,55 @@ class RegisterController: UIViewController, RegisterHandler {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var confirmPasswordField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
-    @IBOutlet weak var registerResults: UILabel!
 
     var sessionModel = SessionModel.sharedInstance
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        emailField.text = sessionModel.name
-        emailField.delegate = self
-        passwordField.delegate = self
-        confirmPasswordField.delegate = self
+        self.emailField.text = sessionModel.name
+        self.emailField.delegate = self
+        self.passwordField.delegate = self
+        self.confirmPasswordField.delegate = self
+        self.registerButton.layer.cornerRadius = 6
+        self.registerButton.clipsToBounds = true
 
         self.enableRegister(false)
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+        self.view.addGestureRecognizer(tap)
     }
 
     @objc func dismissKeyboard() {
-        view.endEditing(true)
+        self.view.endEditing(true)
+    }
+
+    func showPopup(_ title: String, _ message: String) {
+        let alertController = UIAlertController(title: title, message: message,
+                                                preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) {
+            (result : UIAlertAction) -> Void in self.enableRegister(true)
+        }
+
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 
     func enableRegister(_ enable: Bool) {
         if enable {
-            registerButton.isEnabled = true
-            registerButton.alpha = 1.0
+            self.registerButton.isEnabled = true
+            self.registerButton.alpha = 1.0
         }
         else {
-            registerButton.isEnabled = false
-            registerButton.alpha = 0.5
+            self.registerButton.isEnabled = false
+            self.registerButton.alpha = 0.5
         }
-    }
-
-    func setResults(_ success: Bool, _ message: String) {
-        if message == "" {
-            registerResults.isHidden = true
-            return
-        }
-        registerResults.isHidden = false
-
-        if success {
-            registerResults.textColor = HAPPY_COLOR
-        }
-        else {
-            registerResults.textColor = .red
-        }
-        registerResults.text = message
     }
 
     @IBAction func registerClicked(_ sender: Any) {
-        enableRegister(false)
+        self.enableRegister(false)
         sessionModel.register(emailField.text!, passwordField.text!, self)
     }
 
@@ -74,8 +71,7 @@ class RegisterController: UIViewController, RegisterHandler {
     }
 
     func failure(_ message: String) {
-        enableRegister(true)
-        setResults(false, "Registration failed: " + message)
+        self.showPopup("Registration Failed", message)
     }
 }
 
@@ -88,16 +84,14 @@ extension RegisterController: UITextFieldDelegate {
         if (emailField.text == "" ||
             passwordField.text == "" ||
             confirmPasswordField.text == "") {
-            setResults(true, "")
             enableRegister(false)
             return
         }
         if (passwordField.text != confirmPasswordField.text) {
-            setResults(false, "The passwords don't match.\nCorrect this to continue.")
+            self.showPopup("Password mismatch", "The passwords don't match.\nCorrect this to continue.")
             enableRegister(false)
             return
         }
-        setResults(true, "")
         enableRegister(true)
     }
 }

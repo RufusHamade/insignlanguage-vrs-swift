@@ -13,26 +13,39 @@ class LoginController: UIViewController, AuthenticateHandler, SessionHandler, Ge
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var loginErrors: UILabel!
 
     var sessionModel = SessionModel.sharedInstance
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nameField.text = sessionModel.name
-        nameField.delegate = self
-        passwordField.delegate = self
-        sessionModel.setSessionHandler(self)
-        onCredentialsChange()
+        self.nameField.text = sessionModel.name
+        self.nameField.delegate = self
+        self.loginButton.layer.cornerRadius = 6
+        self.loginButton.clipsToBounds = true
+        self.passwordField.delegate = self
+        self.sessionModel.setSessionHandler(self)
+        self.onCredentialsChange()
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+        self.view.addGestureRecognizer(tap)
     }
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+
+    func showPopup(_ title: String, _ message: String) {
+        let alertController = UIAlertController(title: title, message: message,
+                                                preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) {
+            (result : UIAlertAction) -> Void in print("You pressed OK")
+        }
+
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 
     func authenticateOk() {
@@ -55,8 +68,7 @@ class LoginController: UIViewController, AuthenticateHandler, SessionHandler, Ge
     }
 
     func failure(_ reason: String) {
-        loginErrors.isHidden = false
-        loginErrors.text = "Login failed: " + reason
+        showPopup("Login failed", reason)
         onCredentialsChange()
     }
 
@@ -72,7 +84,6 @@ class LoginController: UIViewController, AuthenticateHandler, SessionHandler, Ge
     }
 
     @IBAction func loginClicked(_ sender: Any) {
-        loginErrors.isHidden = true
         loginButton.isEnabled = false
         loginButton.alpha = 0.5
         sessionModel.authenticate(self)

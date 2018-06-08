@@ -12,18 +12,18 @@ class ResetPasswordController: UIViewController, ResetPasswordHandler {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var resetButton: UIButton!
-    @IBOutlet weak var resetResults: UILabel!
 
     var sessionModel = SessionModel.sharedInstance
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        emailField.text = sessionModel.name
-        emailField.delegate = self
+        self.emailField.text = sessionModel.name
+        self.emailField.delegate = self
+        self.resetButton.layer.cornerRadius = 6
+        self.resetButton.clipsToBounds = true
 
         self.enableReset(self.emailField.text != nil && self.emailField.text != "")
-        resetResults.isHidden = true
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -32,6 +32,18 @@ class ResetPasswordController: UIViewController, ResetPasswordHandler {
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+
+    func showPopup(_ title: String, _ message: String) {
+        let alertController = UIAlertController(title: title, message: message,
+                                                preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) {
+            (result : UIAlertAction) -> Void in self.enableReset(true)
+        }
+
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 
     func enableReset(_ enable: Bool) {
@@ -51,16 +63,11 @@ class ResetPasswordController: UIViewController, ResetPasswordHandler {
     }
 
     func resetPasswordOk() {
-        resetResults.isHidden = false
-        resetResults.text = "Reset succeeded.  Now check your email"
-        resetResults.textColor = HAPPY_COLOR
+        self.showPopup("Reset succeeded", "Now check your email")
     }
 
     func failure(_ message: String) {
-        resetResults.isHidden = false
-        resetResults.text = "Reset failed: " + message
-        resetResults.textColor = .red
-        self.enableReset(true)
+        self.showPopup("Reset failed", "Now check your email")
     }
 }
 

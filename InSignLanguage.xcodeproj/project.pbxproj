@@ -12,6 +12,9 @@
 		8B24AE8B202C949700DFA74B /* PersonalProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24AE8A202C949700DFA74B /* PersonalProfileController.swift */; };
 		8B24AE8D202C94B800DFA74B /* BillingDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24AE8C202C94B800DFA74B /* BillingDetailsController.swift */; };
 		8B24AE8F202E100D00DFA74B /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24AE8E202E100D00DFA74B /* SplashController.swift */; };
+		8B2FA20420CAB61E00DE927F /* background-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B2FA20320CAB61D00DE927F /* background-1.jpg */; };
+		8B2FA20620CAB6B400DE927F /* logo-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B2FA20520CAB6B400DE927F /* logo-white.png */; };
+		8B2FA20A20CACD5600DE927F /* background-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B2FA20920CACD5500DE927F /* background-2.jpg */; };
 		8B595B25205C1CBD00AF3324 /* TermsAndConditionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B595B24205C1CBD00AF3324 /* TermsAndConditionsController.swift */; };
 		8B6606B02036FAAF0084A807 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B6606AF2036FAAF0084A807 /* LaunchScreen.storyboard */; };
 		8B6606B22036FB310084A807 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B6606B12036FB310084A807 /* Main.storyboard */; };
@@ -38,6 +41,9 @@
 		8B24AE8A202C949700DFA74B /* PersonalProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalProfileController.swift; sourceTree = "<group>"; };
 		8B24AE8C202C94B800DFA74B /* BillingDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillingDetailsController.swift; sourceTree = "<group>"; };
 		8B24AE8E202E100D00DFA74B /* SplashController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
+		8B2FA20320CAB61D00DE927F /* background-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-1.jpg"; sourceTree = "<group>"; };
+		8B2FA20520CAB6B400DE927F /* logo-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-white.png"; sourceTree = "<group>"; };
+		8B2FA20920CACD5500DE927F /* background-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-2.jpg"; sourceTree = "<group>"; };
 		8B595B24205C1CBD00AF3324 /* TermsAndConditionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsController.swift; sourceTree = "<group>"; };
 		8B6606AF2036FAAF0084A807 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B6606B12036FB310084A807 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -124,8 +130,11 @@
 				8B595B24205C1CBD00AF3324 /* TermsAndConditionsController.swift */,
 				EEC2480A1EC9F58B003EEDA1 /* VideoDisplayController.swift */,
 				8BC4D4F620235DFE00B68D27 /* Model.swift */,
+				8B2FA20320CAB61D00DE927F /* background-1.jpg */,
+				8B2FA20920CACD5500DE927F /* background-2.jpg */,
 				EEC248041EC9F58B003EEDA1 /* hangup.png */,
 				EEC248061EC9F58B003EEDA1 /* logo.png */,
+				8B2FA20520CAB6B400DE927F /* logo-white.png */,
 				EE22E67E1FC49F910088A49E /* onhold-circle.png */,
 				EE22E6801FC82C180088A49E /* onhold-image.png */,
 				EEC248081EC9F58B003EEDA1 /* phone.png */,
@@ -199,11 +208,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B2FA20A20CACD5600DE927F /* background-2.jpg in Resources */,
+				8B2FA20420CAB61E00DE927F /* background-1.jpg in Resources */,
 				8B6606B02036FAAF0084A807 /* LaunchScreen.storyboard in Resources */,
 				EEC2480D1EC9F58B003EEDA1 /* hangup.png in Resources */,
 				EE22E67F1FC49F910088A49E /* onhold-circle.png in Resources */,
 				8B6606B22036FB310084A807 /* Main.storyboard in Resources */,
 				EEC2480F1EC9F58B003EEDA1 /* logo.png in Resources */,
+				8B2FA20620CAB6B400DE927F /* logo-white.png in Resources */,
 				EEC248111EC9F58B003EEDA1 /* phone.png in Resources */,
 				EE4D6DB41ECA124D00EB2E63 /* Assets.xcassets in Resources */,
 				EE22E6811FC82C180088A49E /* onhold-image.png in Resources */,

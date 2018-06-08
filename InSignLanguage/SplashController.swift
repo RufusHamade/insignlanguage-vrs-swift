@@ -23,6 +23,8 @@ class SplashController: UIViewController, CheckTokenHandler, GetPersonalProfileH
         self.sessionModel.connectToServer(self)
         self.retryButton.isHidden = true
         self.retryButton.isEnabled = false
+        self.retryButton.layer.cornerRadius = 6
+        self.retryButton.clipsToBounds = true
     }
 
     func tokenOk() {
@@ -71,7 +73,6 @@ class SplashController: UIViewController, CheckTokenHandler, GetPersonalProfileH
 
     func failure(_ message: String) {
         self.messages.text = message
-        self.messages.textColor = .red
         self.retryButton.isHidden = false
         self.retryButton.isEnabled = true
         self.retryButton.alpha = 1.0
@@ -79,7 +80,6 @@ class SplashController: UIViewController, CheckTokenHandler, GetPersonalProfileH
 
     @IBAction func retryClicked(_ sender: Any) {
         self.messages.text = "Trying again..."
-        self.messages.textColor = HAPPY_COLOR
         self.sessionModel.connectToServer(self)
         self.retryButton.isEnabled = false
         self.retryButton.alpha = 0.5

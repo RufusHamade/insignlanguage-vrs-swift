@@ -20,12 +20,15 @@ class ReadyToCallController: UIViewController, ProviderHandler {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.nameField.layer.borderColor = UIColor.white.cgColor
+        self.nameField.layer.borderWidth = 1.0
+        self.nameField.layer.cornerRadius = 6.0
         self.notesField.layer.borderWidth = 1.0
-        self.notesField.layer.cornerRadius = 3.0
+        self.notesField.layer.cornerRadius = 6.0
         self.notesField.text = sessionModel.getNotes()
         self.notesField.delegate = self
         self.numberField.layer.borderWidth = 1.0
-        self.numberField.layer.cornerRadius = 3.0
+        self.numberField.layer.cornerRadius = 6.0
         self.numberField.delegate = self
         self.numberField.layer.borderWidth = 1.0
         self.sessionModel.setProviderHandler(self)
