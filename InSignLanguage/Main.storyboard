@@ -353,7 +353,7 @@ Follow the link inside and enter a new password.</string>
                             <constraint firstAttribute="trailing" secondItem="6jl-Ev-dDS" secondAttribute="trailing" constant="20" id="z2r-7l-jKj"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Billing" id="hMz-H4-Wi4"/>
+                    <tabBarItem key="tabBarItem" title="Billing" image="billing.png" selectedImage="billing.png" id="hMz-H4-Wi4"/>
                     <connections>
                         <outlet property="back" destination="5k3-eZ-EYU" id="TPT-5r-Twp"/>
                         <outlet property="contractType" destination="5xf-Qw-Oji" id="FVT-JZ-5zz"/>
@@ -531,7 +531,7 @@ Follow the link inside and enter a new password.</string>
                             <constraint firstItem="sHE-bs-kSD" firstAttribute="top" secondItem="oAV-is-5HM" secondAttribute="bottom" constant="10" id="ytX-Kn-DmE"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Password" id="tW1-9Z-l2w"/>
+                    <tabBarItem key="tabBarItem" title="Password" image="password.png" selectedImage="password.png" id="tW1-9Z-l2w"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="back" destination="kcR-MA-EsG" id="ksK-MB-kOL"/>
@@ -805,7 +805,7 @@ Follow the link inside and enter a new password.</string>
                             <constraint firstItem="IFr-qV-hXk" firstAttribute="top" secondItem="85D-aE-3QN" secondAttribute="bottom" id="p1q-d3-NTw"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Details" id="N6A-Up-eZX"/>
+                    <tabBarItem key="tabBarItem" title="Details" image="detail.png" selectedImage="detail.png" id="N6A-Up-eZX"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1100"/>
                     <connections>
@@ -1254,15 +1254,18 @@ Follow the link inside and enter a new password.</string>
     <resources>
         <image name="background-1.jpg" width="2048" height="3068"/>
         <image name="background-2.jpg" width="2048" height="3176"/>
+        <image name="billing.png" width="25" height="25"/>
+        <image name="detail.png" width="25" height="25"/>
         <image name="hangup.png" width="128" height="128"/>
         <image name="logo-white.png" width="2978" height="502"/>
         <image name="logo.png" width="2978" height="502"/>
         <image name="onhold-circle.png" width="276" height="276"/>
         <image name="onhold-image.png" width="298" height="371"/>
+        <image name="password.png" width="25" height="25"/>
         <image name="phone.png" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="M4b-dJ-Dq0"/>
-        <segue reference="6er-TY-e94"/>
+        <segue reference="H1Q-p2-MXU"/>
     </inferredMetricsTieBreakers>
 </document>
