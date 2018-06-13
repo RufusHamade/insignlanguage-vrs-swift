@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterController: UIViewController, RegisterHandler {
+class RegisterController: UIViewController, RegisterHandler, PopupManager {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -38,16 +38,8 @@ class RegisterController: UIViewController, RegisterHandler {
         self.view.endEditing(true)
     }
 
-    func showPopup(_ title: String, _ message: String) {
-        let alertController = UIAlertController(title: title, message: message,
-                                                preferredStyle: .alert)
-
-        let okAction = UIAlertAction(title: "OK", style: .default) {
-            (result : UIAlertAction) -> Void in self.enableRegister(true)
-        }
-
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
+    func showPopupCompletion() {
+        self.enableRegister(true)
     }
 
     func enableRegister(_ enable: Bool) {

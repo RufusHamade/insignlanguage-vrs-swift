@@ -1,10 +1,9 @@
 import UIKit
 
-class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler {
+class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler, PopupManager {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var submit: UIButton!
-    @IBOutlet weak var messages: UILabel!
     @IBOutlet weak var back: UIButton!
 
     @IBOutlet var fields: [UITextField]!
@@ -31,6 +30,7 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler 
     }
 
     var sessionModel = SessionModel.sharedInstance
+    var updateSuccess = false;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +63,7 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler 
                                        name: Notification.Name.UIKeyboardWillShow, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard),
                                        name: Notification.Name.UIKeyboardWillHide, object: nil)
+        self.updateSuccess = false
 
         if self.sessionModel.isProfileOk() {
             self.back.setTitle("Back", for: .normal)
@@ -107,23 +108,17 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler 
         }
     }
 
-    func showMessage(_ isError: Bool, _ message: String) {
-        self.messages.isHidden = false
-        self.messages.textColor = isError ? .red : HAPPY_COLOR
-        self.messages.text = message
-    }
-
     @IBAction func submitClicked(_ sender: Any) {
         if !self.sessionModel.isProfileOk() {
-            self.showMessage(true, "You need to fill in all * fields...")
+            self.showPopup("Information Missing", "You need to fill in all * fields...")
             return
         }
         self.submit.isEnabled = false
         self.submit.alpha = 0.5
-        self.showMessage(false, "Submitting...")
         self.sessionModel.updatePersonalProfile(self)
     }
 
+    // TODO: Logic wrong here.  Will log you out if you enter bad info then hit back.
     @IBAction func backClicked(_ sender: Any) {
         if self.sessionModel.isProfileOk() {
             self.parent?.performSegue(withIdentifier: "unwindToReadyToCall", sender: self)
@@ -135,14 +130,21 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler 
     }
 
     func updatePersonalProfileOk() {
-        self.showMessage(false, "Update succeeded")
-        self.parent?.performSegue(withIdentifier: "registrationComplete", sender: self)
+        self.showPopup("Success", "Update succeeded")
+        self.updateSuccess = true
+    }
+
+    // TODO: Make a callback, then updateSuccess not necessary
+    func showPopupCompletion() {
+        if self.updateSuccess {
+            self.parent?.performSegue(withIdentifier: "registrationComplete", sender: self)
+        }
     }
 
     func failure(_ message: String) {
         self.submit.isEnabled = true
         self.submit.alpha = 1.0
-        self.showMessage(true, "Update failed: " + message)
+        self.showPopup("Update Failed", message)
     }
 }
 
@@ -160,6 +162,5 @@ extension PersonalProfileController: UITextFieldDelegate {
         }
         self.submit.alpha = self.sessionModel.isProfileOk() ? 1.0 : 0.5
         self.submit.isEnabled = true
-        self.messages.isHidden = true
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginController: UIViewController, AuthenticateHandler, SessionHandler, GetPersonalProfileHandler, GetBillingSummaryHandler {
+class LoginController: UIViewController, AuthenticateHandler, SessionHandler, GetPersonalProfileHandler, GetBillingSummaryHandler, PopupManager {
 
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -34,18 +34,6 @@ class LoginController: UIViewController, AuthenticateHandler, SessionHandler, Ge
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
-    }
-
-    func showPopup(_ title: String, _ message: String) {
-        let alertController = UIAlertController(title: title, message: message,
-                                                preferredStyle: .alert)
-
-        let okAction = UIAlertAction(title: "OK", style: .default) {
-            (result : UIAlertAction) -> Void in print("You pressed OK")
-        }
-
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
     }
 
     func authenticateOk() {

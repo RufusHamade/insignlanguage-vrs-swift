@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ResetPasswordController: UIViewController, ResetPasswordHandler {
+class ResetPasswordController: UIViewController, ResetPasswordHandler, PopupManager {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var resetButton: UIButton!
@@ -34,16 +34,8 @@ class ResetPasswordController: UIViewController, ResetPasswordHandler {
         view.endEditing(true)
     }
 
-    func showPopup(_ title: String, _ message: String) {
-        let alertController = UIAlertController(title: title, message: message,
-                                                preferredStyle: .alert)
-
-        let okAction = UIAlertAction(title: "OK", style: .default) {
-            (result : UIAlertAction) -> Void in self.enableReset(true)
-        }
-
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
+    func showPopupCompletion() {
+        self.enableReset(true)
     }
 
     func enableReset(_ enable: Bool) {

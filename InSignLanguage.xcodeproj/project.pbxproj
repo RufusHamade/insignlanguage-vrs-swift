@@ -29,6 +29,7 @@
 		8BF0D64B20CF22C200A9ECB2 /* detail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF0D64820CF22C200A9ECB2 /* detail@2x.png */; };
 		8BF0D64C20CF22C200A9ECB2 /* detail.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF0D64920CF22C200A9ECB2 /* detail.png */; };
 		8BF0D64D20CF22C200A9ECB2 /* detail@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF0D64A20CF22C200A9ECB2 /* detail@3x.png */; };
+		8BF0D65120CF2EE400A9ECB2 /* ViewMixins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0D65020CF2EE400A9ECB2 /* ViewMixins.swift */; };
 		EE22E67F1FC49F910088A49E /* onhold-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = EE22E67E1FC49F910088A49E /* onhold-circle.png */; };
 		EE22E6811FC82C180088A49E /* onhold-image.png in Resources */ = {isa = PBXBuildFile; fileRef = EE22E6801FC82C180088A49E /* onhold-image.png */; };
 		EE3325151EC9F395002D9543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3325141EC9F395002D9543 /* AppDelegate.swift */; };
@@ -67,6 +68,7 @@
 		8BF0D64820CF22C200A9ECB2 /* detail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail@2x.png"; sourceTree = "<group>"; };
 		8BF0D64920CF22C200A9ECB2 /* detail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail.png; sourceTree = "<group>"; };
 		8BF0D64A20CF22C200A9ECB2 /* detail@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail@3x.png"; sourceTree = "<group>"; };
+		8BF0D65020CF2EE400A9ECB2 /* ViewMixins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMixins.swift; sourceTree = "<group>"; };
 		98433EAD26FC19263B3AAB5F /* Pods-InSignLanguage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InSignLanguage.release.xcconfig"; path = "Pods/Target Support Files/Pods-InSignLanguage/Pods-InSignLanguage.release.xcconfig"; sourceTree = "<group>"; };
 		EE22E67E1FC49F910088A49E /* onhold-circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onhold-circle.png"; sourceTree = "<group>"; };
 		EE22E6801FC82C180088A49E /* onhold-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onhold-image.png"; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				EEC248091EC9F58B003EEDA1 /* ReadyToCallController.swift */,
 				8B595B24205C1CBD00AF3324 /* TermsAndConditionsController.swift */,
 				EEC2480A1EC9F58B003EEDA1 /* VideoDisplayController.swift */,
+				8BF0D65020CF2EE400A9ECB2 /* ViewMixins.swift */,
 				8BC4D4F620235DFE00B68D27 /* Model.swift */,
 				8B2FA20320CAB61D00DE927F /* background-1.jpg */,
 				8B2FA20920CACD5500DE927F /* background-2.jpg */,
@@ -314,6 +317,7 @@
 				EE3325151EC9F395002D9543 /* AppDelegate.swift in Sources */,
 				EEC248121EC9F58B003EEDA1 /* ReadyToCallController.swift in Sources */,
 				8B24AE8F202E100D00DFA74B /* SplashController.swift in Sources */,
+				8BF0D65120CF2EE400A9ECB2 /* ViewMixins.swift in Sources */,
 				8B24AE8D202C94B800DFA74B /* BillingDetailsController.swift in Sources */,
 				8B24AE89202C943600DFA74B /* ChangePasswordController.swift in Sources */,
 				EEC2480E1EC9F58B003EEDA1 /* LoginController.swift in Sources */,

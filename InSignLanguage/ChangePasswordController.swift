@@ -1,11 +1,10 @@
 import UIKit
 
-class ChangePasswordController: UIViewController, ChangePasswordHandler {
+class ChangePasswordController: UIViewController, ChangePasswordHandler, PopupManager {
     @IBOutlet weak var oldPassword: UITextField!
     @IBOutlet weak var newPassword1: UITextField!
     @IBOutlet weak var newPassword2: UITextField!
     @IBOutlet weak var submit: UIButton!
-    @IBOutlet weak var messages: UILabel!
     @IBOutlet weak var back: UIButton!
 
     var sessionModel = SessionModel.sharedInstance
@@ -47,7 +46,6 @@ class ChangePasswordController: UIViewController, ChangePasswordHandler {
             self.newPassword1.text == self.newPassword2.text) {
             self.submit.isEnabled = true
             self.submit.alpha = 1.0
-            self.messages.isHidden = true
         }
         else {
             self.submit.isEnabled = false
@@ -59,12 +57,7 @@ class ChangePasswordController: UIViewController, ChangePasswordHandler {
         if (self.newPassword1.text != nil && self.newPassword1.text != "" &&
             self.newPassword2.text != nil && self.newPassword2.text != "") {
             if self.newPassword1.text != self.newPassword2.text {
-                self.messages.isHidden = false
-                self.messages.text = "New passwords don't match.  Please reenter."
-                self.messages.textColor = .red
-            }
-            else {
-                self.messages.isHidden = true
+                self.showPopup("Password Mismatch", "New passwords don't match.  Please reenter.")
             }
         }
     }
@@ -86,15 +79,11 @@ class ChangePasswordController: UIViewController, ChangePasswordHandler {
     }
 
     func changePasswordOk() {
-        self.messages.isHidden = false
-        self.messages.text = "Password updated successfully"
-        self.messages.textColor = HAPPY_COLOR
+        self.showPopup("Success", "Password updated successfully")
     }
 
     func failure(_ message: String) {
-        self.messages.isHidden = false
-        self.messages.text = "Password change failed: " + message
-        self.messages.textColor = .red
+        self.showPopup("Password Change Failed", message)
         self.submit.isEnabled = true
         self.submit.alpha = 1.0
 

@@ -7,7 +7,7 @@ func dateFromString(_ isoString: String) -> String {
 }
 
 
-class ReadyToCallController: UIViewController, ProviderHandler {
+class ReadyToCallController: UIViewController, ProviderHandler, PopupManager {
 
     @IBOutlet weak var nameField: UILabel!
     @IBOutlet weak var notesField: UITextView!
@@ -48,18 +48,6 @@ class ReadyToCallController: UIViewController, ProviderHandler {
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
-    }
-
-    func showPopup(_ title: String, _ message: String) {
-        let alertController = UIAlertController(title: title, message: message,
-                                                preferredStyle: .alert)
-
-        let okAction = UIAlertAction(title: "OK", style: .default) {
-            (result : UIAlertAction) -> Void in print("You pressed OK")
-        }
-
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
     }
 
     func onProviderAvailability(_ availableProviders: Int) {
