@@ -185,9 +185,10 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPA
         self.addItem(label)
         addConstraints(label, lastlabel, 10.0)
 
-        let button = UIButton.init(type: .custom)
+        let button = UIButton.init(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .blue
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .gray
         button.setTitle("Add new payment card", for: [])
         button.addTarget(self, action: #selector(self.handleAddCard), for: .touchUpInside)
         button.layer.cornerRadius = 5;
@@ -198,11 +199,11 @@ class BillingDetailsController: UIViewController, GetBillingSummaryHandler, STPA
             NSLayoutConstraint (item: button, attribute: .width,
                                 relatedBy: .equal,
                                 toItem: nil, attribute: .notAnAttribute,
-                                multiplier: 1, constant: 250),
+                                multiplier: 1, constant: 180),
             NSLayoutConstraint (item: button, attribute: .height,
                                 relatedBy: .equal,
                                 toItem: nil, attribute: .notAnAttribute,
-                                multiplier: 1, constant: 50)
+                                multiplier: 1, constant: 30)
         ])
         addConstraints(button, label, 20.0, centered: true)
     }

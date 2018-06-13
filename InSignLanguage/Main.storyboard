@@ -473,10 +473,10 @@ Follow the link inside and enter a new password.</string>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44t-lS-L9W">
-                                <rect key="frame" x="85" y="318" width="150" height="30"/>
+                                <rect key="frame" x="70" y="318" width="180" height="30"/>
                                 <color key="backgroundColor" red="0.54131130920000003" green="0.53152239720000005" blue="0.56077963080000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="Ed3-7r-7A9"/>
+                                    <constraint firstAttribute="width" constant="180" id="Ed3-7r-7A9"/>
                                     <constraint firstAttribute="height" constant="30" id="RcL-Nd-1oR"/>
                                 </constraints>
                                 <state key="normal" title="Change Password">
@@ -648,11 +648,11 @@ Follow the link inside and enter a new password.</string>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XN4-M0-9kj">
-                                                <rect key="frame" x="105" y="821" width="110" height="30"/>
+                                                <rect key="frame" x="70" y="821" width="180" height="30"/>
                                                 <color key="backgroundColor" red="0.54131130920000003" green="0.53152239720000005" blue="0.56077963080000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="1j2-sB-gZa"/>
-                                                    <constraint firstAttribute="width" constant="110" id="CYm-HS-nxp"/>
+                                                    <constraint firstAttribute="width" constant="180" id="CYm-HS-nxp"/>
                                                 </constraints>
                                                 <state key="normal" title="Save Details">
                                                     <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>

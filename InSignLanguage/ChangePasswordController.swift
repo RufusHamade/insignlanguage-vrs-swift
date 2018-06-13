@@ -16,6 +16,8 @@ class ChangePasswordController: UIViewController, ChangePasswordHandler, PopupMa
         self.newPassword1.delegate = self
         self.newPassword2.delegate = self
         self.maybeEnableSubmit()
+        self.submit.layer.cornerRadius = 5;
+        self.submit.clipsToBounds = true;
 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false

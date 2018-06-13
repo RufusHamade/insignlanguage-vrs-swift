@@ -34,6 +34,8 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.submit.layer.cornerRadius = 5;
+        self.submit.clipsToBounds = true;
 
         for (i, f) in self.fields.enumerated() {
             f.delegate = self
