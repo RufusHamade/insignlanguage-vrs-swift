@@ -26,7 +26,7 @@ class VideoDisplayController: UIViewController, ErrorHandler, DialHandler, CAAni
 
     @IBOutlet weak var hangupButton: UIButton!
     @IBOutlet weak var placeholder: UIImageView!
-    @IBOutlet weak var placeholder2: UIImageView!
+    @IBOutlet weak var placeholderText: UILabel!
     var mainView: UIView?
     var insertView: UIView?
 
@@ -47,7 +47,7 @@ class VideoDisplayController: UIViewController, ErrorHandler, DialHandler, CAAni
         self.connectionModel.setErrorHandler(self)
         self.sessionModel.dial()
         self.placeholder.isHidden = false
-        self.placeholder2.isHidden = false
+        self.placeholderText.isHidden = false
         self.placeholder.rotate360Degrees(duration: 2.0, completionDelegate: self)
         UIApplication.shared.isIdleTimerDisabled = true
     }
@@ -58,7 +58,7 @@ class VideoDisplayController: UIViewController, ErrorHandler, DialHandler, CAAni
         }
         else {
             self.placeholder.isHidden = true
-            self.placeholder2.isHidden = true
+            self.placeholderText.isHidden = true
         }
     }
 

@@ -31,7 +31,6 @@
 		8BF0D64D20CF22C200A9ECB2 /* detail@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF0D64A20CF22C200A9ECB2 /* detail@3x.png */; };
 		8BF0D65120CF2EE400A9ECB2 /* ViewMixins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0D65020CF2EE400A9ECB2 /* ViewMixins.swift */; };
 		EE22E67F1FC49F910088A49E /* onhold-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = EE22E67E1FC49F910088A49E /* onhold-circle.png */; };
-		EE22E6811FC82C180088A49E /* onhold-image.png in Resources */ = {isa = PBXBuildFile; fileRef = EE22E6801FC82C180088A49E /* onhold-image.png */; };
 		EE3325151EC9F395002D9543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3325141EC9F395002D9543 /* AppDelegate.swift */; };
 		EE4D6DB41ECA124D00EB2E63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE4D6DB31ECA124D00EB2E63 /* Assets.xcassets */; };
 		EE7C497F1FE95100009E9A12 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7C497E1FE95100009E9A12 /* RegisterController.swift */; };
@@ -71,7 +70,6 @@
 		8BF0D65020CF2EE400A9ECB2 /* ViewMixins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMixins.swift; sourceTree = "<group>"; };
 		98433EAD26FC19263B3AAB5F /* Pods-InSignLanguage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InSignLanguage.release.xcconfig"; path = "Pods/Target Support Files/Pods-InSignLanguage/Pods-InSignLanguage.release.xcconfig"; sourceTree = "<group>"; };
 		EE22E67E1FC49F910088A49E /* onhold-circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onhold-circle.png"; sourceTree = "<group>"; };
-		EE22E6801FC82C180088A49E /* onhold-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onhold-image.png"; sourceTree = "<group>"; };
 		EE3325111EC9F395002D9543 /* InSignLanguage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InSignLanguage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE3325141EC9F395002D9543 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE3325201EC9F395002D9543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 				EEC248061EC9F58B003EEDA1 /* logo.png */,
 				8B2FA20520CAB6B400DE927F /* logo-white.png */,
 				EE22E67E1FC49F910088A49E /* onhold-circle.png */,
-				EE22E6801FC82C180088A49E /* onhold-image.png */,
 				EEC248081EC9F58B003EEDA1 /* phone.png */,
 				EE3325141EC9F395002D9543 /* AppDelegate.swift */,
 				8B6606AF2036FAAF0084A807 /* LaunchScreen.storyboard */,
@@ -257,7 +254,6 @@
 				8BF0D64620CF22A700A9ECB2 /* billing@2x.png in Resources */,
 				EE4D6DB41ECA124D00EB2E63 /* Assets.xcassets in Resources */,
 				8BF0D64020CF224C00A9ECB2 /* password@3x.png in Resources */,
-				EE22E6811FC82C180088A49E /* onhold-image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
