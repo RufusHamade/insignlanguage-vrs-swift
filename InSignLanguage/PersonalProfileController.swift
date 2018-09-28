@@ -62,9 +62,9 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler,
     override func viewWillAppear(_ animated: Bool) {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard),
-                                       name: Notification.Name.UIKeyboardWillShow, object: nil)
+                                       name: UIResponder.keyboardWillShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard),
-                                       name: Notification.Name.UIKeyboardWillHide, object: nil)
+                                       name: UIResponder.keyboardWillHideNotification, object: nil)
         self.updateSuccess = false
 
         if self.sessionModel.isProfileOk() {
@@ -77,8 +77,8 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler,
 
     override func viewWillDisappear(_ animated: Bool) {
         let notificationCenter = NotificationCenter.default
-        notificationCenter.removeObserver(self, name: Notification.Name.UIKeyboardWillShow, object: nil)
-        notificationCenter.removeObserver(self, name: Notification.Name.UIKeyboardWillHide, object: nil)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     @objc func dismissKeyboard() {
@@ -97,10 +97,10 @@ class PersonalProfileController: UIViewController, UpdatePersonalProfileHandler,
     }
 
     @objc func adjustForKeyboard(notification: Notification) {
-        let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
         let keyboardFrame = self.view.convert(keyboardRect!, from: nil)
 
-        if notification.name == Notification.Name.UIKeyboardWillShow {
+        if notification.name == UIResponder.keyboardWillShowNotification {
             var contentInset:UIEdgeInsets = self.scrollView.contentInset
             contentInset.bottom = keyboardFrame.size.height
             self.scrollView.contentInset = contentInset
