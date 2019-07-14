@@ -7,9 +7,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        STPPaymentConfiguration.shared().publishableKey = "pk_test_xJclrHMVrssEvhXyZ8vk8pR7"
+        STPPaymentConfiguration.shared().publishableKey = Bundle.main.infoDictionary!["STRIPE_PUBLISHABLE_KEY"] as! String
+        //"pk_test_xJclrHMVrssEvhXyZ8vk8pR7"
         return true
     }
 
