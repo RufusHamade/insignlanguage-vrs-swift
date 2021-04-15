@@ -236,7 +236,7 @@ class SessionModel {
     }
 
     func connectToServer(_ handler: CheckTokenHandler) {
-        Alamofire.request(self.serverUrl + "/api/urls")
+        AF.request(self.serverUrl + "/api/urls")
             .responseJSON { response in
                 if response.response == nil {
                     handler.failure("Server Unavailable")
@@ -247,7 +247,7 @@ class SessionModel {
                     return
                 }
 
-                self.urls = response.result.value as? [String: String]
+                self.urls = response.value as? [String: String]
                 if self.urls == nil || self.urls!["version"]! != "1" {
                     handler.failure("Protocol mismatch.  Please upgrade your app.")
                     return
@@ -273,7 +273,7 @@ class SessionModel {
             "password": self.password!
         ]
 
-        Alamofire.request(self.getUrl("api_get_token"),
+        AF.request(self.getUrl("api_get_token"),
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default)
@@ -292,7 +292,7 @@ class SessionModel {
                     handler.failure("Internal Server error")
                 }
                 else {
-                    let jsonResult = response.result.value as! [String: Any]
+                    let jsonResult = response.value as! [String: Any]
                     self.authenticateResult(jsonResult["token"] as! String)
                     self.loginState = .authenticated
                     handler.authenticateOk()
@@ -313,7 +313,7 @@ class SessionModel {
             return
         }
 
-        Alamofire.request(self.getUrl("api_ping"),
+        AF.request(self.getUrl("api_ping"),
                           headers: self.getAuthHeaders())
             .responseJSON { response in
                 if response.response == nil {
@@ -371,16 +371,16 @@ class SessionModel {
                                      "number": self.getNumber(),
                                      "bill_me_via": bill_me_via]
 
-        Alamofire.request(self.getUrl("api_client_call"),
+        AF.request(self.getUrl("api_client_call"),
                           method: .post,
                           parameters: parameters,
                           headers: self.getAuthHeaders())
             .responseJSON { response in
-                if response.result.value == nil {
+                if response.value == nil {
                     self.dialFailure("Server Error")
                     return
                 }
-                let jsonResult = response.result.value as! [String: Any]
+                let jsonResult = response.value as! [String: Any]
                 self.dialResult(callId: jsonResult["call_id"] as! Int,
                                 sessionId: jsonResult["session_id"] as! String,
                                 token: jsonResult["token"] as! String)
@@ -399,7 +399,7 @@ class SessionModel {
             return
         }
 
-        Alamofire.request(self.getUrl("api_client_hangup") + "\(self.callId!)/",
+        AF.request(self.getUrl("api_client_hangup") + "\(self.callId!)/",
                           headers: self.getAuthHeaders())
             .responseJSON { response in
                 self.hangupResult()
@@ -407,12 +407,12 @@ class SessionModel {
     }
 
     @objc func checkProviderAvailability() {
-        Alamofire.request(self.getUrl("api_client_poll"), headers: self.getAuthHeaders())
+        AF.request(self.getUrl("api_client_poll"), headers: self.getAuthHeaders())
             .responseJSON { response in
 
                 switch response.result {
                 case .success:
-                    let jsonResult = response.result.value as! [String: Any]
+                    let jsonResult = response.value as! [String: Any]
                     self.canCall = jsonResult["can_call"] as! Bool
                     self.cardRegistered = jsonResult["card_registered"] as! Bool
                     self.cardActive = jsonResult["card_active"] as! Bool
@@ -454,7 +454,7 @@ class SessionModel {
             "email": email,
         ]
 
-        Alamofire.request(self.getUrl("api_reset_password"),
+        AF.request(self.getUrl("api_reset_password"),
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default)
@@ -463,7 +463,7 @@ class SessionModel {
                     handler.failure("Server Unavailable")
                 }
                 else if response.response!.statusCode == 400 {
-                    let jsonResult = response.result.value as! [String: Any]
+                    let jsonResult = response.value as! [String: Any]
                     handler.failure(jsonResult["error"] as! String)
                 }
                 else if response.response!.statusCode != 200 {
@@ -481,7 +481,7 @@ class SessionModel {
             "new_password": newPassword
         ]
 
-        Alamofire.request(self.getUrl("api_change_password"),
+        AF.request(self.getUrl("api_change_password"),
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default,
@@ -492,16 +492,16 @@ class SessionModel {
                     return
                 }
                 let status = response.response!.statusCode
-                print(response.result.value!)
+                print(response.value!)
                 if status == 400 {
-                    let jsonResult = response.result.value as! [String: Any]
+                    let jsonResult = response.value as! [String: Any]
                     handler.failure(jsonResult["error"] as! String)
                 }
                 else if status != 200 {
                     handler.failure("Internal Server error")
                 }
                 else {
-                    let jsonResult = response.result.value as! [String: Any]
+                    let jsonResult = response.value as! [String: Any]
                     self.authenticateResult(jsonResult["token"] as! String)
                     handler.changePasswordOk()
                 }
@@ -514,7 +514,7 @@ class SessionModel {
             "password": password
         ]
 
-        Alamofire.request(self.getUrl("api_register"),
+        AF.request(self.getUrl("api_register"),
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default)
@@ -523,14 +523,14 @@ class SessionModel {
                     handler.failure("Server Unavailable")
                 }
                 else if response.response!.statusCode == 400 {
-                    let jsonResult = response.result.value as! [String: Any]
+                    let jsonResult = response.value as! [String: Any]
                     handler.failure((jsonResult["error"] as! String))
                 }
                 else if response.response!.statusCode != 200 {
                     handler.failure("Internal Server error")
                 }
                 else {
-                    let jsonResult = response.result.value as! [String: Any]
+                    let jsonResult = response.value as! [String: Any]
                     self.authenticateResult(jsonResult["token"] as! String)
                     self.name = email
                     self.preferences.set(self.name, forKey: "name")
@@ -540,7 +540,7 @@ class SessionModel {
     }
 
     func getPersonalProfile(_ handler: GetPersonalProfileHandler) {
-        Alamofire.request(self.getUrl("api_get_profile"),
+        AF.request(self.getUrl("api_get_profile"),
                           encoding: JSONEncoding.default,
                           headers: self.getAuthHeaders())
             .responseJSON { response in
@@ -553,7 +553,7 @@ class SessionModel {
                     return
                 }
 
-                self.personalProfile = response.result.value as! [String: String?]
+                self.personalProfile = response.value as! [String: String?]
                 handler.getPersonalProfileOk()
         }
     }
@@ -566,7 +566,7 @@ class SessionModel {
             }
         }
 
-        Alamofire.request(self.getUrl("api_update_profile"),
+        AF.request(self.getUrl("api_update_profile"),
                           method: .post,
                           parameters: params,
                           encoding: JSONEncoding.default,
@@ -578,7 +578,7 @@ class SessionModel {
                 }
                 let status = response.response!.statusCode
                 if  status == 400 {
-                    let jsonResult = response.result.value as! [String: Any]
+                    let jsonResult = response.value as! [String: Any]
                     handler.failure(jsonResult["error"] as! String)
                 }
                 else if status != 200 {
@@ -594,7 +594,7 @@ class SessionModel {
     }
 
     func getBillingSummary(_ handler: GetBillingSummaryHandler) {
-        Alamofire.request(self.getUrl("api_get_billing"),
+        AF.request(self.getUrl("api_get_billing"),
                           encoding: JSONEncoding.default,
                           headers: self.getAuthHeaders())
             .responseJSON { response in
@@ -607,7 +607,7 @@ class SessionModel {
                     return
                 }
 
-                self.billingSummary = response.result.value as? [String: Any?]
+                self.billingSummary = response.value as? [String: Any?]
                 handler.getBillingSummaryOk()
         }
     }
@@ -617,7 +617,7 @@ class SessionModel {
             "token": token.tokenId,
         ]
 
-        Alamofire.request(self.getUrl("api_add_card"),
+        AF.request(self.getUrl("api_add_card"),
                           method: .post,
                           parameters: parameters,
                           encoding: JSONEncoding.default,
@@ -638,7 +638,7 @@ class SessionModel {
                                         "Sorry about that."))
                 }
                 else {
-                    self.billingSummary = response.result.value as? [String: Any?]
+                    self.billingSummary = response.value as? [String: Any?]
                     completion(nil)
                 }
         }
