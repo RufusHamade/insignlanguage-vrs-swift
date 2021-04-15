@@ -207,7 +207,7 @@
 					EE3325101EC9F394002D9543 = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = 2KBR239UZK;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1240;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -217,6 +217,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -266,7 +267,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-InSignLanguage/Pods-InSignLanguage-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-InSignLanguage/Pods-InSignLanguage-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
 			);
@@ -277,7 +278,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InSignLanguage/Pods-InSignLanguage-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InSignLanguage/Pods-InSignLanguage-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7B193006F6512735D62EB3FF /* [CP] Check Pods Manifest.lock */ = {
@@ -447,7 +448,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lingoing.InSignLanguage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -462,7 +463,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lingoing.InSignLanguage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
