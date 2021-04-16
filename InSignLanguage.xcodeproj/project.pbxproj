@@ -442,9 +442,11 @@
 			baseConfigurationReference = 6CE316CF5A1693807A51241E /* Pods-InSignLanguage.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 2KBR239UZK;
 				INFOPLIST_FILE = InSignLanguage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lingoing.InSignLanguage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -457,9 +459,11 @@
 			baseConfigurationReference = 98433EAD26FC19263B3AAB5F /* Pods-InSignLanguage.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 2KBR239UZK;
 				INFOPLIST_FILE = InSignLanguage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lingoing.InSignLanguage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
