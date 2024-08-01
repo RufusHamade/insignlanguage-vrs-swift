@@ -72,7 +72,7 @@ class ReadyToCallController: UIViewController, ProviderHandler, PopupManager {
             let bs = self.sessionModel.billingSummary!
             let contract_type = bs["contract_type"] as! String
             let minimum_minutes_charged = bs["minimum_minutes_charged"] as! Int
-            let cost_per_minute = bs["cost_per_minute"] as! NSNumber
+            let cost_per_minute = bs["cost_per_minute"] as! String
             var text: String
             if contract_type == "payg" {
                 if !self.sessionModel.cardRegistered {
@@ -83,7 +83,7 @@ class ReadyToCallController: UIViewController, ProviderHandler, PopupManager {
                 }
                 else {
                     text = String(format: "Pay as you go: Calls cost £%@ per minute,\nminimum %d minutes.",
-                                  cost_per_minute.stringValue, minimum_minutes_charged)
+                                  cost_per_minute, minimum_minutes_charged)
                 }
             }
             else {
